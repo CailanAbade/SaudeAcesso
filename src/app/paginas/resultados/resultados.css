@@ -1,121 +1,598 @@
-.pagina-resultados {
-  background: #f8fafc;
-  min-height: 100vh;
-  padding: 2rem 1.5rem;
-  max-width: 1000px;
-  margin: 0 auto;
+:host {
+  display: block;
 }
+
+.pagina-resultados {
+  min-height: 100vh;
+  background: #f8f9ff;
+  color: #0d1c2f;
+  padding-bottom: 80px;
+}
+
+/* =========================
+   CABEÇALHO
+========================= */
+
+.cabecalho-resultados {
+  width: min(1180px, calc(100% - 40px));
+  margin: 0 auto;
+  padding: 42px 0 28px;
+}
+
+.eyebrow {
+  display: inline-block;
+  margin-bottom: 8px;
+  color: #006194;
+  font-size: 12px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+}
+
+.cabecalho-resultados h1 {
+  margin: 0;
+  font-size: 30px;
+  line-height: 1.2;
+  letter-spacing: -0.6px;
+}
+
+.cabecalho-resultados p {
+  margin: 9px 0 0;
+  color: #66717c;
+  font-size: 14px;
+}
+
+.cabecalho-resultados p strong {
+  color: #0d1c2f;
+}
+
+/* =========================
+   FILTROS
+========================= */
 
 .barra-filtro {
+  width: min(1180px, calc(100% - 40px));
+  margin: 0 auto;
+  padding: 18px;
+  box-sizing: border-box;
+
   display: flex;
-  flex-wrap: wrap;
-  gap: 1rem;
-  margin-bottom: 2rem;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+
   background: #ffffff;
-  padding: 1rem;
-  border-radius: 1rem;
-  box-shadow: 0 10px 15px -3px rgba(15, 23, 42, 0.08);
+  border: 1px solid #d5e3fd;
+  border-radius: 14px;
+  box-shadow: 0 5px 18px rgba(13, 28, 47, 0.04);
 }
 
-.barra-filtro input {
+.campo-busca {
+  position: relative;
   flex: 1;
-  min-width: 220px;
-  height: 48px;
-  border: 1.5px solid #cbd5e1;
-  border-radius: 0.5rem;
-  padding: 0 1rem;
+  min-width: 0;
 }
 
-.seletor-ordenacao {
-  display: flex;
-  border: 1.5px solid #cbd5e1;
-  border-radius: 0.5rem;
-  overflow: hidden;
-}
+.campo-busca input {
+  width: 100%;
+  height: 46px;
+  box-sizing: border-box;
 
-.seletor-ordenacao button {
-  padding: 0 1rem;
-  height: 48px;
-  border: none;
+  padding: 0 42px;
+
+  border: 1px solid #bfc7d2;
+  border-radius: 9px;
+
   background: #ffffff;
-  color: #64748b;
-  font-weight: 600;
+  color: #0d1c2f;
+
+  font-family: inherit;
+  font-size: 14px;
+
+  outline: none;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.campo-busca input::placeholder {
+  color: #89939e;
+}
+
+.campo-busca input:focus {
+  border-color: #006194;
+  box-shadow: 0 0 0 3px rgba(0, 97, 148, 0.1);
+}
+
+.icone-busca {
+  position: absolute;
+  left: 15px;
+  top: 50%;
+  transform: translateY(-50%);
+
+  color: #66717c;
+  font-size: 23px;
+  line-height: 1;
+
+  pointer-events: none;
+}
+
+.limpar-busca {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+
+  width: 27px;
+  height: 27px;
+
+  border: 0;
+  border-radius: 50%;
+
+  background: #eff4ff;
+  color: #3f4850;
+
+  font-size: 18px;
+  line-height: 1;
+
   cursor: pointer;
 }
 
-.seletor-ordenacao button.ativo {
-  background: #e0f2fe;
-  color: #0284c7;
+.limpar-busca:hover {
+  background: #dce8fa;
 }
+
+/* =========================
+   ORDENAÇÃO
+========================= */
+
+.seletor-ordenacao {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  flex-shrink: 0;
+}
+
+.seletor-ordenacao > span {
+  margin-right: 4px;
+  color: #66717c;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.seletor-ordenacao button {
+  padding: 9px 12px;
+
+  border: 1px solid #d5e3fd;
+  border-radius: 8px;
+
+  background: #ffffff;
+  color: #3f4850;
+
+  font-family: inherit;
+  font-size: 12px;
+  font-weight: 700;
+
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.seletor-ordenacao button:hover {
+  border-color: #9dbbd4;
+}
+
+.seletor-ordenacao button.ativo {
+  background: #006194;
+  border-color: #006194;
+  color: #ffffff;
+}
+
+/* =========================
+   RESUMO
+========================= */
+
+.resumo-resultados {
+  width: min(1180px, calc(100% - 40px));
+  margin: 24px auto 12px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 15px;
+}
+
+.resumo-resultados strong {
+  font-size: 14px;
+}
+
+.resumo-resultados span {
+  color: #7a838c;
+  font-size: 12px;
+}
+
+/* =========================
+   LISTA
+========================= */
 
 .lista-resultados {
+  width: min(1180px, calc(100% - 40px));
+  margin: 0 auto;
+
   display: flex;
   flex-direction: column;
-  gap: 1rem;
+  gap: 12px;
 }
 
-.vazio {
-  color: #64748b;
-  text-align: center;
-  padding: 2rem;
-}
+/* =========================
+   CARD
+========================= */
 
 .cartao-servico {
+  position: relative;
+
   display: flex;
-  justify-content: space-between;
   align-items: center;
-  gap: 1rem;
+  gap: 18px;
+
+  padding: 20px;
+
   background: #ffffff;
-  border: 1px solid #e2e8f0;
-  border-radius: 1rem;
-  padding: 1.25rem;
-  transition: border-color 0.2s;
+  border: 1px solid #d5e3fd;
+  border-radius: 14px;
+
+  color: inherit;
+  text-decoration: none;
+
+  transition:
+    transform 0.2s ease,
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
 }
 
 .cartao-servico:hover {
-  border-color: #0284c7;
+  transform: translateY(-2px);
+  border-color: #9cbfdd;
+  box-shadow: 0 8px 24px rgba(13, 28, 47, 0.08);
 }
 
-.info-servico h3 {
-  color: #0f172a;
-  margin-bottom: 0.25rem;
+.icone-servico {
+  width: 52px;
+  height: 52px;
+  flex-shrink: 0;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 13px;
+  background: #eff4ff;
+  color: #006194;
+
+  font-size: 29px;
+  font-weight: 800;
+}
+
+.info-servico {
+  flex: 1;
+  min-width: 0;
+}
+
+.linha-titulo {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.info-servico h2 {
+  margin: 0;
+
+  color: #0d1c2f;
+
+  font-size: 16px;
+  line-height: 1.35;
+}
+
+.status-disponivel {
+  display: inline-flex;
+  align-items: center;
+
+  padding: 4px 7px;
+
+  border-radius: 5px;
+  background: #e5f7e9;
+  color: #006e2d;
+
+  font-size: 9px;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
 }
 
 .nome-clinica {
-  color: #0284c7;
-  font-weight: 600;
-  font-size: 0.875rem;
+  margin: 7px 0 4px;
+
+  color: #006194;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.verificada {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 17px;
+  height: 17px;
+
+  margin-left: 3px;
+
+  border-radius: 50%;
+  background: #e5f7e9;
+  color: #006e2d;
+
+  font-size: 10px;
 }
 
 .endereco {
-  color: #64748b;
-  font-size: 0.8rem;
+  margin: 0;
+
+  color: #7a838c;
+  font-size: 12px;
 }
 
+/* =========================
+   PREÇO
+========================= */
+
 .info-preco {
+  min-width: 155px;
+
   display: flex;
   flex-direction: column;
   align-items: flex-end;
-  gap: 0.15rem;
+  gap: 3px;
+
+  text-align: right;
 }
 
 .preco-tabela {
-  color: #94a3b8;
-  font-size: 0.8rem;
+  color: #8a939c;
+  font-size: 11px;
   text-decoration: line-through;
 }
 
 .preco-app {
-  color: #16a34a;
-  font-weight: 700;
-  font-size: 1.1rem;
+  color: #006e2d;
+  font-size: 20px;
+  line-height: 1;
 }
 
 .etiqueta-desconto {
-  background: #dcfce7;
-  color: #16a34a;
-  font-size: 0.7rem;
-  font-weight: 700;
-  padding: 0.1rem 0.5rem;
-  border-radius: 9999px;
+  padding: 4px 6px;
+
+  border-radius: 5px;
+
+  background: #e4f6e8;
+  color: #006e2d;
+
+  font-size: 10px;
+  font-weight: 900;
+}
+
+.texto-partir {
+  color: #89939e;
+  font-size: 9px;
+}
+
+.seta-card {
+  width: 30px;
+  height: 30px;
+  flex-shrink: 0;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 50%;
+
+  background: #eff4ff;
+  color: #006194;
+
+  font-size: 18px;
+
+  transition: 0.2s;
+}
+
+.cartao-servico:hover .seta-card {
+  background: #006194;
+  color: #ffffff;
+}
+
+/* =========================
+   ESTADO VAZIO
+========================= */
+
+.estado-vazio {
+  padding: 65px 25px;
+
+  background: #ffffff;
+  border: 1px solid #d5e3fd;
+  border-radius: 16px;
+
+  text-align: center;
+}
+
+.icone-vazio {
+  width: 58px;
+  height: 58px;
+
+  margin: 0 auto 15px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 50%;
+
+  background: #eff4ff;
+  color: #006194;
+
+  font-size: 27px;
+}
+
+.estado-vazio h2 {
+  margin: 0 0 8px;
+
+  font-size: 20px;
+}
+
+.estado-vazio p {
+  margin: 0;
+
+  color: #66717c;
+  font-size: 13px;
+}
+
+.estado-vazio p strong {
+  color: #0d1c2f;
+}
+
+.botao-limpar {
+  margin-top: 20px;
+
+  padding: 10px 17px;
+
+  border: 0;
+  border-radius: 8px;
+
+  background: #006194;
+  color: #ffffff;
+
+  font-family: inherit;
+  font-size: 12px;
+  font-weight: 800;
+
+  cursor: pointer;
+}
+
+/* =========================
+   RESPONSIVIDADE
+========================= */
+
+@media (max-width: 850px) {
+
+  .barra-filtro {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .seletor-ordenacao {
+    justify-content: flex-end;
+  }
+
+  .cartao-servico {
+    align-items: flex-start;
+  }
+
+  .info-preco {
+    min-width: 120px;
+  }
+
+}
+
+@media (max-width: 650px) {
+
+  .cabecalho-resultados {
+    padding-top: 30px;
+  }
+
+  .cabecalho-resultados h1 {
+    font-size: 24px;
+  }
+
+  .resumo-resultados {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 5px;
+  }
+
+  .cartao-servico {
+    flex-wrap: wrap;
+  }
+
+  .info-servico {
+    width: calc(100% - 70px);
+  }
+
+  .info-preco {
+    width: 100%;
+    min-width: 0;
+
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+
+    text-align: left;
+  }
+
+  .texto-partir {
+    display: none;
+  }
+
+  .seta-card {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+  }
+
+}
+
+@media (max-width: 480px) {
+
+  .cabecalho-resultados,
+  .barra-filtro,
+  .resumo-resultados,
+  .lista-resultados {
+    width: calc(100% - 28px);
+  }
+
+  .cabecalho-resultados h1 {
+    font-size: 22px;
+  }
+
+  .barra-filtro {
+    padding: 13px;
+  }
+
+  .seletor-ordenacao {
+    flex-wrap: wrap;
+    justify-content: flex-start;
+  }
+
+  .seletor-ordenacao > span {
+    width: 100%;
+    margin-bottom: 2px;
+  }
+
+  .cartao-servico {
+    padding: 16px;
+  }
+
+  .icone-servico {
+    width: 45px;
+    height: 45px;
+    font-size: 24px;
+  }
+
+  .info-servico {
+    width: calc(100% - 63px);
+  }
+
+  .info-servico h2 {
+    font-size: 14px;
+  }
+
+  .info-preco {
+    padding-left: 0;
+  }
+
 }

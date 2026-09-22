@@ -1,46 +1,218 @@
 <app-cabecalho></app-cabecalho>
 
 <main class="pagina-resultados">
+
+  <section class="cabecalho-resultados">
+
+    <div>
+      <span class="eyebrow">SaúdeAcesso</span>
+
+      <h1>Encontre atendimento com preço justo</h1>
+
+      @if (termoBusca()) {
+        <p>
+          Resultados para:
+          <strong>“{{ termoBusca() }}”</strong>
+        </p>
+      } @else {
+        <p>
+          Encontre consultas e serviços de saúde perto de você.
+        </p>
+      }
+    </div>
+
+  </section>
+
+
   <section class="barra-filtro">
-    <input
-      type="text"
-      [(ngModel)]="termoBusca"
-      placeholder="Buscar por serviço, clínica ou bairro..."
-    />
+
+    <div class="campo-busca">
+
+      <span class="icone-busca">⌕</span>
+
+      <input
+        type="text"
+        [ngModel]="termoBusca()"
+        (ngModelChange)="alterarTermoBusca($event)"
+        placeholder="Buscar por serviço, clínica ou bairro..."
+        aria-label="Buscar por serviço, clínica ou bairro"
+      />
+
+      @if (termoBusca()) {
+        <button
+          type="button"
+          class="limpar-busca"
+          (click)="alterarTermoBusca('')"
+          aria-label="Limpar busca"
+        >
+          ×
+        </button>
+      }
+
+    </div>
+
 
     <div class="seletor-ordenacao">
-      <button type="button" [class.ativo]="ordenacao() === 'menor'" (click)="alternarOrdenacao('menor')">
+
+      <span>Ordenar:</span>
+
+      <button
+        type="button"
+        [class.ativo]="ordenacao() === 'menor'"
+        (click)="alternarOrdenacao('menor')"
+      >
         Menor preço
       </button>
-      <button type="button" [class.ativo]="ordenacao() === 'maior'" (click)="alternarOrdenacao('maior')">
+
+      <button
+        type="button"
+        [class.ativo]="ordenacao() === 'maior'"
+        (click)="alternarOrdenacao('maior')"
+      >
         Maior preço
       </button>
+
     </div>
+
   </section>
+
+
+  <section class="resumo-resultados">
+
+    <strong>
+      {{ servicosFiltrados().length }}
+      {{ servicosFiltrados().length === 1 ? 'resultado encontrado' : 'resultados encontrados' }}
+    </strong>
+
+    @if (ordenacao() === 'menor') {
+      <span>Do menor para o maior preço</span>
+    } @else {
+      <span>Do maior para o menor preço</span>
+    }
+
+  </section>
+
 
   <section class="lista-resultados">
+
     @if (servicosFiltrados().length === 0) {
-      <p class="vazio">Nenhum resultado encontrado para essa busca.</p>
-    }
 
-    @for (servico of servicosFiltrados(); track servico.id) {
-      <a [routerLink]="['/clinica', servico.clinica.slug]" class="cartao-servico">
-        <div class="info-servico">
-          <h3>{{ servico.nome }}</h3>
-          <p class="nome-clinica">{{ servico.clinica.nome }}</p>
-          <p class="endereco">{{ servico.clinica.endereco.bairro }}, {{ servico.clinica.endereco.cidade }}</p>
+      <div class="estado-vazio">
+
+        <div class="icone-vazio">
+          ⌕
         </div>
 
-        <div class="info-preco">
-          <span class="preco-tabela">{{ preco.formatarReal(servico.precoTabela) }}</span>
-          <span class="preco-app">{{ preco.formatarReal(servico.precoApp) }}</span>
-          <span class="etiqueta-desconto">
-            -{{ preco.calcularDesconto(servico.precoTabela, servico.precoApp) }}%
+        <h2>Nenhum resultado encontrado</h2>
+
+        @if (termoBusca()) {
+          <p>
+            Não encontramos serviços para
+            <strong>“{{ termoBusca() }}”</strong>.
+          </p>
+
+          <button
+            type="button"
+            class="botao-limpar"
+            (click)="alterarTermoBusca('')"
+          >
+            Limpar busca
+          </button>
+        } @else {
+          <p>
+            Ainda não existem serviços cadastrados para exibir.
+          </p>
+        }
+
+      </div>
+
+    } @else {
+
+      @for (servico of servicosFiltrados(); track servico.id) {
+
+        <a
+          [routerLink]="['/clinicas', servico.clinica.slug]"
+          class="cartao-servico"
+        >
+
+          <div class="icone-servico">
+            <span>+</span>
+          </div>
+
+
+          <div class="info-servico">
+
+            <div class="linha-titulo">
+
+              <h2>
+                {{ servico.nome }}
+              </h2>
+
+              @if (servico.status === 'ativo') {
+                <span class="status-disponivel">
+                  Disponível
+                </span>
+              }
+
+            </div>
+
+            <p class="nome-clinica">
+              {{ servico.clinica.nome }}
+
+              @if (servico.clinica.verificada) {
+                <span class="verificada">
+                  ✓
+                </span>
+              }
+            </p>
+
+            <p class="endereco">
+              ⌖
+              {{ servico.clinica.endereco.bairro }},
+              {{ servico.clinica.endereco.cidade }}
+            </p>
+
+          </div>
+
+
+          <div class="info-preco">
+
+            <span class="preco-tabela">
+              {{ preco.formatarReal(servico.precoTabela) }}
+            </span>
+
+            <strong class="preco-app">
+              {{ preco.formatarReal(servico.precoApp) }}
+            </strong>
+
+            <span class="etiqueta-desconto">
+              -{{
+                preco.calcularDesconto(
+                  servico.precoTabela,
+                  servico.precoApp
+                )
+              }}%
+            </span>
+
+            <span class="texto-partir">
+              preço pelo SaúdeAcesso
+            </span>
+
+          </div>
+
+
+          <span class="seta-card">
+            →
           </span>
-        </div>
-      </a>
+
+        </a>
+
+      }
+
     }
+
   </section>
+
 </main>
 
 <app-rodape></app-rodape>

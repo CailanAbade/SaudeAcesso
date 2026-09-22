@@ -48,7 +48,7 @@ export class Autenticacao {
       nome: dados.nome,
       email: dados.email,
       tipo: dados.tipo,
-      cpf: dados.cpf,
+      ...(dados.cpf ? { cpf: dados.cpf } : {}),
       aceitouTermosEm: new Date().toISOString(),
     };
 

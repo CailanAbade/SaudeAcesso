@@ -1,39 +1,256 @@
 <app-cabecalho></app-cabecalho>
 
 <main class="pagina-inicio">
-  <section class="hero">
-    <span class="etiqueta">✔ SAÚDE POPULAR TRANSPARENTE • SEM MENSALIDADE</span>
-    <h1>Encontre médicos e exames mais baratos no seu bairro</h1>
-    <p>Atendimento médico digno, perto da sua casa e que cabe no seu bolso.</p>
 
-    <div class="caixa-busca">
+  <section class="hero">
+
+```
+<div class="hero-conteudo">
+
+  <span class="etiqueta">
+    ✓ SAÚDE POPULAR TRANSPARENTE • SEM MENSALIDADE
+  </span>
+
+  <h1>
+    Encontre médicos e exames
+    <span>mais baratos no seu bairro</span>
+  </h1>
+
+  <p>
+    Atendimento médico digno, perto da sua casa e que cabe no seu bolso.
+  </p>
+
+  <div class="caixa-busca">
+
+    <div class="campo-busca">
+      <span class="icone-busca">⌕</span>
+
       <input
         type="text"
         [(ngModel)]="termoBusca"
         (keyup.enter)="buscar()"
         placeholder="Ex: Clínico Geral, Ultrassom, Hemograma..."
+        aria-label="Buscar por serviço, exame ou especialidade"
       />
-      <button type="button" (click)="buscar()">🔍 Buscar</button>
     </div>
+
+    <button type="button" (click)="buscar()">
+      <span>⌕</span>
+      Buscar
+    </button>
+
+  </div>
+
+  <div class="atalhos-busca">
+    <span>Buscas populares:</span>
+
+    <button type="button" (click)="termoBusca = 'Clínico Geral'; buscar()">
+      Clínico Geral
+    </button>
+
+    <button type="button" (click)="termoBusca = 'Hemograma'; buscar()">
+      Hemograma
+    </button>
+
+    <button type="button" (click)="termoBusca = 'Ultrassom'; buscar()">
+      Ultrassom
+    </button>
+  </div>
+
+</div>
+```
+
+  </section>
+
+  <section class="beneficios">
+
+```
+<div class="beneficio">
+  <div class="icone-beneficio">R$</div>
+
+  <div>
+    <strong>Preços transparentes</strong>
+    <span>Compare antes de agendar</span>
+  </div>
+</div>
+
+<div class="beneficio">
+  <div class="icone-beneficio">⌖</div>
+
+  <div>
+    <strong>Perto de você</strong>
+    <span>Encontre atendimento no seu bairro</span>
+  </div>
+</div>
+
+<div class="beneficio">
+  <div class="icone-beneficio">✓</div>
+
+  <div>
+    <strong>Clínicas verificadas</strong>
+    <span>Informações claras e atualizadas</span>
+  </div>
+</div>
+```
+
   </section>
 
   <section class="lista-clinicas">
+
+```
+<div class="cabecalho-secao">
+  <div>
+    <span class="eyebrow">SaúdeAcesso</span>
+
     <h2>Clínicas disponíveis</h2>
 
-    @if (clinicas().length === 0) {
-      <p>Carregando clínicas...</p>
+    <p>
+      Encontre opções de atendimento com preços acessíveis.
+    </p>
+  </div>
+
+  <a routerLink="/resultados" class="link-ver-todos">
+    Ver todos os serviços →
+  </a>
+</div>
+
+@if (clinicas().length === 0) {
+
+  <div class="estado-carregando">
+    <div class="carregando-icone">⌛</div>
+    <p>Carregando clínicas...</p>
+  </div>
+
+} @else {
+
+  <div class="grade-clinicas">
+
+    @for (clinica of clinicas(); track clinica.id) {
+
+      <a
+        [routerLink]="['/clinicas', clinica.slug]"
+        class="cartao-clinica"
+      >
+
+        <div class="imagem-clinica">
+
+          @if (clinica.imagemCapa) {
+            <img
+              [src]="clinica.imagemCapa"
+              [alt]="'Imagem da ' + clinica.nome"
+            />
+          } @else {
+            <div class="imagem-placeholder">
+              <span>+</span>
+            </div>
+          }
+
+          @if (clinica.verificada) {
+            <span class="selo-verificada">
+              ✓ Verificada
+            </span>
+          }
+
+        </div>
+
+        <div class="conteudo-clinica">
+
+          <div class="titulo-clinica">
+
+            <h3>{{ clinica.nome }}</h3>
+
+            @if (clinica.verificada) {
+              <span class="icone-verificada">✓</span>
+            }
+
+          </div>
+
+          <p class="localizacao">
+            ⌖
+            {{ clinica.endereco.bairro }},
+            {{ clinica.endereco.cidade }}
+          </p>
+
+          <div class="avaliacao">
+
+            <span class="estrela">★</span>
+
+            <strong>{{ clinica.avaliacao }}</strong>
+
+            <span>
+              ({{ clinica.qtdAvaliacoes }} avaliações)
+            </span>
+
+          </div>
+
+          <div class="card-footer">
+            <span>Ver clínica</span>
+            <span class="seta">→</span>
+          </div>
+
+        </div>
+
+      </a>
+
     }
 
-    <div class="grade-clinicas">
-      @for (clinica of clinicas(); track clinica.id) {
-        <a [routerLink]="['/clinica', clinica.slug]" class="cartao-clinica">
-          <h3>{{ clinica.nome }}</h3>
-          <p>{{ clinica.endereco.bairro }}, {{ clinica.endereco.cidade }}</p>
-          <div class="avaliacao">⭐ {{ clinica.avaliacao }} ({{ clinica.qtdAvaliacoes }} avaliações)</div>
-        </a>
-      }
-    </div>
+  </div>
+
+}
+```
+
   </section>
+
+  <section class="como-funciona">
+
+```
+<div class="como-funciona-conteudo">
+
+  <span class="eyebrow">SIMPLES E TRANSPARENTE</span>
+
+  <h2>Como funciona o SaúdeAcesso?</h2>
+
+  <p>
+    Encontre o atendimento que precisa, compare os preços e entre em
+    contato diretamente com a clínica.
+  </p>
+
+  <div class="passos">
+
+    <div class="passo">
+      <span class="numero">1</span>
+
+      <div>
+        <strong>Pesquise</strong>
+        <span>Digite o serviço ou exame que você procura.</span>
+      </div>
+    </div>
+
+    <div class="passo">
+      <span class="numero">2</span>
+
+      <div>
+        <strong>Compare</strong>
+        <span>Veja preços e clínicas disponíveis.</span>
+      </div>
+    </div>
+
+    <div class="passo">
+      <span class="numero">3</span>
+
+      <div>
+        <strong>Agende</strong>
+        <span>Entre em contato com a clínica para marcar.</span>
+      </div>
+    </div>
+
+  </div>
+
+</div>
+```
+
+  </section>
+
 </main>
 
 <app-rodape></app-rodape>

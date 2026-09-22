@@ -1,0 +1,620 @@
+<app-cabecalho></app-cabecalho>
+
+<div class="pagina-clinica">
+
+  @if (carregando()) {
+    <main class="estado-pagina">
+      <div class="estado-card">
+        <div class="spinner"></div>
+        <h1>Carregando clínica...</h1>
+        <p>Aguarde enquanto buscamos as informações.</p>
+      </div>
+    </main>
+  }
+
+  @if (naoEncontrada()) {
+    <main class="estado-pagina">
+      <div class="estado-card">
+        <div class="icone-erro">!</div>
+        <h1>Clínica não encontrada</h1>
+        <p>
+          Não encontramos uma clínica para este endereço.
+        </p>
+
+        <a routerLink="/resultados" class="botao-principal">
+          Voltar para resultados
+        </a>
+      </div>
+    </main>
+  }
+
+  @if (!carregando() && !naoEncontrada() && clinica(); as dados) {
+
+    <!-- BARRA DE NAVEGAÇÃO DA PÁGINA -->
+    <div class="barra-navegacao">
+      <div class="container">
+        <a routerLink="/resultados" class="voltar-resultados">
+          <span>←</span>
+          Voltar para resultados
+        </a>
+
+        <span class="separador">/</span>
+
+        <span class="breadcrumb">
+          {{ dados.nome }}
+        </span>
+      </div>
+    </div>
+
+    <main>
+
+      <!-- HERO -->
+      <section class="hero-clinica">
+
+        <div class="hero-capa">
+          @if (dados.imagemCapa) {
+            <img
+              [src]="dados.imagemCapa"
+              [alt]="'Imagem da ' + dados.nome"
+            />
+          } @else {
+            <div class="capa-placeholder">
+              <div class="capa-conteudo">
+                <span class="capa-icone">✚</span>
+                <strong>SaúdeAcesso</strong>
+                <span>Atendimento em saúde acessível</span>
+              </div>
+            </div>
+          }
+
+          <div class="badge-atendimento">
+            <span class="ponto"></span>
+            Atendimento disponível
+          </div>
+        </div>
+
+      </section>
+
+
+      <!-- CARD PRINCIPAL DA CLÍNICA -->
+      <section class="container card-clinica">
+
+        <div class="informacoes-principais">
+
+          <div class="cabecalho-clinica">
+
+            <div class="avatar-clinica">
+              <span>✚</span>
+            </div>
+
+            <div class="titulo-clinica">
+
+              <div class="titulo-e-selo">
+                <h1>{{ dados.nome }}</h1>
+
+                @if (dados.verificada) {
+                  <span class="selo-verificada">
+                    ✓ Verificada
+                  </span>
+                }
+              </div>
+
+              <p class="subtitulo-clinica">
+                Clínica de atendimento em saúde
+              </p>
+
+            </div>
+
+          </div>
+
+
+          <!-- ENDEREÇO -->
+          <div class="informacao-item endereco-item">
+
+            <div class="icone-informacao">
+              <span>⌖</span>
+            </div>
+
+            <div>
+              <span class="rotulo">Endereço</span>
+
+              <p>
+                {{ dados.endereco.rua }}, {{ dados.endereco.numero }}
+              </p>
+
+              <p>
+                {{ dados.endereco.bairro }} —
+                {{ dados.endereco.cidade }}/{{ dados.endereco.estado }}
+              </p>
+            </div>
+
+          </div>
+
+
+          <!-- AVALIAÇÃO -->
+          <div class="avaliacao-clinica">
+
+            <div class="estrelas">
+              ★
+            </div>
+
+            <div>
+              <strong>{{ dados.avaliacao.toFixed(1) }}</strong>
+
+              <span>
+                {{ dados.qtdAvaliacoes }} avaliações
+              </span>
+            </div>
+
+          </div>
+
+        </div>
+
+
+        <!-- CARD DE PREÇO -->
+        <aside class="card-tarifa">
+
+          <span class="etiqueta-tarifa">
+            TARIFA POPULAR
+          </span>
+
+          <h2>
+            Preços acessíveis
+          </h2>
+
+          @if (servicos().length > 0) {
+
+            <p class="texto-preco">
+              Serviços a partir de
+            </p>
+
+            <strong class="preco-destaque">
+              {{ preco.formatarReal(servicos()[0].precoApp) }}
+            </strong>
+
+          } @else {
+
+            <p class="texto-preco">
+              Consulte os serviços disponíveis.
+            </p>
+
+          }
+
+          <a
+            class="botao-contato"
+            href="https://wa.me/"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <span>◉</span>
+            Falar pelo WhatsApp
+          </a>
+
+          <small>
+            Sem taxas nem mensalidades para o paciente.
+          </small>
+
+        </aside>
+
+      </section>
+
+
+      <!-- CONTEÚDO -->
+      <section class="container layout-conteudo">
+
+        <!-- COLUNA PRINCIPAL -->
+        <div class="coluna-principal">
+
+
+          <!-- SOBRE -->
+        <section class="bloco-conteudo" id="servicos">
+            <div class="titulo-bloco">
+              <span class="linha-titulo"></span>
+              <h2>Sobre a Clínica</h2>
+            </div>
+
+            <p class="texto-sobre">
+              Encontre informações sobre os serviços,
+              profissionais e atendimento oferecidos por esta clínica.
+            </p>
+
+
+            <div class="indicadores">
+
+              <div class="indicador">
+                <strong>{{ dados.qtdAvaliacoes }}</strong>
+                <span>Avaliações</span>
+              </div>
+
+              <div class="indicador">
+                <strong>{{ servicos().length }}</strong>
+                <span>Serviços</span>
+              </div>
+
+              <div class="indicador">
+                <strong>{{ medicos().length }}</strong>
+                <span>Profissionais</span>
+              </div>
+
+            </div>
+
+          </section>
+
+
+          <!-- SERVIÇOS -->
+          <section class="bloco-conteudo">
+
+            <div class="titulo-bloco">
+              <span class="linha-titulo"></span>
+              <h2>Serviços disponíveis</h2>
+            </div>
+
+            @if (servicos().length === 0) {
+
+              <div class="vazio">
+                <span>☰</span>
+                <p>Nenhum serviço disponível no momento.</p>
+              </div>
+
+            } @else {
+
+              <div class="lista-servicos">
+
+                @for (servico of servicos(); track servico.id) {
+
+                  <article class="card-servico">
+
+                    <div class="servico-esquerda">
+
+                      <div class="icone-servico">
+                        <span>+</span>
+                      </div>
+
+                      <div class="servico-dados">
+
+                        <h3>
+                          {{ servico.nome }}
+                        </h3>
+
+                        <span
+                          class="status-servico"
+                          [class.inativo]="servico.status === 'inativo'"
+                        >
+                          <span></span>
+
+                          {{
+                            servico.status === 'ativo'
+                              ? 'Disponível'
+                              : 'Indisponível'
+                          }}
+                        </span>
+
+                      </div>
+
+                    </div>
+
+
+                    <div class="servico-precos">
+
+                      <span class="preco-tabela">
+                        {{ preco.formatarReal(servico.precoTabela) }}
+                      </span>
+
+                      <strong>
+                        {{ preco.formatarReal(servico.precoApp) }}
+                      </strong>
+
+                      <span class="desconto">
+                        -{{
+                          preco.calcularDesconto(
+                            servico.precoTabela,
+                            servico.precoApp
+                          )
+                        }}%
+                      </span>
+
+                    </div>
+
+
+                    <button
+                      class="botao-agendar"
+                      type="button"
+                    >
+                      Agendar
+                    </button>
+
+                  </article>
+
+                }
+
+              </div>
+
+            }
+
+          </section>
+
+
+          <!-- CORPO CLÍNICO -->
+          <section class="bloco-conteudo">
+
+            <div class="titulo-bloco">
+              <span class="linha-titulo"></span>
+              <h2>Corpo Clínico</h2>
+            </div>
+
+            <p class="descricao-bloco">
+              Conheça os profissionais cadastrados nesta clínica.
+            </p>
+
+            @if (medicos().length === 0) {
+
+              <div class="vazio">
+                <span>◯</span>
+                <p>Nenhum profissional cadastrado.</p>
+              </div>
+
+            } @else {
+
+              <div class="lista-medicos">
+
+                @for (medico of medicos(); track medico.id) {
+
+                  <article class="card-medico">
+
+                    <div class="foto-medico">
+
+                      @if (medico.foto) {
+
+                        <img
+                          [src]="medico.foto"
+                          [alt]="medico.nome"
+                        />
+
+                      } @else {
+
+                        <span>👤</span>
+
+                      }
+
+                    </div>
+
+                    <div class="dados-medico">
+
+                      <h3>
+                        {{ medico.nome }}
+                      </h3>
+
+                      <p>
+                        {{ medico.especialidadeId }}
+                      </p>
+
+                      <small>
+                        {{ medico.crm }}
+                      </small>
+
+                    </div>
+
+                  </article>
+
+                }
+
+              </div>
+
+            }
+
+          </section>
+
+
+          <!-- ESTRUTURA -->
+          <section class="bloco-conteudo">
+
+            <div class="titulo-bloco">
+              <span class="linha-titulo"></span>
+              <h2>Estrutura & Facilidades</h2>
+            </div>
+
+            <div class="facilidades">
+
+              <span>
+                ✓ Atendimento presencial
+              </span>
+
+              <span>
+                ✓ Profissionais cadastrados
+              </span>
+
+              <span>
+                ✓ Preços acessíveis
+              </span>
+
+              <span>
+                ✓ Informações transparentes
+              </span>
+
+            </div>
+
+          </section>
+
+
+          <!-- LOCALIZAÇÃO -->
+          <section class="bloco-conteudo">
+
+            <div class="titulo-bloco">
+              <span class="linha-titulo"></span>
+              <h2>Horário & Como Chegar</h2>
+            </div>
+
+            <div class="mapa">
+
+              <div class="mapa-conteudo">
+
+                <span class="pin-mapa">⌖</span>
+
+                <strong>
+                  Localização da clínica
+                </strong>
+
+                <span>
+                  {{ dados.endereco.bairro }},
+                  {{ dados.endereco.cidade }}
+                </span>
+
+              </div>
+
+            </div>
+
+            <div class="endereco-completo">
+
+              <span class="icone-endereco">
+                ⌖
+              </span>
+
+              <p>
+                <strong>
+                  {{ dados.endereco.rua }},
+                  {{ dados.endereco.numero }}
+                </strong>
+
+                <br />
+
+                {{ dados.endereco.bairro }} —
+                {{ dados.endereco.cidade }}/{{ dados.endereco.estado }}
+              </p>
+
+            </div>
+
+          </section>
+
+        </div>
+
+
+        <!-- COLUNA LATERAL -->
+        <aside class="coluna-lateral">
+
+
+          <!-- SERVIÇOS RESUMIDOS -->
+          <div class="card-lateral">
+
+            <div class="cabecalho-lateral">
+              <h2>Serviços e preços</h2>
+
+              <span>
+                {{ servicos().length }}
+              </span>
+            </div>
+
+            @if (servicos().length === 0) {
+
+              <p class="lateral-vazio">
+                Nenhum serviço cadastrado.
+              </p>
+
+            } @else {
+
+              @for (servico of servicos(); track servico.id) {
+
+                <div class="servico-resumo">
+
+                  <div class="resumo-info">
+
+                    <strong>
+                      {{ servico.nome }}
+                    </strong>
+
+                    <span>
+                      {{ preco.formatarReal(servico.precoApp) }}
+                    </span>
+
+                  </div>
+
+                  <button type="button">
+                    WhatsApp
+                  </button>
+
+                </div>
+
+              }
+
+            }
+
+          </div>
+
+
+          <!-- COMPROMISSO -->
+          <div class="card-compromisso">
+
+            <div class="icone-compromisso">
+              ✓
+            </div>
+
+            <h2>
+              Compromisso SaúdeAcesso
+            </h2>
+
+            <p>
+              Informações claras para ajudar você
+              a encontrar atendimento com preços acessíveis.
+            </p>
+
+          </div>
+
+
+          <!-- INFORMAÇÕES -->
+          <div class="card-informacoes">
+
+            <h3>
+              Informações da clínica
+            </h3>
+
+            <div>
+              <span>Localização</span>
+              <strong>{{ dados.endereco.bairro }}</strong>
+            </div>
+
+            <div>
+              <span>Cidade</span>
+              <strong>{{ dados.endereco.cidade }}</strong>
+            </div>
+
+            <div>
+              <span>Estado</span>
+              <strong>{{ dados.endereco.estado }}</strong>
+            </div>
+
+          </div>
+
+        </aside>
+
+      </section>
+
+    </main>
+
+
+    <!-- BARRA INFERIOR -->
+    <div class="barra-agendamento">
+
+      <div class="container barra-agendamento-conteudo">
+
+        <div>
+          <strong>
+            Encontre atendimento com preço acessível
+          </strong>
+
+          <span>
+            Consulte os serviços disponíveis nesta clínica.
+          </span>
+        </div>
+
+        <a href="#servicos" class="botao-barra">
+          Ver serviços
+        </a>
+
+      </div>
+
+    </div>
+
+  }
+
+</div>
+
+<app-rodape></app-rodape>

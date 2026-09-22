@@ -1,211 +1,728 @@
+:host {
+  display: block;
+  width: 100%;
+}
+
+/* =========================
+   PÁGINA
+========================= */
+
 .pagina-autenticacao {
   min-height: 100vh;
+  width: 100%;
+
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: #f8f9ff;
-  padding: 2rem 1rem;
+
+  padding: 40px 20px;
+  box-sizing: border-box;
+
+  background:
+    radial-gradient(
+      circle at 10% 20%,
+      rgba(0, 123, 185, 0.09),
+      transparent 30%
+    ),
+    radial-gradient(
+      circle at 90% 80%,
+      rgba(124, 249, 148, 0.08),
+      transparent 28%
+    ),
+    #f8f9ff;
 }
+
+/* =========================
+   CARTÃO PRINCIPAL
+========================= */
 
 .cartao-autenticacao {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  max-width: 1000px;
-  width: 100%;
-  background: #ffffff;
-  border-radius: 1rem;
+  width: 1050px;
+  max-width: 100%;
+
+  display: grid !important;
+
+  grid-template-columns: 46% 54% !important;
+  grid-template-rows: auto !important;
+
+  align-items: stretch;
+
   overflow: hidden;
-  box-shadow: 0 10px 15px -3px rgba(15, 23, 42, 0.08);
+
+  box-sizing: border-box;
+
+  background: #ffffff;
+
+  border: 1px solid #d5e3fd;
+  border-radius: 18px;
+
+  box-shadow:
+    0 20px 50px rgba(13, 28, 47, 0.09);
 }
+
+/* =========================
+   PAINEL ESQUERDO
+========================= */
 
 .painel-boas-vindas {
-  background: linear-gradient(160deg, #00628d, #006194);
+  grid-column: 1 !important;
+  grid-row: 1 !important;
+
+  min-width: 0;
+  min-height: 650px;
+
+  display: flex;
+
+  flex-direction: column;
+
+  padding: 42px;
+
+  box-sizing: border-box;
+
+  background:
+    radial-gradient(
+      circle at 80% 15%,
+      rgba(124, 249, 148, 0.13),
+      transparent 25%
+    ),
+    linear-gradient(
+      155deg,
+      #00628d 0%,
+      #006194 60%,
+      #00547f 100%
+    );
+
   color: #ffffff;
-  padding: 2.5rem;
+}
+
+.marca {
   display: flex;
-  flex-direction: column;
+  align-items: center;
+
+  gap: 9px;
+
+  font-size: 18px;
+  font-weight: 900;
+
+  letter-spacing: -0.4px;
+}
+
+.marca > span:last-child span {
+  font-weight: 400;
+}
+
+.marca-icone {
+  width: 31px;
+  height: 31px;
+
+  display: flex;
+  align-items: center;
   justify-content: center;
-  gap: 1.5rem;
+
+  flex-shrink: 0;
+
+  border-radius: 9px;
+
+  background: #ffffff;
+  color: #006194;
+
+  font-size: 24px;
+  font-weight: 300;
 }
 
-.painel-boas-vindas h1 {
-  font-family: 'Plus Jakarta Sans', sans-serif;
-  font-size: 1.75rem;
-  line-height: 1.3;
-}
-
-.lista-beneficios {
-  list-style: none;
-  padding: 0;
-  display: flex;
-  flex-direction: column;
-  gap: 0.75rem;
-  font-size: 0.9rem;
-}
-
-.painel-formulario {
-  padding: 2.5rem;
-  display: flex;
-  flex-direction: column;
+.boas-vindas-conteudo {
+  margin: auto 0;
 }
 
 .etiqueta {
-  display: inline-block;
-  background: #e0f2fe;
-  color: #0284c7;
-  font-size: 0.75rem;
-  font-weight: 700;
-  padding: 0.25rem 0.75rem;
-  border-radius: 9999px;
+  display: inline-flex;
+  align-items: center;
+
   width: fit-content;
-  margin-bottom: 0.75rem;
-}
 
-.painel-boas-vindas .etiqueta {
-  background: rgba(255, 255, 255, 0.15);
+  margin-bottom: 17px;
+  padding: 6px 10px;
+
+  border-radius: 999px;
+
+  background: rgba(255, 255, 255, 0.14);
+
   color: #ffffff;
+
+  font-size: 9px;
+  font-weight: 900;
+
+  letter-spacing: 0.7px;
 }
 
-h2 {
+.painel-boas-vindas h1 {
+  max-width: 430px;
+
+  margin: 0 0 17px;
+
   font-family: 'Plus Jakarta Sans', sans-serif;
-  color: #0f172a;
+
+  font-size: 31px;
+  line-height: 1.18;
+
+  letter-spacing: -0.8px;
+}
+
+.boas-vindas-conteudo > p {
+  max-width: 420px;
+
+  margin: 0 0 30px;
+
+  color: rgba(255, 255, 255, 0.78);
+
+  font-size: 13px;
+  line-height: 1.65;
+}
+
+.lista-beneficios {
+  display: flex;
+  flex-direction: column;
+
+  gap: 17px;
+
+  margin: 0;
+  padding: 0;
+
+  list-style: none;
+}
+
+.lista-beneficios li {
+  display: flex;
+  align-items: flex-start;
+
+  gap: 12px;
+
+  color: rgba(255, 255, 255, 0.82);
+
+  font-size: 11px;
+  line-height: 1.5;
+}
+
+.lista-beneficios strong {
+  display: block;
+
+  margin-bottom: 2px;
+
+  color: #ffffff;
+
+  font-size: 12px;
+}
+
+.icone-beneficio {
+  width: 34px;
+  height: 34px;
+
+  flex-shrink: 0;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 9px;
+
+  background: rgba(255, 255, 255, 0.13);
+
+  color: #ffffff;
+
+  font-size: 11px;
+  font-weight: 900;
+}
+
+.mensagem-rodape {
+  color: rgba(255, 255, 255, 0.55);
+
+  font-size: 9px;
+}
+
+/* =========================
+   PAINEL DO FORMULÁRIO
+========================= */
+
+.painel-formulario {
+  grid-column: 2 !important;
+  grid-row: 1 !important;
+
+  min-width: 0;
+
+  padding: 42px;
+
+  box-sizing: border-box;
+
+  display: flex;
+  flex-direction: column;
+
+  background: #ffffff;
+}
+
+.etiqueta-clara {
+  margin-bottom: 10px;
+
+  background: #e8f4fc;
+
+  color: #006194;
+}
+
+.cabecalho-formulario h2 {
+  margin: 0;
+
+  color: #0d1c2f;
+
+  font-family: 'Plus Jakarta Sans', sans-serif;
+
+  font-size: 27px;
+  line-height: 1.2;
 }
 
 .subtitulo {
-  color: #64748b;
-  margin-bottom: 1.5rem;
+  margin: 8px 0 25px;
+
+  color: #71808e;
+
+  font-size: 12px;
+  line-height: 1.5;
 }
+
+/* =========================
+   SELETORES
+========================= */
 
 .seletor-tipo,
 .seletor-modo {
+  width: 100%;
+
   display: flex;
-  border: 1.5px solid #cbd5e1;
-  border-radius: 0.5rem;
+
   overflow: hidden;
-  margin-bottom: 1rem;
+
+  box-sizing: border-box;
+
+  border: 1px solid #d5e3fd;
+  border-radius: 9px;
+
+  background: #f8f9ff;
+}
+
+.seletor-tipo {
+  margin-bottom: 10px;
+}
+
+.seletor-modo {
+  margin-bottom: 19px;
 }
 
 .seletor-tipo button,
 .seletor-modo button {
   flex: 1;
-  padding: 0.75rem;
-  background: #ffffff;
-  border: none;
+
+  min-width: 0;
+  min-height: 44px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  gap: 6px;
+
+  padding: 0 8px;
+
+  border: 0;
+
+  background: transparent;
+  color: #71808e;
+
+  font-family: inherit;
+
+  font-size: 11px;
+  font-weight: 800;
+
   cursor: pointer;
-  font-weight: 600;
-  color: #64748b;
-  min-height: 48px;
+
+  transition: 0.2s;
 }
 
 .seletor-tipo button.ativo,
 .seletor-modo button.ativo {
-  background: #e0f2fe;
-  color: #0284c7;
+  background: #e8f4fc;
+
+  color: #006194;
 }
+
+.seletor-tipo button:hover:not(.ativo),
+.seletor-modo button:hover:not(.ativo) {
+  background: #eff4ff;
+}
+
+.icone-seletor {
+  font-size: 16px;
+  line-height: 1;
+}
+
+/* =========================
+   ALERTA DE ERRO
+========================= */
+
+.alerta-erro {
+  display: flex;
+  align-items: center;
+
+  gap: 8px;
+
+  margin-bottom: 15px;
+  padding: 10px 12px;
+
+  box-sizing: border-box;
+
+  border: 1px solid #ffc9c5;
+  border-radius: 8px;
+
+  background: #fff0ee;
+  color: #93000a;
+
+  font-size: 11px;
+  line-height: 1.4;
+}
+
+.alerta-erro span {
+  width: 18px;
+  height: 18px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  flex-shrink: 0;
+
+  border-radius: 50%;
+
+  background: #ba1a1a;
+  color: #ffffff;
+
+  font-size: 10px;
+  font-weight: 900;
+}
+
+/* =========================
+   FORMULÁRIO
+========================= */
 
 .formulario {
+  width: 100%;
+
   display: flex;
   flex-direction: column;
-  gap: 0.35rem;
+
+  box-sizing: border-box;
 }
 
-.formulario label {
-  font-size: 0.875rem;
-  font-weight: 600;
-  color: #0f172a;
-  margin-top: 0.75rem;
+.campo-formulario {
+  width: 100%;
+
+  display: flex;
+  flex-direction: column;
+
+  min-width: 0;
 }
 
-.formulario input {
-  height: 52px;
-  border-radius: 0.5rem;
-  border: 1.5px solid #cbd5e1;
-  padding: 0 1rem;
-  font-size: 1rem;
+.formulario label:not(.opcao-lgpd) {
+  margin: 10px 0 6px;
+
+  color: #263443;
+
+  font-size: 11px;
+  font-weight: 800;
+}
+
+.formulario input[type='text'],
+.formulario input[type='email'],
+.formulario input[type='password'] {
+  width: 100%;
+  height: 45px;
+
+  box-sizing: border-box;
+
+  padding: 0 12px;
+
+  border: 1px solid #bfcbd7;
+  border-radius: 8px;
+
+  outline: none;
+
+  background: #ffffff;
+  color: #0d1c2f;
+
+  font-family: inherit;
+
+  font-size: 12px;
+
+  transition:
+    border-color 0.2s,
+    box-shadow 0.2s;
+}
+
+.formulario input::placeholder {
+  color: #9aa5af;
 }
 
 .formulario input:focus {
-  outline: none;
-  border-color: #0284c7;
-  box-shadow: 0 0 0 3px #e0f2fe;
+  border-color: #006194;
+
+  box-shadow:
+    0 0 0 3px rgba(0, 97, 148, 0.09);
 }
+
+/* =========================
+   CAMPO DE SENHA
+========================= */
 
 .campo-senha {
   position: relative;
-  display: flex;
-  align-items: center;
+
+  width: 100%;
 }
 
 .campo-senha input {
-  flex: 1;
+  padding-right: 45px !important;
 }
 
 .botao-olho {
   position: absolute;
-  right: 0.75rem;
-  background: none;
-  border: none;
+
+  top: 50%;
+  right: 8px;
+
+  transform: translateY(-50%);
+
+  width: 32px;
+  height: 32px;
+
+  border: 0;
+  border-radius: 6px;
+
+  background: transparent;
+  color: #64717d;
+
+  font-size: 14px;
+
   cursor: pointer;
-  font-size: 1.1rem;
+}
+
+.botao-olho:hover {
+  background: #eff4ff;
+
+  color: #006194;
 }
 
 .erro-campo {
+  margin-top: 4px;
+
   color: #ba1a1a;
-  font-size: 0.8rem;
+
+  font-size: 9px;
 }
+
+/* =========================
+   LGPD
+========================= */
 
 .opcao-lgpd {
   display: flex;
   align-items: flex-start;
-  gap: 0.5rem;
-  font-size: 0.85rem;
-  color: #334155;
-  margin-top: 1rem;
+
+  gap: 8px;
+
+  margin-top: 15px;
+
+  color: #667582;
+
+  font-size: 10px;
+  line-height: 1.5;
 }
 
 .opcao-lgpd input {
-  width: 20px;
-  height: 20px;
-  margin-top: 2px;
+  width: 17px !important;
+  height: 17px !important;
+
+  flex-shrink: 0;
+
+  margin: 1px 0 0 !important;
 }
 
-.opcao-lgpd a {
-  color: #0284c7;
-  font-weight: 600;
+.opcao-lgpd a,
+.aviso-privacidade a {
+  color: #006194;
+
+  font-weight: 800;
+
+  text-decoration: none;
 }
 
-.alerta-erro {
-  background: #ffdad6;
-  color: #93000a;
-  padding: 0.75rem 1rem;
-  border-radius: 0.5rem;
-  font-size: 0.875rem;
-  margin-bottom: 1rem;
+.opcao-lgpd a:hover,
+.aviso-privacidade a:hover {
+  text-decoration: underline;
 }
+
+.opcao-lgpd strong {
+  color: #3f4850;
+}
+
+.erro-lgpd {
+  margin-left: 25px;
+}
+
+/* =========================
+   BOTÃO PRINCIPAL
+========================= */
 
 .botao-principal {
-  margin-top: 1.5rem;
-  height: 52px;
-  border-radius: 9999px;
-  border: none;
-  background: #16a34a;
+  width: 100%;
+  height: 47px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  gap: 8px;
+
+  margin-top: 18px;
+
+  border: 0;
+  border-radius: 9px;
+
+  background: #006e2d;
   color: #ffffff;
-  font-weight: 700;
-  font-size: 1rem;
+
+  font-family: inherit;
+
+  font-size: 12px;
+  font-weight: 900;
+
   cursor: pointer;
-  transition: opacity 0.2s;
+
+  transition:
+    background 0.2s,
+    transform 0.2s;
+}
+
+.botao-principal:hover:not(:disabled) {
+  background: #005a25;
+
+  transform: translateY(-1px);
 }
 
 .botao-principal:disabled {
-  opacity: 0.6;
+  opacity: 0.55;
+
   cursor: not-allowed;
 }
 
-@media (max-width: 768px) {
+.botao-principal span {
+  font-size: 17px;
+}
+
+/* =========================
+   AVISO DE PRIVACIDADE
+========================= */
+
+.aviso-privacidade {
+  margin: 20px 0 0;
+
+  color: #929ca6;
+
+  font-size: 9px;
+  line-height: 1.5;
+
+  text-align: center;
+}
+
+.aviso-privacidade a {
+  color: #006194;
+
+  font-weight: 800;
+
+  text-decoration: none;
+}
+
+/* =========================
+   RESPONSIVIDADE
+========================= */
+
+/*
+   Só muda para uma coluna em telas realmente estreitas.
+   Desktop e notebook continuam lado a lado.
+*/
+
+@media (max-width: 700px) {
   .cartao-autenticacao {
-    grid-template-columns: 1fr;
+    grid-template-columns: 1fr !important;
+    grid-template-rows: auto auto !important;
   }
+
+  .painel-boas-vindas {
+    grid-column: 1 !important;
+    grid-row: 1 !important;
+
+    min-height: auto;
+  }
+
+  .painel-formulario {
+    grid-column: 1 !important;
+    grid-row: 2 !important;
+  }
+
+  .boas-vindas-conteudo {
+    margin: 35px 0;
+  }
+
+  .painel-boas-vindas h1 {
+    font-size: 27px;
+  }
+}
+
+/* =========================
+   CELULAR
+========================= */
+
+@media (max-width: 600px) {
+  .pagina-autenticacao {
+    padding: 15px 10px;
+  }
+
+  .cartao-autenticacao {
+    border-radius: 13px;
+  }
+
   .painel-boas-vindas {
     display: none;
+  }
+
+  .painel-formulario {
+    grid-column: 1 !important;
+    grid-row: 1 !important;
+
+    padding: 27px 20px;
+  }
+
+  .cabecalho-formulario h2 {
+    font-size: 23px;
+  }
+}
+
+/* =========================
+   CELULAR PEQUENO
+========================= */
+
+@media (max-width: 400px) {
+  .painel-formulario {
+    padding: 23px 16px;
+  }
+
+  .seletor-tipo button,
+  .seletor-modo button {
+    font-size: 10px;
   }
 }

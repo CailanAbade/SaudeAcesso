@@ -1,6 +1,12 @@
 import { Routes } from '@angular/router';
+import { autenticacaoGuard } from './nucleo/guardas/autenticacao-guard';
 
 export const routes: Routes = [
+  {
+    path: '',
+    redirectTo: 'inicio',
+    pathMatch: 'full',
+  },
   {
     path: 'inicio',
     loadComponent: () =>
@@ -19,4 +25,25 @@ export const routes: Routes = [
       import('./paginas/autenticacao/autenticacao').then((m) => m.AutenticacaoComponent),
     title: 'SaúdeAcesso | Entrar',
   },
+  {
+  path: 'privacidade',
+  loadComponent: () =>
+    import('./paginas/privacidade/privacidade').then((m) => m.PrivacidadeComponent),
+  title: 'SaúdeAcesso | Política de Privacidade e LGPD',
+},
+  {
+    path: 'clinicas/:slug',
+    loadComponent: () =>
+      import('./paginas/clinica/clinica').then((m) => m.ClinicaComponent),
+    title: 'SaúdeAcesso | Perfil da clínica',
+  },
+  {
+  path: 'painel-clinica',
+  canActivate: [autenticacaoGuard],
+  loadComponent: () =>
+    import('./paginas/painel-clinica/painel-clinica').then(
+      (m) => m.PainelClinica
+    ),
+  title: 'SaúdeAcesso | Painel da Clínica',
+},
 ];

@@ -1,0 +1,1174 @@
+:host {
+  display: block;
+}
+
+.pagina-clinica {
+  background: #f8f9ff;
+  color: #0d1c2f;
+  min-height: 100vh;
+}
+
+/* =========================
+   ESTADOS
+========================= */
+
+.estado-pagina {
+  min-height: 60vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 60px 20px;
+}
+
+.estado-card {
+  background: #ffffff;
+  border: 1px solid #d5e3fd;
+  border-radius: 20px;
+  padding: 48px;
+  text-align: center;
+  max-width: 480px;
+  width: 100%;
+  box-shadow: 0 10px 30px rgba(13, 28, 47, 0.06);
+}
+
+.estado-card h1 {
+  margin: 18px 0 8px;
+  font-size: 28px;
+}
+
+.estado-card p {
+  color: #3f4850;
+  margin-bottom: 28px;
+}
+
+.spinner {
+  width: 42px;
+  height: 42px;
+  margin: 0 auto;
+  border: 4px solid #d5e3fd;
+  border-top-color: #006194;
+  border-radius: 50%;
+  animation: girar 0.8s linear infinite;
+}
+
+@keyframes girar {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.icone-erro {
+  width: 52px;
+  height: 52px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: #ffe9e9;
+  color: #b42318;
+  font-size: 28px;
+  font-weight: 800;
+}
+
+.botao-principal {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 13px 22px;
+  border-radius: 10px;
+  background: #006194;
+  color: #ffffff;
+  text-decoration: none;
+  font-weight: 700;
+}
+
+/* =========================
+   CONTAINER
+========================= */
+
+.container {
+  width: min(1180px, calc(100% - 40px));
+  margin: 0 auto;
+}
+
+/* =========================
+   BARRA DE NAVEGAÇÃO
+========================= */
+
+.barra-navegacao {
+  background: #ffffff;
+  border-bottom: 1px solid #d5e3fd;
+}
+
+.barra-navegacao .container {
+  min-height: 58px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.voltar-resultados {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: #006194;
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.voltar-resultados:hover {
+  text-decoration: underline;
+}
+
+.voltar-resultados span {
+  font-size: 20px;
+}
+
+.separador {
+  color: #a5afba;
+}
+
+.breadcrumb {
+  color: #66717c;
+  font-size: 14px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* =========================
+   HERO
+========================= */
+
+.hero-clinica {
+  width: 100%;
+}
+
+.hero-capa {
+  height: 300px;
+  position: relative;
+  overflow: hidden;
+  background: #dcecff;
+}
+
+.hero-capa img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.capa-placeholder {
+  width: 100%;
+  height: 100%;
+  background:
+    radial-gradient(circle at 25% 30%, rgba(0, 123, 185, 0.25), transparent 32%),
+    radial-gradient(circle at 75% 70%, rgba(0, 110, 45, 0.18), transparent 30%),
+    linear-gradient(135deg, #dff3ff, #edf7ff 50%, #e3f6e9);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.capa-conteudo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  color: #006194;
+}
+
+.capa-conteudo strong {
+  font-size: 26px;
+}
+
+.capa-conteudo span:last-child {
+  color: #3f4850;
+  font-size: 14px;
+}
+
+.capa-icone {
+  width: 64px;
+  height: 64px;
+  border-radius: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #ffffff;
+  font-size: 32px;
+  font-weight: 900;
+  box-shadow: 0 8px 24px rgba(13, 28, 47, 0.1);
+}
+
+.badge-atendimento {
+  position: absolute;
+  right: 30px;
+  bottom: 24px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 9px 14px;
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 999px;
+  color: #006e2d;
+  font-size: 13px;
+  font-weight: 800;
+  box-shadow: 0 6px 20px rgba(13, 28, 47, 0.1);
+}
+
+.ponto {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #006e2d;
+}
+
+/* =========================
+   CARD DA CLÍNICA
+========================= */
+
+.card-clinica {
+  position: relative;
+  margin-top: -52px;
+  z-index: 2;
+  background: #ffffff;
+  border-radius: 20px;
+  box-shadow: 0 15px 40px rgba(13, 28, 47, 0.1);
+  border: 1px solid rgba(191, 199, 210, 0.6);
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 330px;
+  overflow: hidden;
+}
+
+.informacoes-principais {
+  padding: 34px;
+}
+
+.cabecalho-clinica {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  margin-bottom: 30px;
+}
+
+.avatar-clinica {
+  width: 76px;
+  height: 76px;
+  flex-shrink: 0;
+  border-radius: 18px;
+  background: #e6eeff;
+  color: #006194;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 34px;
+  font-weight: 900;
+}
+
+.titulo-e-selo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.titulo-clinica h1 {
+  margin: 0;
+  font-size: 30px;
+  line-height: 1.15;
+  letter-spacing: -0.6px;
+}
+
+.subtitulo-clinica {
+  margin: 7px 0 0;
+  color: #66717c;
+  font-size: 15px;
+}
+
+.selo-verificada {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 5px 9px;
+  border-radius: 999px;
+  background: #e6f8eb;
+  color: #006e2d;
+  font-size: 12px;
+  font-weight: 800;
+}
+
+.informacao-item {
+  display: flex;
+  gap: 14px;
+  align-items: flex-start;
+}
+
+.icone-informacao {
+  width: 40px;
+  height: 40px;
+  flex-shrink: 0;
+  border-radius: 10px;
+  background: #eff4ff;
+  color: #006194;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 22px;
+}
+
+.rotulo {
+  display: block;
+  color: #7a838c;
+  font-size: 12px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 5px;
+}
+
+.endereco-item p {
+  margin: 0 0 3px;
+  color: #3f4850;
+  font-size: 14px;
+}
+
+.avaliacao-clinica {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 25px;
+}
+
+.estrelas {
+  font-size: 24px;
+  color: #f2a900;
+}
+
+.avaliacao-clinica strong {
+  display: block;
+  font-size: 17px;
+}
+
+.avaliacao-clinica span {
+  display: block;
+  margin-top: 2px;
+  color: #66717c;
+  font-size: 12px;
+}
+
+/* =========================
+   TARIFA
+========================= */
+
+.card-tarifa {
+  background: #eff8f2;
+  border-left: 1px solid #d5e3fd;
+  padding: 34px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.etiqueta-tarifa {
+  align-self: flex-start;
+  padding: 5px 9px;
+  border-radius: 6px;
+  background: #dff5e5;
+  color: #006e2d;
+  font-size: 11px;
+  font-weight: 900;
+  letter-spacing: 0.6px;
+}
+
+.card-tarifa h2 {
+  margin: 15px 0 10px;
+  font-size: 21px;
+}
+
+.texto-preco {
+  margin: 0;
+  color: #66717c;
+  font-size: 13px;
+}
+
+.preco-destaque {
+  margin: 3px 0 18px;
+  color: #006e2d;
+  font-size: 34px;
+  letter-spacing: -1px;
+}
+
+.botao-contato {
+  width: 100%;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 13px;
+  border-radius: 10px;
+  background: #006e2d;
+  color: #ffffff;
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 800;
+}
+
+.botao-contato:hover {
+  filter: brightness(0.94);
+}
+
+.card-tarifa small {
+  margin-top: 12px;
+  color: #66717c;
+  font-size: 11px;
+  line-height: 1.4;
+}
+
+/* =========================
+   LAYOUT
+========================= */
+
+.layout-conteudo {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 330px;
+  gap: 30px;
+  padding-top: 40px;
+  padding-bottom: 100px;
+}
+
+.coluna-principal {
+  min-width: 0;
+}
+
+.bloco-conteudo {
+  background: #ffffff;
+  border: 1px solid #d5e3fd;
+  border-radius: 16px;
+  padding: 30px;
+  margin-bottom: 24px;
+}
+
+.titulo-bloco {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 18px;
+}
+
+.linha-titulo {
+  width: 4px;
+  height: 24px;
+  border-radius: 5px;
+  background: #006194;
+}
+
+.titulo-bloco h2 {
+  margin: 0;
+  font-size: 21px;
+  letter-spacing: -0.3px;
+}
+
+.texto-sobre,
+.descricao-bloco {
+  color: #3f4850;
+  font-size: 14px;
+  line-height: 1.7;
+  margin: 0;
+}
+
+/* =========================
+   INDICADORES
+========================= */
+
+.indicadores {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  margin-top: 28px;
+  border: 1px solid #d5e3fd;
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.indicador {
+  padding: 18px;
+  text-align: center;
+  border-right: 1px solid #d5e3fd;
+}
+
+.indicador:last-child {
+  border-right: 0;
+}
+
+.indicador strong {
+  display: block;
+  color: #006194;
+  font-size: 24px;
+}
+
+.indicador span {
+  color: #66717c;
+  font-size: 12px;
+}
+
+/* =========================
+   SERVIÇOS
+========================= */
+
+.lista-servicos {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.card-servico {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  padding: 18px;
+  border: 1px solid #d5e3fd;
+  border-radius: 13px;
+  transition: 0.2s ease;
+}
+
+.card-servico:hover {
+  border-color: #9cbfdd;
+  box-shadow: 0 5px 16px rgba(13, 28, 47, 0.05);
+}
+
+.servico-esquerda {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  align-items: center;
+  gap: 13px;
+}
+
+.icone-servico {
+  width: 42px;
+  height: 42px;
+  flex-shrink: 0;
+  border-radius: 10px;
+  background: #eff4ff;
+  color: #006194;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+  font-weight: 800;
+}
+
+.servico-dados {
+  min-width: 0;
+}
+
+.servico-dados h3 {
+  margin: 0 0 6px;
+  font-size: 15px;
+  overflow-wrap: anywhere;
+}
+
+.status-servico {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  color: #006e2d;
+  font-size: 11px;
+  font-weight: 700;
+}
+
+.status-servico span {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #006e2d;
+}
+
+.status-servico.inativo {
+  color: #b42318;
+}
+
+.status-servico.inativo span {
+  background: #b42318;
+}
+
+.servico-precos {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  white-space: nowrap;
+}
+
+.preco-tabela {
+  color: #8a939c;
+  font-size: 12px;
+  text-decoration: line-through;
+}
+
+.servico-precos strong {
+  color: #006e2d;
+  font-size: 17px;
+}
+
+.desconto {
+  padding: 4px 6px;
+  border-radius: 5px;
+  background: #e4f6e8;
+  color: #006e2d;
+  font-size: 10px;
+  font-weight: 900;
+}
+
+.botao-agendar {
+  border: 0;
+  border-radius: 8px;
+  background: #006194;
+  color: #ffffff;
+  padding: 10px 15px;
+  font-size: 12px;
+  font-weight: 800;
+  cursor: pointer;
+}
+
+.botao-agendar:hover {
+  filter: brightness(0.94);
+}
+
+/* =========================
+   MÉDICOS
+========================= */
+
+.lista-medicos {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 14px;
+  margin-top: 22px;
+}
+
+.card-medico {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 16px;
+  border: 1px solid #d5e3fd;
+  border-radius: 12px;
+}
+
+.foto-medico {
+  width: 58px;
+  height: 58px;
+  flex-shrink: 0;
+  border-radius: 50%;
+  overflow: hidden;
+  background: #e6eeff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #006194;
+  font-size: 25px;
+}
+
+.foto-medico img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.dados-medico {
+  min-width: 0;
+}
+
+.dados-medico h3 {
+  margin: 0 0 5px;
+  font-size: 14px;
+}
+
+.dados-medico p {
+  margin: 0 0 4px;
+  color: #006194;
+  font-size: 12px;
+}
+
+.dados-medico small {
+  color: #7a838c;
+  font-size: 11px;
+}
+
+/* =========================
+   FACILIDADES
+========================= */
+
+.facilidades {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 9px;
+}
+
+.facilidades span {
+  padding: 9px 12px;
+  border-radius: 8px;
+  background: #eff4ff;
+  color: #3f4850;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+/* =========================
+   MAPA
+========================= */
+
+.mapa {
+  height: 260px;
+  margin-top: 22px;
+  border-radius: 14px;
+  overflow: hidden;
+  background:
+    linear-gradient(rgba(255, 255, 255, 0.7), rgba(255, 255, 255, 0.7)),
+    repeating-linear-gradient(
+      45deg,
+      #dce8df,
+      #dce8df 20px,
+      #eaf1ea 20px,
+      #eaf1ea 40px
+    );
+  border: 1px solid #d5e3fd;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.mapa-conteudo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 7px;
+  padding: 20px;
+  background: rgba(255, 255, 255, 0.92);
+  border-radius: 14px;
+  box-shadow: 0 8px 20px rgba(13, 28, 47, 0.08);
+  text-align: center;
+}
+
+.pin-mapa {
+  font-size: 32px;
+  color: #006194;
+}
+
+.mapa-conteudo strong {
+  font-size: 14px;
+}
+
+.mapa-conteudo span:last-child {
+  color: #66717c;
+  font-size: 12px;
+}
+
+.endereco-completo {
+  display: flex;
+  gap: 12px;
+  margin-top: 18px;
+  padding: 14px;
+  border-radius: 10px;
+  background: #f4f7fc;
+}
+
+.icone-endereco {
+  color: #006194;
+  font-size: 20px;
+}
+
+.endereco-completo p {
+  margin: 0;
+  color: #3f4850;
+  font-size: 13px;
+  line-height: 1.6;
+}
+
+/* =========================
+   LATERAL
+========================= */
+
+.coluna-lateral {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  align-self: start;
+  position: sticky;
+  top: 20px;
+}
+
+.card-lateral,
+.card-compromisso,
+.card-informacoes {
+  background: #ffffff;
+  border: 1px solid #d5e3fd;
+  border-radius: 16px;
+  overflow: hidden;
+}
+
+.cabecalho-lateral {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px;
+  border-bottom: 1px solid #d5e3fd;
+}
+
+.cabecalho-lateral h2 {
+  margin: 0;
+  font-size: 17px;
+}
+
+.cabecalho-lateral span {
+  min-width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: #eff4ff;
+  color: #006194;
+  font-size: 11px;
+  font-weight: 800;
+}
+
+.servico-resumo {
+  padding: 15px 18px;
+  border-bottom: 1px solid #edf0f4;
+}
+
+.servico-resumo:last-child {
+  border-bottom: 0;
+}
+
+.resumo-info {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.resumo-info strong {
+  font-size: 12px;
+  line-height: 1.4;
+}
+
+.resumo-info span {
+  color: #006e2d;
+  font-size: 15px;
+  font-weight: 900;
+}
+
+.servico-resumo button {
+  width: 100%;
+  margin-top: 10px;
+  border: 1px solid #b9d8c2;
+  background: #f0faf3;
+  color: #006e2d;
+  border-radius: 7px;
+  padding: 8px;
+  font-size: 11px;
+  font-weight: 800;
+  cursor: pointer;
+}
+
+.lateral-vazio {
+  padding: 20px;
+  color: #66717c;
+  font-size: 13px;
+}
+
+.card-compromisso {
+  padding: 24px;
+  background: #edf8f0;
+  border-color: #cce8d3;
+}
+
+.icone-compromisso {
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 13px;
+  border-radius: 50%;
+  background: #d7f2de;
+  color: #006e2d;
+  font-size: 20px;
+  font-weight: 900;
+}
+
+.card-compromisso h2 {
+  margin: 0 0 8px;
+  color: #07572a;
+  font-size: 16px;
+}
+
+.card-compromisso p {
+  margin: 0;
+  color: #3f4850;
+  font-size: 12px;
+  line-height: 1.6;
+}
+
+.card-informacoes {
+  padding: 20px;
+}
+
+.card-informacoes h3 {
+  margin: 0 0 15px;
+  font-size: 15px;
+}
+
+.card-informacoes div {
+  display: flex;
+  justify-content: space-between;
+  gap: 15px;
+  padding: 10px 0;
+  border-bottom: 1px solid #edf0f4;
+}
+
+.card-informacoes div:last-child {
+  border-bottom: 0;
+}
+
+.card-informacoes span {
+  color: #7a838c;
+  font-size: 12px;
+}
+
+.card-informacoes strong {
+  font-size: 12px;
+}
+
+/* =========================
+   VAZIOS
+========================= */
+
+.vazio {
+  padding: 35px 20px;
+  border: 1px dashed #bfc7d2;
+  border-radius: 12px;
+  text-align: center;
+  color: #66717c;
+}
+
+.vazio span {
+  display: block;
+  margin-bottom: 8px;
+  font-size: 25px;
+  color: #006194;
+}
+
+.vazio p {
+  margin: 0;
+  font-size: 13px;
+}
+
+/* =========================
+   BARRA INFERIOR
+========================= */
+
+.barra-agendamento {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 20;
+  background: rgba(255, 255, 255, 0.96);
+  border-top: 1px solid #d5e3fd;
+  box-shadow: 0 -8px 25px rgba(13, 28, 47, 0.08);
+  backdrop-filter: blur(10px);
+}
+
+.barra-agendamento-conteudo {
+  min-height: 72px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.barra-agendamento-conteudo div {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.barra-agendamento-conteudo strong {
+  font-size: 14px;
+}
+
+.barra-agendamento-conteudo span {
+  color: #66717c;
+  font-size: 12px;
+}
+
+.botao-barra {
+  flex-shrink: 0;
+  padding: 11px 20px;
+  border-radius: 9px;
+  background: #006194;
+  color: #ffffff;
+  text-decoration: none;
+  font-size: 12px;
+  font-weight: 800;
+}
+
+/* =========================
+   RESPONSIVIDADE
+========================= */
+
+@media (max-width: 900px) {
+
+  .card-clinica,
+  .layout-conteudo {
+    grid-template-columns: 1fr;
+  }
+
+  .card-tarifa {
+    border-left: 0;
+    border-top: 1px solid #d5e3fd;
+  }
+
+  .coluna-lateral {
+    position: static;
+  }
+
+}
+
+@media (max-width: 700px) {
+
+  .container {
+    width: min(100% - 28px, 1180px);
+  }
+
+  .hero-capa {
+    height: 220px;
+  }
+
+  .badge-atendimento {
+    right: 14px;
+    bottom: 14px;
+    font-size: 11px;
+  }
+
+  .card-clinica {
+    margin-top: -30px;
+    border-radius: 16px;
+  }
+
+  .informacoes-principais,
+  .card-tarifa {
+    padding: 24px;
+  }
+
+  .titulo-clinica h1 {
+    font-size: 23px;
+  }
+
+  .avatar-clinica {
+    width: 60px;
+    height: 60px;
+    font-size: 26px;
+  }
+
+  .bloco-conteudo {
+    padding: 22px;
+  }
+
+  .indicadores {
+    grid-template-columns: 1fr;
+  }
+
+  .indicador {
+    border-right: 0;
+    border-bottom: 1px solid #d5e3fd;
+  }
+
+  .indicador:last-child {
+    border-bottom: 0;
+  }
+
+  .card-servico {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .servico-esquerda {
+    width: 100%;
+  }
+
+  .servico-precos {
+    width: 100%;
+    flex-wrap: wrap;
+  }
+
+  .botao-agendar {
+    width: 100%;
+  }
+
+  .lista-medicos {
+    grid-template-columns: 1fr;
+  }
+
+  .barra-agendamento-conteudo {
+    min-height: 64px;
+  }
+
+  .barra-agendamento-conteudo strong {
+    font-size: 12px;
+  }
+
+  .barra-agendamento-conteudo span {
+    display: none;
+  }
+
+  .botao-barra {
+    padding: 10px 14px;
+  }
+
+}
+
+@media (max-width: 480px) {
+
+  .barra-navegacao .container {
+    min-height: 50px;
+  }
+
+  .breadcrumb,
+  .separador {
+    display: none;
+  }
+
+  .hero-capa {
+    height: 180px;
+  }
+
+  .capa-conteudo strong {
+    font-size: 21px;
+  }
+
+  .capa-icone {
+    width: 50px;
+    height: 50px;
+    font-size: 25px;
+  }
+
+  .cabecalho-clinica {
+    align-items: flex-start;
+  }
+
+  .titulo-e-selo {
+    display: block;
+  }
+
+  .selo-verificada {
+    margin-top: 8px;
+  }
+
+  .preco-destaque {
+    font-size: 29px;
+  }
+
+}

@@ -1,0 +1,234 @@
+<div class="painel">
+  <aside class="barra-lateral">
+    <div class="marca">
+      <img src="logo.png" alt="SaúdeAcesso" />
+    </div>
+
+    <nav class="navegacao">
+      <a class="item-navegacao ativo" href="#">
+        <span>⌂</span>
+        <span>Visão geral</span>
+      </a>
+
+      <a class="item-navegacao" href="#">
+        <span>▣</span>
+        <span>Serviços</span>
+      </a>
+
+      <a class="item-navegacao" href="#">
+        <span>♙</span>
+        <span>Profissionais</span>
+      </a>
+
+      <a class="item-navegacao" href="#">
+        <span>◷</span>
+        <span>Horários</span>
+      </a>
+
+      <a class="item-navegacao" href="#">
+        <span>⚙</span>
+        <span>Configurações</span>
+      </a>
+    </nav>
+
+    <div class="rodape-lateral">
+      <a class="item-navegacao" routerLink="/privacidade">
+        <span>ⓘ</span>
+        <span>Privacidade</span>
+      </a>
+
+      <button class="botao-sair" type="button">
+        <span>↪</span>
+        <span>Sair</span>
+      </button>
+    </div>
+  </aside>
+
+  <main class="conteudo">
+    <header class="cabecalho-painel">
+      <div>
+        <p class="saudacao">Painel da clínica</p>
+        <h1>Olá, Clínica Vida Nova!</h1>
+        <p class="subtitulo">
+          Gerencie seus serviços e informações no SaúdeAcesso.
+        </p>
+      </div>
+
+      <div class="perfil">
+        <div class="avatar">CV</div>
+        <div class="perfil-info">
+          <strong>Clínica Vida Nova</strong>
+          <span>Clínica parceira</span>
+        </div>
+      </div>
+    </header>
+
+    <section class="cartoes-resumo">
+      <article class="cartao-resumo">
+        <div class="icone-resumo">▣</div>
+        <div>
+          <span class="rotulo-resumo">Serviços cadastrados</span>
+          <strong>2</strong>
+        </div>
+      </article>
+
+      <article class="cartao-resumo">
+        <div class="icone-resumo">♙</div>
+        <div>
+          <span class="rotulo-resumo">Profissionais</span>
+          <strong>1</strong>
+        </div>
+      </article>
+
+      <article class="cartao-resumo">
+        <div class="icone-resumo">★</div>
+        <div>
+          <span class="rotulo-resumo">Avaliação</span>
+          <strong>4,7</strong>
+        </div>
+      </article>
+
+      <article class="cartao-resumo destaque">
+        <div class="icone-resumo">✓</div>
+        <div>
+          <span class="rotulo-resumo">Perfil</span>
+          <strong>Verificado</strong>
+        </div>
+      </article>
+    </section>
+
+    <section class="secao">
+      <div class="cabecalho-secao">
+        <div>
+          <span class="etiqueta-secao">CATÁLOGO</span>
+          <h2>Seus serviços</h2>
+          <p>Confira os serviços disponibilizados pela sua clínica.</p>
+        </div>
+
+        <a class="botao-principal" href="#">
+          <span>+</span>
+          Cadastrar novo serviço
+        </a>
+      </div>
+
+      <div class="tabela-container">
+        <table>
+          <thead>
+            <tr>
+              <th>Serviço</th>
+              <th>Preço de tabela</th>
+              <th>Preço SaúdeAcesso</th>
+              <th>Desconto</th>
+              <th>Status</th>
+              <th>Ação</th>
+            </tr>
+          </thead>
+
+          <tbody>
+            <tr>
+              <td>
+                <div class="servico-nome">
+                  <strong>Consulta Clínico Geral</strong>
+                  <span>Consulta médica</span>
+                </div>
+              </td>
+
+              <td>R$ 150,00</td>
+
+              <td>
+                <strong class="preco-app">R$ 60,00</strong>
+              </td>
+
+              <td>
+                <span class="desconto">60% OFF</span>
+              </td>
+
+              <td>
+                <span class="status ativo-status">Ativo</span>
+              </td>
+
+              <td>
+                <button class="botao-acao" type="button">Editar</button>
+              </td>
+            </tr>
+
+            <tr>
+              <td>
+                <div class="servico-nome">
+                  <strong>Hemograma Completo</strong>
+                  <span>Exame laboratorial</span>
+                </div>
+              </td>
+
+              <td>R$ 80,00</td>
+
+              <td>
+                <strong class="preco-app">R$ 35,00</strong>
+              </td>
+
+              <td>
+                <span class="desconto">56% OFF</span>
+              </td>
+
+              <td>
+                <span class="status ativo-status">Ativo</span>
+              </td>
+
+              <td>
+                <button class="botao-acao" type="button">Editar</button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="secao-grid">
+      <article class="cartao-informacao">
+        <div class="cabecalho-card">
+          <div>
+            <span class="etiqueta-secao">CLÍNICA</span>
+            <h2>Informações do perfil</h2>
+          </div>
+
+          <button class="botao-secundario" type="button">Editar</button>
+        </div>
+
+        <div class="informacoes">
+          <div class="informacao">
+            <span>Nome</span>
+            <strong>Clínica Vida Nova</strong>
+          </div>
+
+          <div class="informacao">
+            <span>Endereço</span>
+            <strong>Rua das Flores, 120 — Liberdade</strong>
+          </div>
+
+          <div class="informacao">
+            <span>Cidade</span>
+            <strong>Salvador — BA</strong>
+          </div>
+        </div>
+      </article>
+
+      <article class="cartao-informacao">
+        <div class="cabecalho-card">
+          <div>
+            <span class="etiqueta-secao">VISIBILIDADE</span>
+            <h2>Seu perfil público</h2>
+          </div>
+        </div>
+
+        <p class="texto-card">
+          É assim que os pacientes encontram sua clínica no SaúdeAcesso.
+        </p>
+
+        <a class="botao-secundario largura-total" href="#">
+          Visualizar perfil público
+          <span>→</span>
+        </a>
+      </article>
+    </section>
+  </main>
+</div>

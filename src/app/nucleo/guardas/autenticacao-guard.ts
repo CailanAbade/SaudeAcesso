@@ -10,8 +10,14 @@ export const autenticacaoGuard: CanActivateFn = () => {
   return user(auth).pipe(
     take(1),
     map((usuarioLogado) => {
-      if (usuarioLogado) return true;
-      roteador.navigate(['/entrar'], { queryParams: { redirecionar: 'painel' } });
+      if (usuarioLogado) {
+        return true;
+      }
+
+      roteador.navigate(['/entrar'], {
+        queryParams: { redirecionar: 'painel-clinica' },
+      });
+
       return false;
     })
   );

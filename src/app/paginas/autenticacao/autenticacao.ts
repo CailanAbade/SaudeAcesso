@@ -130,11 +130,17 @@ export class AutenticacaoComponent {
     this.roteador.navigateByUrl(destino ? `/${destino}` : '/');
   }
 
-  private tratarErro(erro: unknown): void {
-    if (erro instanceof FirebaseError) {
-      this.mensagemErro.set(traduzirErroFirebase(erro.code));
-    } else {
-      this.mensagemErro.set('Ocorreu um erro inesperado. Tente novamente.');
-    }
+ private tratarErro(erro: unknown): void {
+  console.error('ERRO COMPLETO DO FIREBASE:', erro);
+
+  if (erro instanceof FirebaseError) {
+    console.error('CÓDIGO FIREBASE:', erro.code);
+    console.error('MENSAGEM FIREBASE:', erro.message);
+
+    this.mensagemErro.set(traduzirErroFirebase(erro.code));
+  } else {
+    console.error('ERRO NÃO RECONHECIDO:', erro);
+    this.mensagemErro.set('Ocorreu um erro inesperado. Tente novamente.');
   }
+}
 }

@@ -2,7 +2,7 @@
 export const environment = {
   producao: false,
   firebase: {
-    apiKey: "AIzaSyC0X1VSd50nCq8B7R0a2sGSlB_VsNyr9Yg",
+    apiKey: "AIzaSyC0XIVSd50nCq8B7R0a2sGSlB_VsNyr9Yg",
     authDomain: "saudeacesso.firebaseapp.com",
     projectId: "saudeacesso",
     storageBucket: "saudeacesso.firebasestorage.app",
