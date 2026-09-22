@@ -1,0 +1,228 @@
+<div class="pagina">
+  <header class="cabecalho">
+    <a routerLink="/painel-clinica" class="logo">
+      <img src="logo.png" alt="SaúdeAcesso" />
+    </a>
+
+    <a routerLink="/painel-clinica" class="voltar">
+      <span>←</span>
+      Voltar ao painel
+    </a>
+  </header>
+
+  <main class="conteudo">
+    <div class="cabecalho-pagina">
+      <div>
+        <span class="etiqueta">CATÁLOGO</span>
+        <h1>Cadastrar novo serviço</h1>
+        <p>
+          Adicione um serviço para que os pacientes possam encontrá-lo no SaúdeAcesso.
+        </p>
+      </div>
+    </div>
+
+    <div class="layout">
+      <section class="cartao formulario-cartao">
+        <form [formGroup]="formulario" (ngSubmit)="cadastrar()">
+          <div class="secao-formulario">
+            <div class="titulo-secao">
+              <span class="numero">01</span>
+              <div>
+                <h2>Informações do serviço</h2>
+                <p>Informe os dados principais do serviço oferecido.</p>
+              </div>
+            </div>
+
+            <div class="campo">
+              <label for="nome">Nome do serviço</label>
+
+              <input
+                id="nome"
+                type="text"
+                formControlName="nome"
+                placeholder="Ex.: Consulta Clínico Geral"
+              />
+
+              @if (
+                formulario.controls.nome.invalid &&
+                formulario.controls.nome.touched
+              ) {
+                <small>Informe o nome do serviço.</small>
+              }
+            </div>
+
+            <div class="campo">
+              <label for="categoria">Categoria</label>
+
+              <select id="categoria" formControlName="categoria">
+                <option value="">Selecione uma categoria</option>
+                <option value="cat-clinico-geral">Clínico Geral</option>
+                <option value="cat-cardiologia">Cardiologia</option>
+                <option value="cat-ginecologia">Ginecologia</option>
+                <option value="cat-pediatria">Pediatria</option>
+                <option value="cat-exame-laboratorial">
+                  Exame Laboratorial
+                </option>
+                <option value="cat-exame-imagem">Exame de Imagem</option>
+              </select>
+
+              @if (
+                formulario.controls.categoria.invalid &&
+                formulario.controls.categoria.touched
+              ) {
+                <small>Selecione uma categoria.</small>
+              }
+            </div>
+          </div>
+
+          <div class="divisor"></div>
+
+          <div class="secao-formulario">
+            <div class="titulo-secao">
+              <span class="numero">02</span>
+              <div>
+                <h2>Definição de preços</h2>
+                <p>
+                  Informe o preço normal e o preço oferecido pelo SaúdeAcesso.
+                </p>
+              </div>
+            </div>
+
+            <div class="campos-preco">
+              <div class="campo">
+                <label for="precoTabela">Preço de tabela</label>
+
+                <div class="campo-moeda">
+                  <span>R$</span>
+                  <input
+                    id="precoTabela"
+                    type="number"
+                    min="0.01"
+                    step="0.01"
+                    formControlName="precoTabela"
+                    placeholder="0,00"
+                  />
+                </div>
+
+                @if (
+                  formulario.controls.precoTabela.invalid &&
+                  formulario.controls.precoTabela.touched
+                ) {
+                  <small>Informe um preço válido.</small>
+                }
+              </div>
+
+              <div class="campo">
+                <label for="precoApp">Preço SaúdeAcesso</label>
+
+                <div class="campo-moeda destaque">
+                  <span>R$</span>
+                  <input
+                    id="precoApp"
+                    type="number"
+                    min="0.01"
+                    step="0.01"
+                    formControlName="precoApp"
+                    placeholder="0,00"
+                  />
+                </div>
+
+                @if (
+                  formulario.controls.precoApp.invalid &&
+                  formulario.controls.precoApp.touched
+                ) {
+                  <small>Informe um preço válido.</small>
+                }
+              </div>
+            </div>
+
+            <div class="resumo-preco">
+              <div>
+                <span>Desconto para o paciente</span>
+                <strong>{{ desconto() }}% OFF</strong>
+              </div>
+
+              <div>
+                <span>Economia</span>
+                <strong>{{ formatarReal(economia()) }}</strong>
+              </div>
+            </div>
+          </div>
+
+          @if (mensagemErro()) {
+            <div class="mensagem-erro">
+              {{ mensagemErro() }}
+            </div>
+          }
+
+          <div class="acoes">
+            <a routerLink="/painel-clinica" class="botao-cancelar">
+              Cancelar
+            </a>
+
+            <button
+              type="submit"
+              class="botao-principal"
+              [disabled]="enviando()"
+            >
+              @if (enviando()) {
+                Cadastrando...
+              } @else {
+                Cadastrar serviço
+              }
+            </button>
+          </div>
+        </form>
+      </section>
+
+      <aside class="coluna-lateral">
+        <div class="cartao ajuda">
+          <div class="icone-ajuda">i</div>
+
+          <h2>Como funciona?</h2>
+
+          <p>
+            O preço SaúdeAcesso é o valor promocional que será exibido para os
+            pacientes na plataforma.
+          </p>
+
+          <div class="regra">
+            <span>✓</span>
+            <p>
+              O preço promocional deve ser menor ou igual ao preço de tabela.
+            </p>
+          </div>
+
+          <div class="regra">
+            <span>✓</span>
+            <p>
+              O desconto será calculado automaticamente.
+            </p>
+          </div>
+        </div>
+
+        <div class="cartao previa">
+          <span class="etiqueta">PRÉVIA</span>
+
+          <h3>
+            {{ formulario.controls.nome.value || 'Nome do serviço' }}
+          </h3>
+
+          <div class="precos">
+            <span>
+              {{ formatarReal(precoTabela()) }}
+            </span>
+
+            <strong>
+              {{ formatarReal(precoApp()) }}
+            </strong>
+          </div>
+
+          <span class="badge">
+            {{ desconto() }}% OFF
+          </span>
+        </div>
+      </aside>
+    </div>
+  </main>
+</div>

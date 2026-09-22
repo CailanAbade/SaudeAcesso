@@ -37,7 +37,11 @@
         <span>Privacidade</span>
       </a>
 
-      <button class="botao-sair" type="button">
+      <button
+        class="botao-sair"
+        type="button"
+        (click)="sair()"
+      >
         <span>↪</span>
         <span>Sair</span>
       </button>
@@ -48,16 +52,21 @@
     <header class="cabecalho-painel">
       <div>
         <p class="saudacao">Painel da clínica</p>
-        <h1>Olá, Clínica Vida Nova!</h1>
+
+        <h1>Olá, {{ nomeClinica() }}!</h1>
+
         <p class="subtitulo">
           Gerencie seus serviços e informações no SaúdeAcesso.
         </p>
       </div>
 
       <div class="perfil">
-        <div class="avatar">CV</div>
+        <div class="avatar">
+          {{ iniciaisClinica() }}
+        </div>
+
         <div class="perfil-info">
-          <strong>Clínica Vida Nova</strong>
+          <strong>{{ nomeClinica() }}</strong>
           <span>Clínica parceira</span>
         </div>
       </div>
@@ -66,33 +75,43 @@
     <section class="cartoes-resumo">
       <article class="cartao-resumo">
         <div class="icone-resumo">▣</div>
+
         <div>
-          <span class="rotulo-resumo">Serviços cadastrados</span>
-          <strong>2</strong>
+          <span>Serviços cadastrados</span>
+          <strong>{{ quantidadeServicos() }}</strong>
         </div>
       </article>
 
       <article class="cartao-resumo">
         <div class="icone-resumo">♙</div>
+
         <div>
-          <span class="rotulo-resumo">Profissionais</span>
-          <strong>1</strong>
+          <span>Profissionais</span>
+          <strong>{{ quantidadeMedicos() }}</strong>
         </div>
       </article>
 
       <article class="cartao-resumo">
         <div class="icone-resumo">★</div>
+
         <div>
-          <span class="rotulo-resumo">Avaliação</span>
-          <strong>4,7</strong>
+          <span>Avaliação</span>
+          <strong>{{ avaliacao() }}</strong>
         </div>
       </article>
 
-      <article class="cartao-resumo destaque">
+      <article
+        class="cartao-resumo"
+        [class.destaque]="verificada()"
+      >
         <div class="icone-resumo">✓</div>
+
         <div>
-          <span class="rotulo-resumo">Perfil</span>
-          <strong>Verificado</strong>
+          <span>Perfil</span>
+
+          <strong>
+            {{ verificada() ? 'Verificado' : 'Não verificado' }}
+          </strong>
         </div>
       </article>
     </section>
@@ -101,11 +120,18 @@
       <div class="cabecalho-secao">
         <div>
           <span class="etiqueta-secao">CATÁLOGO</span>
+
           <h2>Seus serviços</h2>
-          <p>Confira os serviços disponibilizados pela sua clínica.</p>
+
+          <p>
+            Confira os serviços disponibilizados pela sua clínica.
+          </p>
         </div>
 
-        <a class="botao-principal" href="#">
+        <a
+          class="botao-principal"
+          routerLink="/cadastrar-servico"
+        >
           <span>+</span>
           Cadastrar novo serviço
         </a>
@@ -125,59 +151,111 @@
           </thead>
 
           <tbody>
-            <tr>
-              <td>
-                <div class="servico-nome">
-                  <strong>Consulta Clínico Geral</strong>
-                  <span>Consulta médica</span>
-                </div>
-              </td>
+            @if (carregando()) {
+              <tr>
+                <td
+                  colspan="6"
+                  class="estado-vazio"
+                >
+                  Carregando serviços...
+                </td>
+              </tr>
+            } @else if (servicos().length === 0) {
+              <tr>
+                <td
+                  colspan="6"
+                  class="estado-vazio"
+                >
+                  <strong>Nenhum serviço cadastrado</strong>
 
-              <td>R$ 150,00</td>
+                  <p>
+                    Cadastre um serviço para ele aparecer no catálogo.
+                  </p>
+                </td>
+              </tr>
+            } @else {
+              @for (servico of servicos(); track servico.id) {
+                <tr>
+                  <td>
+                    <div class="servico-nome">
+                      <strong>
+                        {{ servico.nome }}
+                      </strong>
+                    </div>
+                  </td>
 
-              <td>
-                <strong class="preco-app">R$ 60,00</strong>
-              </td>
+                  <td>
+                    {{ formatarReal(servico.precoTabela) }}
+                  </td>
 
-              <td>
-                <span class="desconto">60% OFF</span>
-              </td>
+                  <td>
+                    <strong class="preco-app">
+                      {{ formatarReal(servico.precoApp) }}
+                    </strong>
+                  </td>
 
-              <td>
-                <span class="status ativo-status">Ativo</span>
-              </td>
+                  <td>
+                    <span class="desconto">
+                      {{
+                        calcularDesconto(
+                          servico.precoTabela,
+                          servico.precoApp
+                        )
+                      }}% OFF
+                    </span>
+                  </td>
 
-              <td>
-                <button class="botao-acao" type="button">Editar</button>
-              </td>
-            </tr>
+                  <td>
+                    <span
+                      class="status"
+                      [class.ativo-status]="servico.status === 'ativo'"
+                      [class.inativo-status]="servico.status !== 'ativo'"
+                    >
+                      {{
+                        servico.status === 'ativo'
+                          ? 'Ativo'
+                          : 'Inativo'
+                      }}
+                    </span>
+                  </td>
 
-            <tr>
-              <td>
-                <div class="servico-nome">
-                  <strong>Hemograma Completo</strong>
-                  <span>Exame laboratorial</span>
-                </div>
-              </td>
+                  <td>
+                    <div class="acoes-servico">
+                      <button
+                        class="botao-acao"
+                        type="button"
+                        title="Ações do serviço"
+                        (click)="abrirAcoes(servico)"
+                      >
+                        ⋯
+                      </button>
 
-              <td>R$ 80,00</td>
+                      @if (servicoEditando()?.id === servico.id) {
+                        <div class="menu-acoes">
+                          <a
+                            [routerLink]="['/editar-servico', servico.id]"
+                          >
+                            Editar serviço
+                          </a>
 
-              <td>
-                <strong class="preco-app">R$ 35,00</strong>
-              </td>
-
-              <td>
-                <span class="desconto">56% OFF</span>
-              </td>
-
-              <td>
-                <span class="status ativo-status">Ativo</span>
-              </td>
-
-              <td>
-                <button class="botao-acao" type="button">Editar</button>
-              </td>
-            </tr>
+                          <button
+                            type="button"
+                            (click)="alternarStatus(servico)"
+                            [disabled]="processandoServico() === servico.id"
+                          >
+                            {{
+                              servico.status === 'ativo'
+                                ? 'Desativar serviço'
+                                : 'Ativar serviço'
+                            }}
+                          </button>
+                        </div>
+                      }
+                    </div>
+                  </td>
+                </tr>
+              }
+            }
           </tbody>
         </table>
       </div>
@@ -188,26 +266,41 @@
         <div class="cabecalho-card">
           <div>
             <span class="etiqueta-secao">CLÍNICA</span>
+
             <h2>Informações do perfil</h2>
           </div>
 
-          <button class="botao-secundario" type="button">Editar</button>
+          <button
+            class="botao-secundario"
+            type="button"
+          >
+            Editar
+          </button>
         </div>
 
         <div class="informacoes">
           <div class="informacao">
             <span>Nome</span>
-            <strong>Clínica Vida Nova</strong>
+
+            <strong>
+              {{ nomeClinica() }}
+            </strong>
           </div>
 
           <div class="informacao">
             <span>Endereço</span>
-            <strong>Rua das Flores, 120 — Liberdade</strong>
+
+            <strong>
+              {{ enderecoClinica() }}
+            </strong>
           </div>
 
           <div class="informacao">
             <span>Cidade</span>
-            <strong>Salvador — BA</strong>
+
+            <strong>
+              {{ cidadeClinica() }}
+            </strong>
           </div>
         </div>
       </article>
@@ -215,7 +308,10 @@
       <article class="cartao-informacao">
         <div class="cabecalho-card">
           <div>
-            <span class="etiqueta-secao">VISIBILIDADE</span>
+            <span class="etiqueta-secao">
+              VISIBILIDADE
+            </span>
+
             <h2>Seu perfil público</h2>
           </div>
         </div>
@@ -224,7 +320,10 @@
           É assim que os pacientes encontram sua clínica no SaúdeAcesso.
         </p>
 
-        <a class="botao-secundario largura-total" href="#">
+        <a
+          class="botao-secundario largura-total"
+          [routerLink]="['/clinicas', slugClinica()]"
+        >
           Visualizar perfil público
           <span>→</span>
         </a>

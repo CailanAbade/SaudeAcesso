@@ -1,0 +1,201 @@
+<div class="pagina">
+  <header class="cabecalho">
+    <a class="logo" routerLink="/painel-clinica">
+      <img src="logo.png" alt="SaúdeAcesso" />
+    </a>
+
+    <a class="voltar" routerLink="/painel-clinica">
+      ← Voltar ao painel
+    </a>
+  </header>
+
+  <main class="conteudo">
+    @if (carregando()) {
+      <section class="cartao carregamento">
+        <div class="spinner"></div>
+        <p>Carregando serviço...</p>
+      </section>
+    } @else if (mensagemErro() && !servico()) {
+      <section class="cartao erro-pagina">
+        <div class="icone-erro">!</div>
+
+        <h1>Não foi possível carregar</h1>
+
+        <p>{{ mensagemErro() }}</p>
+
+        <a class="botao-principal" routerLink="/painel-clinica">
+          Voltar ao painel
+        </a>
+      </section>
+    } @else {
+      <section class="introducao">
+        <span class="etiqueta">CATÁLOGO</span>
+
+        <h1>Editar serviço</h1>
+
+        <p>
+          Atualize as informações e os preços do serviço da sua clínica.
+        </p>
+      </section>
+
+      <section class="cartao">
+        <form [formGroup]="formulario" (ngSubmit)="salvar()">
+          <div class="grupo">
+            <label for="nome">Nome do serviço</label>
+
+            <input
+              id="nome"
+              type="text"
+              formControlName="nome"
+              placeholder="Ex.: Consulta Cardiológica"
+            />
+
+            @if (
+              formulario.controls.nome.invalid &&
+              formulario.controls.nome.touched
+            ) {
+              <small class="erro">
+                Informe o nome do serviço.
+              </small>
+            }
+          </div>
+
+          <div class="grupo">
+            <label for="categoria">Categoria</label>
+
+            <select id="categoria" formControlName="categoria">
+              <option value="">Selecione uma categoria</option>
+              <option value="cat-clinico-geral">Clínico Geral</option>
+              <option value="cat-cardiologia">Cardiologia</option>
+              <option value="cat-ginecologia">Ginecologia</option>
+              <option value="cat-pediatria">Pediatria</option>
+              <option value="cat-exame-laboratorial">
+                Exames Laboratoriais
+              </option>
+              <option value="cat-exame-imagem">
+                Exames de Imagem
+              </option>
+            </select>
+
+            @if (
+              formulario.controls.categoria.invalid &&
+              formulario.controls.categoria.touched
+            ) {
+              <small class="erro">
+                Selecione uma categoria.
+              </small>
+            }
+          </div>
+
+          <div class="linha-precos">
+            <div class="grupo">
+              <label for="precoTabela">Preço de tabela</label>
+
+              <div class="campo-preco">
+                <span>R$</span>
+
+                <input
+                  id="precoTabela"
+                  type="number"
+                  min="0.01"
+                  step="0.01"
+                  formControlName="precoTabela"
+                  placeholder="0,00"
+                />
+              </div>
+
+              @if (
+                formulario.controls.precoTabela.invalid &&
+                formulario.controls.precoTabela.touched
+              ) {
+                <small class="erro">
+                  Informe um preço válido.
+                </small>
+              }
+            </div>
+
+            <div class="grupo">
+              <label for="precoApp">Preço SaúdeAcesso</label>
+
+              <div class="campo-preco">
+                <span>R$</span>
+
+                <input
+                  id="precoApp"
+                  type="number"
+                  min="0.01"
+                  step="0.01"
+                  formControlName="precoApp"
+                  placeholder="0,00"
+                />
+              </div>
+
+              @if (
+                formulario.controls.precoApp.invalid &&
+                formulario.controls.precoApp.touched
+              ) {
+                <small class="erro">
+                  Informe um preço válido.
+                </small>
+              }
+            </div>
+          </div>
+
+          @if (precoTabela > 0 && precoApp >= 0) {
+            <div class="previsualizacao">
+              <div>
+                <span>Desconto oferecido</span>
+                <strong>{{ desconto }}% OFF</strong>
+              </div>
+
+              <div>
+                <span>Economia para o paciente</span>
+                <strong>{{ formatarReal(economia) }}</strong>
+              </div>
+            </div>
+          }
+
+          @if (precoApp > precoTabela && precoTabela > 0) {
+            <div class="alerta">
+              O preço SaúdeAcesso não pode ser maior que o preço de tabela.
+            </div>
+          }
+
+          @if (mensagemErro()) {
+            <div class="mensagem-erro">
+              {{ mensagemErro() }}
+            </div>
+          }
+
+          @if (mensagemSucesso()) {
+            <div class="mensagem-sucesso">
+              {{ mensagemSucesso() }}
+            </div>
+          }
+
+          <div class="acoes">
+            <a class="botao-cancelar" routerLink="/painel-clinica">
+              Cancelar
+            </a>
+
+            <button
+              class="botao-principal"
+              type="submit"
+              [disabled]="
+                salvando() ||
+                formulario.invalid ||
+                precoApp > precoTabela
+              "
+            >
+              @if (salvando()) {
+                Salvando...
+              } @else {
+                Salvar alterações
+              }
+            </button>
+          </div>
+        </form>
+      </section>
+    }
+  </main>
+</div>
