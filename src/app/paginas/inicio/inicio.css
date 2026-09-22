@@ -1,0 +1,112 @@
+.pagina-inicio {
+  background: #f8fafc;
+  min-height: 100vh;
+}
+
+.hero {
+  text-align: center;
+  padding: 3rem 1.5rem;
+  background: linear-gradient(180deg, #e0f2fe, #f8fafc);
+}
+
+.etiqueta {
+  display: inline-block;
+  background: #dcfce7;
+  color: #16a34a;
+  font-size: 0.75rem;
+  font-weight: 700;
+  padding: 0.35rem 0.9rem;
+  border-radius: 9999px;
+  margin-bottom: 1rem;
+}
+
+.hero h1 {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 2rem;
+  color: #0f172a;
+  max-width: 700px;
+  margin: 0 auto 0.75rem;
+}
+
+.hero p {
+  color: #64748b;
+  max-width: 500px;
+  margin: 0 auto 2rem;
+}
+
+.caixa-busca {
+  max-width: 600px;
+  margin: 0 auto;
+  display: flex;
+  gap: 0.5rem;
+  background: #ffffff;
+  padding: 0.75rem;
+  border-radius: 1rem;
+  box-shadow: 0 10px 15px -3px rgba(15, 23, 42, 0.08);
+}
+
+.caixa-busca input {
+  flex: 1;
+  height: 52px;
+  border: 1.5px solid #cbd5e1;
+  border-radius: 0.5rem;
+  padding: 0 1rem;
+}
+
+.caixa-busca button {
+  height: 52px;
+  padding: 0 1.5rem;
+  background: #16a34a;
+  color: #ffffff;
+  border: none;
+  border-radius: 9999px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.lista-clinicas {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 3rem 1.5rem;
+}
+
+.lista-clinicas h2 {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  color: #0f172a;
+  margin-bottom: 1.5rem;
+}
+
+.grade-clinicas {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 1.25rem;
+}
+
+.cartao-clinica {
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 1rem;
+  padding: 1.25rem;
+  transition: border-color 0.2s;
+}
+
+.cartao-clinica:hover {
+  border-color: #0284c7;
+}
+
+.cartao-clinica h3 {
+  color: #0f172a;
+  margin-bottom: 0.35rem;
+}
+
+.cartao-clinica p {
+  color: #64748b;
+  font-size: 0.875rem;
+  margin-bottom: 0.5rem;
+}
+
+.avaliacao {
+  color: #16a34a;
+  font-size: 0.85rem;
+  font-weight: 600;
+}

@@ -1,0 +1,131 @@
+{
+  "clinicas": [
+    {
+      "id": "cli-001",
+      "slug": "clinica-vida-nova",
+      "nome": "Clínica Vida Nova",
+      "verificada": true,
+      "regiaoId": "reg-001",
+      "endereco": {
+        "rua": "Rua das Flores",
+        "numero": "120",
+        "bairro": "Liberdade",
+        "cidade": "Salvador",
+        "estado": "BA"
+      },
+      "avaliacao": 4.7,
+      "qtdAvaliacoes": 312,
+      "imagemCapa": "",
+      "planoId": "plano-trial"
+    },
+    {
+      "id": "cli-002",
+      "slug": "policlinica-bem-estar",
+      "nome": "Policlínica Bem Estar",
+      "verificada": true,
+      "regiaoId": "reg-002",
+      "endereco": {
+        "rua": "Av. Barros Reis",
+        "numero": "845",
+        "bairro": "Cabula",
+        "cidade": "Salvador",
+        "estado": "BA"
+      },
+      "avaliacao": 4.5,
+      "qtdAvaliacoes": 189,
+      "imagemCapa": "",
+      "planoId": "plano-premium"
+    },
+    {
+      "id": "cli-003",
+      "slug": "centro-medico-esperanca",
+      "nome": "Centro Médico Esperança",
+      "verificada": false,
+      "regiaoId": "reg-001",
+      "endereco": {
+        "rua": "Rua da Paz",
+        "numero": "45",
+        "bairro": "Pau da Lima",
+        "cidade": "Salvador",
+        "estado": "BA"
+      },
+      "avaliacao": 4.2,
+      "qtdAvaliacoes": 76,
+      "imagemCapa": "",
+      "planoId": "plano-trial"
+    }
+  ],
+  "servicos": [
+    {
+      "id": "srv-001",
+      "clinicaId": "cli-001",
+      "nome": "Consulta Clínico Geral",
+      "categoriaId": "cat-clinico-geral",
+      "precoTabela": 150,
+      "precoApp": 60,
+      "status": "ativo"
+    },
+    {
+      "id": "srv-002",
+      "clinicaId": "cli-001",
+      "nome": "Hemograma Completo",
+      "categoriaId": "cat-exame-laboratorial",
+      "precoTabela": 80,
+      "precoApp": 35,
+      "status": "ativo"
+    },
+    {
+      "id": "srv-003",
+      "clinicaId": "cli-002",
+      "nome": "Ultrassom Abdominal",
+      "categoriaId": "cat-exame-imagem",
+      "precoTabela": 220,
+      "precoApp": 99,
+      "status": "ativo"
+    },
+    {
+      "id": "srv-004",
+      "clinicaId": "cli-002",
+      "nome": "Consulta Ginecológica",
+      "categoriaId": "cat-ginecologia",
+      "precoTabela": 180,
+      "precoApp": 70,
+      "status": "ativo"
+    },
+    {
+      "id": "srv-005",
+      "clinicaId": "cli-003",
+      "nome": "Consulta Pediátrica",
+      "categoriaId": "cat-pediatria",
+      "precoTabela": 160,
+      "precoApp": 65,
+      "status": "ativo"
+    }
+  ],
+  "medicos": [
+    {
+      "id": "med-001",
+      "clinicaId": "cli-001",
+      "nome": "Dra. Ana Paula Ferreira",
+      "especialidadeId": "cat-clinico-geral",
+      "crm": "CRM-BA 12345",
+      "foto": ""
+    },
+    {
+      "id": "med-002",
+      "clinicaId": "cli-002",
+      "nome": "Dr. Carlos Eduardo Souza",
+      "especialidadeId": "cat-ginecologia",
+      "crm": "CRM-BA 54321",
+      "foto": ""
+    },
+    {
+      "id": "med-003",
+      "clinicaId": "cli-003",
+      "nome": "Dra. Beatriz Lima",
+      "especialidadeId": "cat-pediatria",
+      "crm": "CRM-BA 67890",
+      "foto": ""
+    }
+  ]
+}

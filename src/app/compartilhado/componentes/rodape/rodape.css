@@ -1,0 +1,49 @@
+.rodape {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 3rem;
+  padding: 3rem 2rem;
+  background: #f8fafc;
+  border-top: 1px solid #e2e8f0;
+}
+
+.coluna-marca {
+  flex: 2;
+  min-width: 220px;
+}
+
+.coluna-marca p {
+  color: #64748b;
+  font-size: 0.85rem;
+  margin-top: 0.75rem;
+}
+
+.marca-azul { color: #0284c7; font-weight: 700; }
+.marca-verde { color: #16a34a; font-weight: 700; }
+
+.coluna {
+  flex: 1;
+  min-width: 160px;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.coluna h4 {
+  color: #0f172a;
+  font-size: 0.9rem;
+  margin-bottom: 0.5rem;
+}
+
+.coluna a {
+  color: #64748b;
+  font-size: 0.85rem;
+}
+
+.direitos {
+  width: 100%;
+  text-align: center;
+  color: #94a3b8;
+  font-size: 0.8rem;
+  margin-top: 1rem;
+}

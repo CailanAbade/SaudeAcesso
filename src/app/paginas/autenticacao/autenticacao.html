@@ -1,0 +1,118 @@
+<div class="pagina-autenticacao">
+  <div class="cartao-autenticacao">
+
+    <div class="painel-boas-vindas">
+      <span class="etiqueta">Acesso Universal</span>
+      <h1>Cuidado médico de qualidade ao alcance de quem mais precisa.</h1>
+      <ul class="lista-beneficios">
+        <li>💳 Consultas a partir de R$ 50 perto da sua casa</li>
+        <li>🚫 Sem mensalidade ou taxas ocultas</li>
+        <li>💬 Profissionais verificados e apoio via WhatsApp</li>
+      </ul>
+    </div>
+
+    <div class="painel-formulario">
+      <span class="etiqueta">Acesso Universal</span>
+      <h2>{{ modo() === 'entrar' ? 'Acesse sua conta' : 'Crie sua conta' }}</h2>
+      <p class="subtitulo">
+        {{ modo() === 'entrar'
+          ? 'Entre para agendar consultas ou gerenciar seus atendimentos.'
+          : 'Cadastre-se gratuitamente em poucos passos.' }}
+      </p>
+
+      <div class="seletor-tipo" role="tablist">
+        <button type="button" role="tab" [class.ativo]="tipoUsuario() === 'paciente'" (click)="selecionarTipo('paciente')">
+          👤 Sou Paciente
+        </button>
+        <button type="button" role="tab" [class.ativo]="tipoUsuario() === 'clinica'" (click)="selecionarTipo('clinica')">
+          ➕ Sou Clínica
+        </button>
+      </div>
+
+      <div class="seletor-modo">
+        <button type="button" [class.ativo]="modo() === 'entrar'" (click)="alternarModo('entrar')">Entrar</button>
+        <button type="button" [class.ativo]="modo() === 'cadastrar'" (click)="alternarModo('cadastrar')">Criar conta</button>
+      </div>
+
+      @if (mensagemErro()) {
+        <div class="alerta-erro" role="alert">⚠️ {{ mensagemErro() }}</div>
+      }
+
+      @if (modo() === 'entrar') {
+        <form [formGroup]="formularioEntrar" (ngSubmit)="aoEnviarEntrar()" class="formulario">
+          <label for="email-entrar">E-mail</label>
+          <input id="email-entrar" type="email" formControlName="email" placeholder="seu.email@exemplo.com" autocomplete="email" />
+          @if (formularioEntrar.get('email')?.invalid && formularioEntrar.get('email')?.touched) {
+            <span class="erro-campo">Digite um e-mail válido.</span>
+          }
+
+          <label for="senha-entrar">Senha</label>
+          <div class="campo-senha">
+            <input id="senha-entrar" [type]="senhaVisivel() ? 'text' : 'password'" formControlName="senha" placeholder="Digite sua senha" autocomplete="current-password" />
+            <button type="button" class="botao-olho" (click)="alternarVisibilidadeSenha()">
+              {{ senhaVisivel() ? '🙈' : '👁️' }}
+            </button>
+          </div>
+          @if (formularioEntrar.get('senha')?.invalid && formularioEntrar.get('senha')?.touched) {
+            <span class="erro-campo">Digite sua senha.</span>
+          }
+
+          <button type="submit" class="botao-principal" [disabled]="enviando()">
+            {{ enviando() ? 'Entrando...' : '➜ Entrar na minha conta' }}
+          </button>
+        </form>
+      }
+
+      @if (modo() === 'cadastrar') {
+        <form [formGroup]="formularioCadastro" (ngSubmit)="aoEnviarCadastro()" class="formulario">
+          <label for="nome-cadastro">Nome completo</label>
+          <input id="nome-cadastro" type="text" formControlName="nome" placeholder="Seu nome completo" />
+          @if (formularioCadastro.get('nome')?.invalid && formularioCadastro.get('nome')?.touched) {
+            <span class="erro-campo">Digite seu nome completo.</span>
+          }
+
+          <label for="email-cadastro">E-mail</label>
+          <input id="email-cadastro" type="email" formControlName="email" placeholder="seu.email@exemplo.com" />
+          @if (formularioCadastro.get('email')?.invalid && formularioCadastro.get('email')?.touched) {
+            <span class="erro-campo">Digite um e-mail válido.</span>
+          }
+
+          @if (tipoUsuario() === 'paciente') {
+            <label for="cpf-cadastro">CPF</label>
+            <input id="cpf-cadastro" type="text" formControlName="cpf" placeholder="000.000.000-00" />
+            @if (formularioCadastro.get('cpf')?.invalid && formularioCadastro.get('cpf')?.touched) {
+              <span class="erro-campo">Digite um CPF válido.</span>
+            }
+          }
+
+          <label for="senha-cadastro">Senha</label>
+          <input id="senha-cadastro" type="password" formControlName="senha" placeholder="Mínimo 6 caracteres" />
+          @if (formularioCadastro.get('senha')?.invalid && formularioCadastro.get('senha')?.touched) {
+            <span class="erro-campo">A senha precisa ter no mínimo 6 caracteres.</span>
+          }
+
+          <label for="confirmar-senha-cadastro">Confirmar senha</label>
+          <input id="confirmar-senha-cadastro" type="password" formControlName="confirmarSenha" placeholder="Repita a senha" />
+          @if (formularioCadastro.errors?.['senhasDiferentes'] && formularioCadastro.get('confirmarSenha')?.touched) {
+            <span class="erro-campo">As senhas não coincidem.</span>
+          }
+
+          <label class="opcao-lgpd">
+            <input type="checkbox" formControlName="aceiteTermos" />
+            <span>
+              Aceito os <a routerLink="/privacidade">Termos de Uso e a Política de Privacidade</a>
+              e consinto com o tratamento de dados de saúde conforme a <strong>LGPD</strong>.
+            </span>
+          </label>
+          @if (formularioCadastro.get('aceiteTermos')?.invalid && formularioCadastro.get('aceiteTermos')?.touched) {
+            <span class="erro-campo">É necessário aceitar os termos para continuar.</span>
+          }
+
+          <button type="submit" class="botao-principal" [disabled]="enviando()">
+            {{ enviando() ? 'Criando conta...' : '✓ Criar minha conta' }}
+          </button>
+        </form>
+      }
+    </div>
+  </div>
+</div>

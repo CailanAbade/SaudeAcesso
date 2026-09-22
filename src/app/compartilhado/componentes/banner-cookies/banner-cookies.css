@@ -1,0 +1,47 @@
+.banner-cookies {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: #ffffff;
+  border-top: 1px solid #cbd5e1;
+  padding: 1rem 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
+  z-index: 1000;
+  box-shadow: 0 -4px 12px rgba(15, 23, 42, 0.08);
+}
+
+.banner-cookies p {
+  color: #334155;
+  font-size: 0.875rem;
+  margin: 0;
+  flex: 1;
+  min-width: 250px;
+}
+
+.acoes-cookies {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.link-preferencias {
+  color: #0284c7;
+  font-size: 0.875rem;
+  font-weight: 600;
+}
+
+.botao-aceitar {
+  height: 48px;
+  padding: 0 1.5rem;
+  border-radius: 9999px;
+  border: none;
+  background: #0284c7;
+  color: #ffffff;
+  font-weight: 700;
+  cursor: pointer;
+}

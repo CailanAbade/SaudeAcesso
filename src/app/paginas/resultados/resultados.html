@@ -1,0 +1,46 @@
+<app-cabecalho></app-cabecalho>
+
+<main class="pagina-resultados">
+  <section class="barra-filtro">
+    <input
+      type="text"
+      [(ngModel)]="termoBusca"
+      placeholder="Buscar por serviço, clínica ou bairro..."
+    />
+
+    <div class="seletor-ordenacao">
+      <button type="button" [class.ativo]="ordenacao() === 'menor'" (click)="alternarOrdenacao('menor')">
+        Menor preço
+      </button>
+      <button type="button" [class.ativo]="ordenacao() === 'maior'" (click)="alternarOrdenacao('maior')">
+        Maior preço
+      </button>
+    </div>
+  </section>
+
+  <section class="lista-resultados">
+    @if (servicosFiltrados().length === 0) {
+      <p class="vazio">Nenhum resultado encontrado para essa busca.</p>
+    }
+
+    @for (servico of servicosFiltrados(); track servico.id) {
+      <a [routerLink]="['/clinica', servico.clinica.slug]" class="cartao-servico">
+        <div class="info-servico">
+          <h3>{{ servico.nome }}</h3>
+          <p class="nome-clinica">{{ servico.clinica.nome }}</p>
+          <p class="endereco">{{ servico.clinica.endereco.bairro }}, {{ servico.clinica.endereco.cidade }}</p>
+        </div>
+
+        <div class="info-preco">
+          <span class="preco-tabela">{{ preco.formatarReal(servico.precoTabela) }}</span>
+          <span class="preco-app">{{ preco.formatarReal(servico.precoApp) }}</span>
+          <span class="etiqueta-desconto">
+            -{{ preco.calcularDesconto(servico.precoTabela, servico.precoApp) }}%
+          </span>
+        </div>
+      </a>
+    }
+  </section>
+</main>
+
+<app-rodape></app-rodape>

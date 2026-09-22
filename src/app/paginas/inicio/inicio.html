@@ -1,0 +1,39 @@
+<app-cabecalho></app-cabecalho>
+
+<main class="pagina-inicio">
+  <section class="hero">
+    <span class="etiqueta">✔ SAÚDE POPULAR TRANSPARENTE • SEM MENSALIDADE</span>
+    <h1>Encontre médicos e exames mais baratos no seu bairro</h1>
+    <p>Atendimento médico digno, perto da sua casa e que cabe no seu bolso.</p>
+
+    <div class="caixa-busca">
+      <input
+        type="text"
+        [(ngModel)]="termoBusca"
+        (keyup.enter)="buscar()"
+        placeholder="Ex: Clínico Geral, Ultrassom, Hemograma..."
+      />
+      <button type="button" (click)="buscar()">🔍 Buscar</button>
+    </div>
+  </section>
+
+  <section class="lista-clinicas">
+    <h2>Clínicas disponíveis</h2>
+
+    @if (clinicas().length === 0) {
+      <p>Carregando clínicas...</p>
+    }
+
+    <div class="grade-clinicas">
+      @for (clinica of clinicas(); track clinica.id) {
+        <a [routerLink]="['/clinica', clinica.slug]" class="cartao-clinica">
+          <h3>{{ clinica.nome }}</h3>
+          <p>{{ clinica.endereco.bairro }}, {{ clinica.endereco.cidade }}</p>
+          <div class="avaliacao">⭐ {{ clinica.avaliacao }} ({{ clinica.qtdAvaliacoes }} avaliações)</div>
+        </a>
+      }
+    </div>
+  </section>
+</main>
+
+<app-rodape></app-rodape>s

@@ -1,0 +1,15 @@
+@if (visivel()) {
+  <div class="banner-cookies" role="dialog" aria-label="Consentimento de cookies">
+    <p>
+      🛡️ Utilizamos cookies e dados de navegação conforme a
+      <strong>LGPD (Lei Geral de Proteção de Dados)</strong> para garantir segurança clínica
+      e a melhor experiência de agendamento.
+    </p>
+    <div class="acoes-cookies">
+      <a routerLink="/privacidade" class="link-preferencias">Preferências</a>
+      <button type="button" class="botao-aceitar" (click)="aceitar()">
+        Entendi e Concordo
+      </button>
+    </div>
+  </div>
+}
