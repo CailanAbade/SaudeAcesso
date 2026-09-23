@@ -1,5 +1,9 @@
-import { Component, computed, inject, signal } from '@angular/core';
-import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
+import { Component, inject, signal } from '@angular/core';
+import {
+  FormBuilder,
+  ReactiveFormsModule,
+  Validators,
+} from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
 import {
   Firestore,
@@ -28,39 +32,65 @@ export class CadastrarServico {
   mensagemErro = signal<string | null>(null);
 
   formulario = this.construtorFormulario.group({
-    nome: ['', [Validators.required, Validators.minLength(3)]],
-    categoria: ['', [Validators.required]],
+    nome: [
+      '',
+      [
+        Validators.required,
+        Validators.minLength(3),
+      ],
+    ],
+
+    categoria: [
+      '',
+      [Validators.required],
+    ],
+
     precoTabela: [
       null as number | null,
-      [Validators.required, Validators.min(0.01)],
+      [
+        Validators.required,
+        Validators.min(0.01),
+      ],
     ],
+
     precoApp: [
       null as number | null,
-      [Validators.required, Validators.min(0.01)],
+      [
+        Validators.required,
+        Validators.min(0.01),
+      ],
     ],
   });
 
-  precoTabela = computed(
-    () => Number(this.formulario.controls.precoTabela.value) || 0
-  );
+  get precoTabela(): number {
+    return (
+      Number(
+        this.formulario.controls.precoTabela.value
+      ) || 0
+    );
+  }
 
-  precoApp = computed(
-    () => Number(this.formulario.controls.precoApp.value) || 0
-  );
+  get precoApp(): number {
+    return (
+      Number(
+        this.formulario.controls.precoApp.value
+      ) || 0
+    );
+  }
 
-  desconto = computed(() => {
+  get desconto(): number {
     return this.preco.calcularDesconto(
-      this.precoTabela(),
-      this.precoApp()
+      this.precoTabela,
+      this.precoApp
     );
-  });
+  }
 
-  economia = computed(() => {
+  get economia(): number {
     return this.preco.calcularEconomia(
-      this.precoTabela(),
-      this.precoApp()
+      this.precoTabela,
+      this.precoApp
     );
-  });
+  }
 
   formatarReal(valor: number): string {
     return this.preco.formatarReal(valor);
@@ -72,7 +102,8 @@ export class CadastrarServico {
       return;
     }
 
-    const usuario = this.autenticacao.usuarioAtual();
+    const usuario =
+      this.autenticacao.usuarioAtual();
 
     if (
       !usuario ||
@@ -82,13 +113,18 @@ export class CadastrarServico {
       this.mensagemErro.set(
         'Não foi possível identificar a clínica da sua conta.'
       );
+
       return;
     }
 
-    if (this.precoApp() > this.precoTabela()) {
+    if (
+      this.precoApp >
+      this.precoTabela
+    ) {
       this.mensagemErro.set(
         'O preço SaúdeAcesso não pode ser maior que o preço de tabela.'
       );
+
       return;
     }
 
@@ -96,20 +132,38 @@ export class CadastrarServico {
     this.mensagemErro.set(null);
 
     try {
-      const servicos = collection(this.firestore, 'servicos');
+      const servicos = collection(
+        this.firestore,
+        'servicos'
+      );
 
       await addDoc(servicos, {
-        clinicaId: usuario.clinicaId,
-        nome: this.formulario.controls.nome.value!.trim(),
-        categoriaId: this.formulario.controls.categoria.value!,
-        precoTabela: this.precoTabela(),
-        precoApp: this.precoApp(),
+        clinicaId:
+          usuario.clinicaId,
+
+        nome:
+          this.formulario.controls.nome.value!.trim(),
+
+        categoriaId:
+          this.formulario.controls.categoria.value!,
+
+        precoTabela:
+          this.precoTabela,
+
+        precoApp:
+          this.precoApp,
+
         status: 'ativo',
       });
 
-      await this.roteador.navigate(['/painel-clinica']);
+      await this.roteador.navigate([
+        '/painel-clinica',
+      ]);
     } catch (erro) {
-      console.error('Erro ao cadastrar serviço:', erro);
+      console.error(
+        'Erro ao cadastrar serviço:',
+        erro
+      );
 
       this.mensagemErro.set(
         'Não foi possível cadastrar o serviço. Tente novamente.'

@@ -1,0 +1,39 @@
+[35msrc/app/nucleo/servicos/catalogo.ts[m[36m:[m[32m32[m[36m:[mexport class Cata[1;31mlogo[m {
+[35msrc/app/paginas/cadastrar-servico/cadastrar-servico.css[m[36m:[m[32m29[m[36m:[m.[1;31mlogo[m img {
+[35msrc/app/paginas/cadastrar-servico/cadastrar-servico.css[m[36m:[m[32m330[m[36m:[m  .[1;31mlogo[m img {
+[35msrc/app/paginas/cadastrar-servico/cadastrar-servico.html[m[36m:[m[32m3[m[36m:[m    <a class="[1;31mlogo[m" routerLink="/painel-clinica">
+[35msrc/app/paginas/cadastrar-servico/cadastrar-servico.html[m[36m:[m[32m4[m[36m:[m      [1;31m<img[m [1;31msrc=[m"[1;31mlogo[m.png" alt="SaúdeAcesso" />
+[35msrc/app/paginas/cadastrar-servico/cadastrar-servico.html[m[36m:[m[32m14[m[36m:[m      <span class="etiqueta">CATÁ[1;31mLOGO[m</span>
+[35msrc/app/paginas/cadastrar-servico/cadastrar-servico.html[m[36m:[m[32m19[m[36m:[m        Adicione um novo serviço ao catá[1;31mlogo[m da sua clínica.
+[35msrc/app/paginas/clinica/clinica.html[m[36m:[m[32m56[m[36m:[m            [1;31m<img[m
+[35msrc/app/paginas/clinica/clinica.html[m[36m:[m[32m368[m[36m:[m                        [1;31m<img[m
+[35msrc/app/paginas/clinica/clinica.ts[m[36m:[m[32m23[m[36m:[mimport { Cata[1;31mlogo[m } from '../../nucleo/servicos/cata[1;31mlogo[m';
+[35msrc/app/paginas/clinica/clinica.ts[m[36m:[m[32m43[m[36m:[m  private cata[1;31mlogo[m = inject(
+[35msrc/app/paginas/clinica/clinica.ts[m[36m:[m[32m44[m[36m:[m    Cata[1;31mlogo[m
+[35msrc/app/paginas/clinica/clinica.ts[m[36m:[m[32m86[m[36m:[m    this.cata[1;31mlogo[m
+[35msrc/app/paginas/clinica/clinica.ts[m[36m:[m[32m100[m[36m:[m              this.cata[1;31mlogo[m.listarServicosPorClinica(
+[35msrc/app/paginas/clinica/clinica.ts[m[36m:[m[32m105[m[36m:[m              this.cata[1;31mlogo[m.listarMedicosPorClinica(
+[35msrc/app/paginas/editar-servico/editar-servico.css[m[36m:[m[32m27[m[36m:[m.[1;31mlogo[m img {
+[35msrc/app/paginas/editar-servico/editar-servico.css[m[36m:[m[32m309[m[36m:[m  .[1;31mlogo[m img {
+[35msrc/app/paginas/editar-servico/editar-servico.html[m[36m:[m[32m3[m[36m:[m    <a class="[1;31mlogo[m" routerLink="/painel-clinica">
+[35msrc/app/paginas/editar-servico/editar-servico.html[m[36m:[m[32m4[m[36m:[m      [1;31m<img[m [1;31msrc=[m"[1;31mlogo[m.png" alt="SaúdeAcesso" />
+[35msrc/app/paginas/editar-servico/editar-servico.html[m[36m:[m[32m32[m[36m:[m        <span class="etiqueta">CATÁ[1;31mLOGO[m</span>
+[35msrc/app/paginas/editar-servico/editar-servico.ts[m[36m:[m[32m8[m[36m:[mimport { Cata[1;31mlogo[m } from '../../nucleo/servicos/cata[1;31mlogo[m';
+[35msrc/app/paginas/editar-servico/editar-servico.ts[m[36m:[m[32m22[m[36m:[m  private cata[1;31mlogo[m = inject(Cata[1;31mlogo[m);
+[35msrc/app/paginas/editar-servico/editar-servico.ts[m[36m:[m[32m75[m[36m:[m    this.cata[1;31mlogo[m.listarServicosPorClinica(clinicaId).subscribe({
+[35msrc/app/paginas/inicio/inicio.html[m[36m:[m[32m138[m[36m:[m            [1;31m<img[m
+[35msrc/app/paginas/inicio/inicio.ts[m[36m:[m[32m6[m[36m:[mimport { Cata[1;31mlogo[m } from '../../nucleo/servicos/cata[1;31mlogo[m';
+[35msrc/app/paginas/inicio/inicio.ts[m[36m:[m[32m20[m[36m:[m  private cata[1;31mlogo[m = inject(Cata[1;31mlogo[m);
+[35msrc/app/paginas/inicio/inicio.ts[m[36m:[m[32m28[m[36m:[m    this.cata[1;31mlogo[m.listarClinicas().subscribe((lista) => this.clinicas.set(lista));
+[35msrc/app/paginas/painel-clinica/painel-clinica.html[m[36m:[m[32m4[m[36m:[m      [1;31m<img[m [1;31msrc=[m"[1;31mlogo[m.png" alt="SaúdeAcesso" />
+[35msrc/app/paginas/painel-clinica/painel-clinica.html[m[36m:[m[32m122[m[36m:[m          <span class="etiqueta-secao">CATÁ[1;31mLOGO[m</span>
+[35msrc/app/paginas/painel-clinica/painel-clinica.html[m[36m:[m[32m178[m[36m:[m                    Cadastre um serviço para ele aparecer no catá[1;31mlogo[m.
+[35msrc/app/paginas/painel-clinica/painel-clinica.ts[m[36m:[m[32m22[m[36m:[mimport { Cata[1;31mlogo[m } from '../../nucleo/servicos/cata[1;31mlogo[m';
+[35msrc/app/paginas/painel-clinica/painel-clinica.ts[m[36m:[m[32m47[m[36m:[m  private cata[1;31mlogo[m = inject(Cata[1;31mlogo[m);
+[35msrc/app/paginas/painel-clinica/painel-clinica.ts[m[36m:[m[32m125[m[36m:[m        this.cata[1;31mlogo[m.listarClinicas(),
+[35msrc/app/paginas/painel-clinica/painel-clinica.ts[m[36m:[m[32m128[m[36m:[m        this.cata[1;31mlogo[m.listarServicosPorClinica(
+[35msrc/app/paginas/painel-clinica/painel-clinica.ts[m[36m:[m[32m133[m[36m:[m        this.cata[1;31mlogo[m.listarMedicosPorClinica(
+[35msrc/app/paginas/privacidade/privacidade.html[m[36m:[m[32m5[m[36m:[m  [1;31m<img[m [1;31msrc=[m"[1;31mlogo[m.png" alt="SaúdeAcesso">
+[35msrc/app/paginas/resultados/resultados.ts[m[36m:[m[32m6[m[36m:[mimport { Cata[1;31mlogo[m, ServicoComClinica } from '../../nucleo/servicos/cata[1;31mlogo[m';
+[35msrc/app/paginas/resultados/resultados.ts[m[36m:[m[32m28[m[36m:[m  private cata[1;31mlogo[m = inject(Cata[1;31mlogo[m);
+[35msrc/app/paginas/resultados/resultados.ts[m[36m:[m[32m68[m[36m:[m    this.cata[1;31mlogo[m.listarServicosComClinica().subscribe({

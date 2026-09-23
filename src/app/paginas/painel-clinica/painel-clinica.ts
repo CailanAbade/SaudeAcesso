@@ -13,6 +13,7 @@ import { combineLatest } from 'rxjs';
 
 import {
   Firestore,
+  deleteDoc,
   doc,
   setDoc,
 } from '@angular/fire/firestore';
@@ -66,6 +67,9 @@ export class PainelClinica {
   servicoEditando =
     signal<Servico | null>(null);
 
+  mensagemErro =
+    signal<string | null>(null);
+
   private clinicaIdCarregada =
     signal<string | null>(null);
 
@@ -114,6 +118,7 @@ export class PainelClinica {
     clinicaId: string
   ): void {
     this.carregando.set(true);
+    this.mensagemErro.set(null);
 
     combineLatest({
       clinicas:
@@ -155,6 +160,10 @@ export class PainelClinica {
         console.error(
           'Erro ao carregar painel da clínica:',
           erro
+        );
+
+        this.mensagemErro.set(
+          'Não foi possível carregar os dados da clínica.'
         );
 
         this.carregando.set(false);
@@ -294,6 +303,8 @@ export class PainelClinica {
       servico.id
     );
 
+    this.mensagemErro.set(null);
+
     try {
       const novoStatus =
         servico.status === 'ativo'
@@ -342,14 +353,89 @@ export class PainelClinica {
       this.servicoEditando.set(
         null
       );
-
-      console.log(
-        `Serviço "${servico.nome}" alterado para ${novoStatus}.`
-      );
     } catch (erro) {
       console.error(
         'Erro ao alterar status do serviço:',
         erro
+      );
+
+      this.mensagemErro.set(
+        'Não foi possível alterar o status do serviço.'
+      );
+    } finally {
+      this.processandoServico.set(
+        null
+      );
+    }
+  }
+
+  async excluirServico(
+    servico: Servico
+  ): Promise<void> {
+    const usuario =
+      this.autenticacao.usuarioAtual();
+
+    if (
+      !usuario?.clinicaId ||
+      usuario.clinicaId !==
+        servico.clinicaId
+    ) {
+      console.error(
+        'Clínica não autorizada para excluir este serviço.'
+      );
+
+      this.mensagemErro.set(
+        'Você não tem permissão para excluir este serviço.'
+      );
+
+      return;
+    }
+
+    const confirmou =
+      window.confirm(
+        `Tem certeza que deseja excluir o serviço "${servico.nome}"?\n\nEssa ação não pode ser desfeita.`
+      );
+
+    if (!confirmou) {
+      return;
+    }
+
+    this.processandoServico.set(
+      servico.id
+    );
+
+    this.mensagemErro.set(null);
+
+    try {
+      const referencia = doc(
+        this.firestore,
+        'servicos',
+        servico.id
+      );
+
+      await deleteDoc(
+        referencia
+      );
+
+      this.servicos.update(
+        (lista) =>
+          lista.filter(
+            (item) =>
+              item.id !== servico.id
+          )
+      );
+
+      this.servicoEditando.set(
+        null
+      );
+    } catch (erro) {
+      console.error(
+        'Erro ao excluir serviço:',
+        erro
+      );
+
+      this.mensagemErro.set(
+        'Não foi possível excluir o serviço. Tente novamente.'
       );
     } finally {
       this.processandoServico.set(
