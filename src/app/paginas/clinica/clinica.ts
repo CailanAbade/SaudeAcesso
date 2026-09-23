@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
 import {
   Component,
+  computed,
   inject,
   signal,
 } from '@angular/core';
@@ -19,7 +20,9 @@ import {
 
 import { Medico } from '../../nucleo/modelos/medico.model';
 import { Servico } from '../../nucleo/modelos/servico.model';
+import { Horario } from '../../nucleo/modelos/horario.model';
 
+import { Autenticacao } from '../../nucleo/servicos/autenticacao';
 import { Catalogo } from '../../nucleo/servicos/catalogo';
 import { Preco } from '../../nucleo/servicos/preco';
 
@@ -38,6 +41,10 @@ import { Preco } from '../../nucleo/servicos/preco';
 export class ClinicaComponent {
   private rota = inject(
     ActivatedRoute
+  );
+
+  private autenticacao = inject(
+    Autenticacao
   );
 
   private catalogo = inject(
@@ -59,11 +66,24 @@ export class ClinicaComponent {
   medicos =
     signal<Medico[]>([]);
 
+  horarios =
+    signal<Horario[]>([]);
+
   carregando =
     signal(true);
 
   naoEncontrada =
     signal(false);
+
+  ehClinicaLogada =
+    computed(() => {
+      const usuario =
+        this.autenticacao.usuarioAtual();
+
+      return (
+        usuario?.tipo === 'clinica'
+      );
+    });
 
   constructor() {
     const slug =
@@ -105,10 +125,16 @@ export class ClinicaComponent {
               this.catalogo.listarMedicosPorClinica(
                 clinica.id
               ),
+
+            horarios:
+              this.catalogo.listarHorariosPorClinica(
+                clinica.id
+              ),
           }).subscribe({
             next: ({
               servicos,
               medicos,
+              horarios,
             }) => {
               this.servicos.set(
                 servicos
@@ -116,6 +142,10 @@ export class ClinicaComponent {
 
               this.medicos.set(
                 medicos
+              );
+
+              this.horarios.set(
+                horarios
               );
 
               this.carregando.set(

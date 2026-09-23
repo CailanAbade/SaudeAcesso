@@ -2,405 +2,444 @@
 
   <div class="cartao-autenticacao">
 
-<section class="painel-boas-vindas">
+    <section class="painel-boas-vindas">
 
-  <div class="marca">
-    <span class="marca-icone">+</span>
-    <span>Saúde<span>Acesso</span></span>
-  </div>
-
-  <div class="boas-vindas-conteudo">
-
-    <span class="etiqueta">ACESSO UNIVERSAL</span>
-
-    <h1>
-      Cuidado médico de qualidade ao alcance de quem mais precisa.
-    </h1>
-
-    <p>
-      Encontre atendimento perto de você, compare preços e tenha acesso
-      a informações claras antes de agendar.
-    </p>
-
-    <ul class="lista-beneficios">
-
-      <li>
-        <span class="icone-beneficio">R$</span>
-        <span>
-          <strong>Preços acessíveis</strong>
-          Consultas e exames com valores transparentes.
-        </span>
-      </li>
-
-      <li>
-        <span class="icone-beneficio">✓</span>
-        <span>
-          <strong>Sem mensalidade</strong>
-          Você paga apenas pelo atendimento que utilizar.
-        </span>
-      </li>
-
-      <li>
-        <span class="icone-beneficio">⌕</span>
-        <span>
-          <strong>Encontre perto de você</strong>
-          Pesquise clínicas e serviços por região.
-        </span>
-      </li>
-
-    </ul>
-
-  </div>
-
-  <div class="mensagem-rodape">
-    SaúdeAcesso · Informação para uma saúde mais acessível.
-  </div>
-
-</section>
-
-<section class="painel-formulario">
-
-  <div class="cabecalho-formulario">
-
-    <span class="etiqueta etiqueta-clara">
-      ACESSO UNIVERSAL
-    </span>
-
-    <h2>
-      {{ modo() === 'entrar' ? 'Acesse sua conta' : 'Crie sua conta' }}
-    </h2>
-
-    <p class="subtitulo">
-      {{ modo() === 'entrar'
-        ? 'Entre para agendar consultas ou gerenciar seus atendimentos.'
-        : 'Cadastre-se gratuitamente em poucos passos.' }}
-    </p>
-
-  </div>
-
-  <div class="seletor-tipo" role="tablist">
-
-    <button
-      type="button"
-      role="tab"
-      [class.ativo]="tipoUsuario() === 'paciente'"
-      (click)="selecionarTipo('paciente')"
-    >
-      <span class="icone-seletor">○</span>
-      Sou Paciente
-    </button>
-
-    <button
-      type="button"
-      role="tab"
-      [class.ativo]="tipoUsuario() === 'clinica'"
-      (click)="selecionarTipo('clinica')"
-    >
-      <span class="icone-seletor">+</span>
-      Sou Clínica
-    </button>
-
-  </div>
-
-  <div class="seletor-modo">
-
-    <button
-      type="button"
-      [class.ativo]="modo() === 'entrar'"
-      (click)="alternarModo('entrar')"
-    >
-      Entrar
-    </button>
-
-    <button
-      type="button"
-      [class.ativo]="modo() === 'cadastrar'"
-      (click)="alternarModo('cadastrar')"
-    >
-      Criar conta
-    </button>
-
-  </div>
-
-  @if (mensagemErro()) {
-    <div class="alerta-erro" role="alert">
-      <span>!</span>
-      {{ mensagemErro() }}
-    </div>
-  }
-
-  @if (modo() === 'entrar') {
-
-    <form
-      [formGroup]="formularioEntrar"
-      (ngSubmit)="aoEnviarEntrar()"
-      class="formulario"
-    >
-
-      <div class="campo-formulario">
-
-        <label for="email-entrar">
-          E-mail
-        </label>
-
-        <input
-          id="email-entrar"
-          type="email"
-          formControlName="email"
-          placeholder="seu.email@exemplo.com"
-          autocomplete="email"
+      <a
+        class="marca"
+        routerLink="/inicio"
+        aria-label="SaúdeAcesso"
+      >
+        <img
+          src="logo.png"
+          alt="SaúdeAcesso"
         />
+      </a>
 
-        @if (
-          formularioEntrar.get('email')?.invalid &&
-          formularioEntrar.get('email')?.touched
-        ) {
-          <span class="erro-campo">
-            Digite um e-mail válido.
-          </span>
-        }
+      <div class="boas-vindas-conteudo">
+
+        <span class="etiqueta">
+          ACESSO UNIVERSAL
+        </span>
+
+        <h1>
+          Cuidado médico de qualidade ao alcance de quem mais precisa.
+        </h1>
+
+        <p>
+          Encontre atendimento perto de você, compare preços e tenha acesso
+          a informações claras antes de agendar.
+        </p>
+
+        <ul class="lista-beneficios">
+
+          <li>
+            <span class="icone-beneficio">R$</span>
+            <span>
+              <strong>Preços acessíveis</strong>
+              Consultas e exames com valores transparentes.
+            </span>
+          </li>
+
+          <li>
+            <span class="icone-beneficio">✓</span>
+            <span>
+              <strong>Sem mensalidade</strong>
+              Você paga apenas pelo atendimento que utilizar.
+            </span>
+          </li>
+
+          <li>
+            <span class="icone-beneficio">⌕</span>
+            <span>
+              <strong>Encontre perto de você</strong>
+              Pesquise clínicas e serviços por região.
+            </span>
+          </li>
+
+        </ul>
 
       </div>
 
-      <div class="campo-formulario">
+      <div class="mensagem-rodape">
+        SaúdeAcesso · Informação para uma saúde mais acessível.
+      </div>
 
-        <label for="senha-entrar">
-          Senha
-        </label>
+    </section>
 
-        <div class="campo-senha">
+    <section class="painel-formulario">
 
-          <input
-            id="senha-entrar"
-            [type]="senhaVisivel() ? 'text' : 'password'"
-            formControlName="senha"
-            placeholder="Digite sua senha"
-            autocomplete="current-password"
-          />
+      <div class="cabecalho-formulario">
+
+        <span class="etiqueta etiqueta-clara">
+          ACESSO UNIVERSAL
+        </span>
+
+        <h2>
+          {{ modo() === 'entrar' ? 'Acesse sua conta' : 'Crie sua conta' }}
+        </h2>
+
+        <p class="subtitulo">
+          {{ modo() === 'entrar'
+            ? 'Entre para agendar consultas ou gerenciar seus atendimentos.'
+            : 'Cadastre-se gratuitamente em poucos passos.' }}
+        </p>
+
+      </div>
+
+      <div class="seletor-tipo" role="tablist">
+
+        <button
+          type="button"
+          role="tab"
+          [class.ativo]="tipoUsuario() === 'paciente'"
+          (click)="selecionarTipo('paciente')"
+        >
+          <span class="icone-seletor">○</span>
+          Sou Paciente
+        </button>
+
+        <button
+          type="button"
+          role="tab"
+          [class.ativo]="tipoUsuario() === 'clinica'"
+          (click)="selecionarTipo('clinica')"
+        >
+          <span class="icone-seletor">+</span>
+          Sou Clínica
+        </button>
+
+      </div>
+
+      <div class="seletor-modo">
+
+        <button
+          type="button"
+          [class.ativo]="modo() === 'entrar'"
+          (click)="alternarModo('entrar')"
+        >
+          Entrar
+        </button>
+
+        <button
+          type="button"
+          [class.ativo]="modo() === 'cadastrar'"
+          (click)="alternarModo('cadastrar')"
+        >
+          Criar conta
+        </button>
+
+      </div>
+
+      @if (mensagemErro()) {
+        <div class="alerta-erro" role="alert">
+          <span>!</span>
+          {{ mensagemErro() }}
+        </div>
+      }
+
+      @if (modo() === 'entrar') {
+
+        <form
+          [formGroup]="formularioEntrar"
+          (ngSubmit)="aoEnviarEntrar()"
+          class="formulario"
+        >
+
+          <div class="campo-formulario">
+
+            <label for="email-entrar">
+              E-mail
+            </label>
+
+            <input
+              id="email-entrar"
+              type="email"
+              formControlName="email"
+              placeholder="seu.email@exemplo.com"
+              autocomplete="email"
+            />
+
+            @if (
+              formularioEntrar.get('email')?.invalid &&
+              formularioEntrar.get('email')?.touched
+            ) {
+              <span class="erro-campo">
+                Digite um e-mail válido.
+              </span>
+            }
+
+          </div>
+
+          <div class="campo-formulario">
+
+            <label for="senha-entrar">
+              Senha
+            </label>
+
+            <div class="campo-senha">
+
+              <input
+                id="senha-entrar"
+                [type]="senhaVisivel() ? 'text' : 'password'"
+                formControlName="senha"
+                placeholder="Digite sua senha"
+                autocomplete="current-password"
+              />
+
+              <button
+                type="button"
+                class="botao-olho"
+                (click)="alternarVisibilidadeSenha()"
+                [attr.aria-label]="senhaVisivel() ? 'Ocultar senha' : 'Mostrar senha'"
+              >
+                {{ senhaVisivel() ? '◉' : '○' }}
+              </button>
+
+            </div>
+
+            @if (
+              formularioEntrar.get('senha')?.invalid &&
+              formularioEntrar.get('senha')?.touched
+            ) {
+              <span class="erro-campo">
+                Digite sua senha.
+              </span>
+            }
+
+          </div>
 
           <button
-            type="button"
-            class="botao-olho"
-            (click)="alternarVisibilidadeSenha()"
-            [attr.aria-label]="senhaVisivel() ? 'Ocultar senha' : 'Mostrar senha'"
+            type="submit"
+            class="botao-principal"
+            [disabled]="enviando()"
           >
-            {{ senhaVisivel() ? '◉' : '○' }}
+            {{ enviando() ? 'Entrando...' : 'Entrar na minha conta' }}
+
+            @if (!enviando()) {
+              <span>→</span>
+            }
           </button>
 
-        </div>
+        </form>
 
-        @if (
-          formularioEntrar.get('senha')?.invalid &&
-          formularioEntrar.get('senha')?.touched
-        ) {
-          <span class="erro-campo">
-            Digite sua senha.
-          </span>
-        }
+      }
 
-      </div>
+      @if (modo() === 'cadastrar') {
 
-      <button
-        type="submit"
-        class="botao-principal"
-        [disabled]="enviando()"
-      >
-        {{ enviando() ? 'Entrando...' : 'Entrar na minha conta' }}
-        @if (!enviando()) {
-          <span>→</span>
-        }
-      </button>
+        <form
+          [formGroup]="formularioCadastro"
+          (ngSubmit)="aoEnviarCadastro()"
+          class="formulario"
+        >
 
-    </form>
+          <div class="campo-formulario">
 
-  }
+            <label for="nome-cadastro">
+              {{ tipoUsuario() === 'clinica' ? 'Nome da clínica' : 'Nome completo' }}
+            </label>
 
-  @if (modo() === 'cadastrar') {
+            <input
+              id="nome-cadastro"
+              type="text"
+              formControlName="nome"
+              [placeholder]="tipoUsuario() === 'clinica' ? 'Nome da clínica' : 'Seu nome completo'"
+              autocomplete="name"
+            />
 
-    <form
-      [formGroup]="formularioCadastro"
-      (ngSubmit)="aoEnviarCadastro()"
-      class="formulario"
-    >
+            @if (
+              formularioCadastro.get('nome')?.invalid &&
+              formularioCadastro.get('nome')?.touched
+            ) {
+              <span class="erro-campo">
+                Digite seu nome completo.
+              </span>
+            }
 
-      <div class="campo-formulario">
+          </div>
 
-        <label for="nome-cadastro">
-          Nome completo
-        </label>
+          <div class="campo-formulario">
 
-        <input
-          id="nome-cadastro"
-          type="text"
-          formControlName="nome"
-          placeholder="Seu nome completo"
-          autocomplete="name"
-        />
+            <label for="email-cadastro">
+              E-mail
+            </label>
 
-        @if (
-          formularioCadastro.get('nome')?.invalid &&
-          formularioCadastro.get('nome')?.touched
-        ) {
-          <span class="erro-campo">
-            Digite seu nome completo.
-          </span>
-        }
+            <input
+              id="email-cadastro"
+              type="email"
+              formControlName="email"
+              placeholder="seu.email@exemplo.com"
+              autocomplete="email"
+            />
 
-      </div>
+            @if (
+              formularioCadastro.get('email')?.invalid &&
+              formularioCadastro.get('email')?.touched
+            ) {
+              <span class="erro-campo">
+                Digite um e-mail válido.
+              </span>
+            }
 
-      <div class="campo-formulario">
+          </div>
 
-        <label for="email-cadastro">
-          E-mail
-        </label>
+          @if (tipoUsuario() === 'paciente') {
 
-        <input
-          id="email-cadastro"
-          type="email"
-          formControlName="email"
-          placeholder="seu.email@exemplo.com"
-          autocomplete="email"
-        />
+            <div class="campo-formulario">
 
-        @if (
-          formularioCadastro.get('email')?.invalid &&
-          formularioCadastro.get('email')?.touched
-        ) {
-          <span class="erro-campo">
-            Digite um e-mail válido.
-          </span>
-        }
+              <label for="cpf-cadastro">
+                CPF
+              </label>
 
-      </div>
+              <input
+                id="cpf-cadastro"
+                type="text"
+                formControlName="cpf"
+                placeholder="000.000.000-00"
+                inputmode="numeric"
+              />
 
-      @if (tipoUsuario() === 'paciente') {
+              @if (
+                formularioCadastro.get('cpf')?.invalid &&
+                formularioCadastro.get('cpf')?.touched
+              ) {
+                <span class="erro-campo">
+                  Digite um CPF válido.
+                </span>
+              }
 
-        <div class="campo-formulario">
+            </div>
 
-          <label for="cpf-cadastro">
-            CPF
+          }
+
+          @if (tipoUsuario() === 'clinica') {
+
+            <div class="campo-formulario">
+
+              <label for="cnpj-cadastro">
+                CNPJ
+              </label>
+
+              <input
+                id="cnpj-cadastro"
+                type="text"
+                formControlName="cnpj"
+                placeholder="00.000.000/0000-00"
+                inputmode="numeric"
+                autocomplete="organization"
+              />
+
+              @if (
+                formularioCadastro.get('cnpj')?.invalid &&
+                formularioCadastro.get('cnpj')?.touched
+              ) {
+                <span class="erro-campo">
+                  Digite o CNPJ da clínica.
+                </span>
+              }
+
+            </div>
+
+          }
+
+          <div class="campo-formulario">
+
+            <label for="senha-cadastro">
+              Senha
+            </label>
+
+            <input
+              id="senha-cadastro"
+              type="password"
+              formControlName="senha"
+              placeholder="Mínimo 6 caracteres"
+              autocomplete="new-password"
+            />
+
+            @if (
+              formularioCadastro.get('senha')?.invalid &&
+              formularioCadastro.get('senha')?.touched
+            ) {
+              <span class="erro-campo">
+                A senha precisa ter no mínimo 6 caracteres.
+              </span>
+            }
+
+          </div>
+
+          <div class="campo-formulario">
+
+            <label for="confirmar-senha-cadastro">
+              Confirmar senha
+            </label>
+
+            <input
+              id="confirmar-senha-cadastro"
+              type="password"
+              formControlName="confirmarSenha"
+              placeholder="Repita a senha"
+              autocomplete="new-password"
+            />
+
+            @if (
+              formularioCadastro.errors?.['senhasDiferentes'] &&
+              formularioCadastro.get('confirmarSenha')?.touched
+            ) {
+              <span class="erro-campo">
+                As senhas não coincidem.
+              </span>
+            }
+
+          </div>
+
+          <label class="opcao-lgpd">
+
+            <input
+              type="checkbox"
+              formControlName="aceiteTermos"
+            />
+
+            <span>
+              Aceito os
+              <a routerLink="/privacidade">
+                Termos de Uso e a Política de Privacidade
+              </a>
+              e consinto com o tratamento de dados conforme a
+              <strong>LGPD</strong>.
+            </span>
+
           </label>
 
-          <input
-            id="cpf-cadastro"
-            type="text"
-            formControlName="cpf"
-            placeholder="000.000.000-00"
-            inputmode="numeric"
-          />
-
           @if (
-            formularioCadastro.get('cpf')?.invalid &&
-            formularioCadastro.get('cpf')?.touched
+            formularioCadastro.get('aceiteTermos')?.invalid &&
+            formularioCadastro.get('aceiteTermos')?.touched
           ) {
-            <span class="erro-campo">
-              Digite um CPF válido.
+            <span class="erro-campo erro-lgpd">
+              É necessário aceitar os termos para continuar.
             </span>
           }
 
-        </div>
+          <button
+            type="submit"
+            class="botao-principal"
+            [disabled]="enviando()"
+          >
+            {{ enviando() ? 'Criando conta...' : 'Criar minha conta' }}
+
+            @if (!enviando()) {
+              <span>→</span>
+            }
+          </button>
+
+        </form>
 
       }
 
-      <div class="campo-formulario">
+      <p class="aviso-privacidade">
+        Seus dados são tratados de acordo com nossa
+        <a routerLink="/privacidade">Política de Privacidade</a>.
+      </p>
 
-        <label for="senha-cadastro">
-          Senha
-        </label>
-
-        <input
-          id="senha-cadastro"
-          type="password"
-          formControlName="senha"
-          placeholder="Mínimo 6 caracteres"
-          autocomplete="new-password"
-        />
-
-        @if (
-          formularioCadastro.get('senha')?.invalid &&
-          formularioCadastro.get('senha')?.touched
-        ) {
-          <span class="erro-campo">
-            A senha precisa ter no mínimo 6 caracteres.
-          </span>
-        }
-
-      </div>
-
-      <div class="campo-formulario">
-
-        <label for="confirmar-senha-cadastro">
-          Confirmar senha
-        </label>
-
-        <input
-          id="confirmar-senha-cadastro"
-          type="password"
-          formControlName="confirmarSenha"
-          placeholder="Repita a senha"
-          autocomplete="new-password"
-        />
-
-        @if (
-          formularioCadastro.errors?.['senhasDiferentes'] &&
-          formularioCadastro.get('confirmarSenha')?.touched
-        ) {
-          <span class="erro-campo">
-            As senhas não coincidem.
-          </span>
-        }
-
-      </div>
-
-      <label class="opcao-lgpd">
-
-        <input
-          type="checkbox"
-          formControlName="aceiteTermos"
-        />
-
-        <span>
-          Aceito os
-          <a routerLink="/privacidade">
-            Termos de Uso e a Política de Privacidade
-          </a>
-          e consinto com o tratamento de dados conforme a
-          <strong>LGPD</strong>.
-        </span>
-
-      </label>
-
-      @if (
-        formularioCadastro.get('aceiteTermos')?.invalid &&
-        formularioCadastro.get('aceiteTermos')?.touched
-      ) {
-        <span class="erro-campo erro-lgpd">
-          É necessário aceitar os termos para continuar.
-        </span>
-      }
-
-      <button
-        type="submit"
-        class="botao-principal"
-        [disabled]="enviando()"
-      >
-        {{ enviando() ? 'Criando conta...' : 'Criar minha conta' }}
-
-        @if (!enviando()) {
-          <span>→</span>
-        }
-      </button>
-
-    </form>
-
-  }
-
-  <p class="aviso-privacidade">
-    Seus dados são tratados de acordo com nossa
-    <a routerLink="/privacidade">Política de Privacidade</a>.
-  </p>
-
-</section>
+    </section>
 
   </div>
 

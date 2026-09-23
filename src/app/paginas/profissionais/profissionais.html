@@ -1,0 +1,338 @@
+<div class="pagina">
+
+  <header class="cabecalho">
+
+    <a
+      class="logo"
+      routerLink="/painel-clinica"
+    >
+      <img
+        src="logo.png"
+        alt="SaúdeAcesso"
+      />
+    </a>
+
+    <a
+      class="voltar"
+      routerLink="/painel-clinica"
+    >
+      ← Voltar ao painel
+    </a>
+
+  </header>
+
+  <main class="conteudo">
+
+    <section class="cabecalho-pagina">
+
+      <div>
+        <span class="etiqueta">
+          EQUIPE
+        </span>
+
+        <h1>
+          Profissionais
+        </h1>
+
+        <p>
+          Cadastre e gerencie os profissionais que atendem na sua clínica.
+        </p>
+      </div>
+
+      @if (!formularioAberto()) {
+        <button
+          class="botao-principal"
+          type="button"
+          (click)="abrirCadastro()"
+        >
+          <span>+</span>
+          Cadastrar profissional
+        </button>
+      }
+
+    </section>
+
+    @if (mensagemErro()) {
+      <div class="mensagem-erro">
+        {{ mensagemErro() }}
+      </div>
+    }
+
+    @if (formularioAberto()) {
+
+      <section class="cartao formulario-card">
+
+        <div class="cabecalho-card">
+
+          <div>
+            <span class="etiqueta">
+              {{ profissionalEditando()
+                ? 'EDITAR'
+                : 'NOVO PROFISSIONAL' }}
+            </span>
+
+            <h2>
+              {{ profissionalEditando()
+                ? 'Editar profissional'
+                : 'Cadastrar profissional' }}
+            </h2>
+          </div>
+
+          <button
+            class="botao-fechar"
+            type="button"
+            (click)="cancelar()"
+          >
+            ×
+          </button>
+
+        </div>
+
+        <form
+          [formGroup]="formulario"
+          (ngSubmit)="salvar()"
+        >
+
+          <div class="campo">
+
+            <label for="nome">
+              Nome completo
+            </label>
+
+            <input
+              id="nome"
+              type="text"
+              formControlName="nome"
+              placeholder="Ex.: Dra. Ana Paula Ferreira"
+            />
+
+            @if (
+              formulario.controls.nome.invalid &&
+              formulario.controls.nome.touched
+            ) {
+              <small>
+                Informe o nome do profissional.
+              </small>
+            }
+
+          </div>
+
+          <div class="linha">
+
+            <div class="campo">
+
+              <label for="especialidade">
+                Especialidade
+              </label>
+
+              <select
+                id="especialidade"
+                formControlName="especialidadeId"
+              >
+                <option value="">
+                  Selecione uma especialidade
+                </option>
+
+                <option value="cat-clinico-geral">
+                  Clínico Geral
+                </option>
+
+                <option value="cat-cardiologia">
+                  Cardiologia
+                </option>
+
+                <option value="cat-ginecologia">
+                  Ginecologia
+                </option>
+
+                <option value="cat-pediatria">
+                  Pediatria
+                </option>
+              </select>
+
+              @if (
+                formulario.controls.especialidadeId.invalid &&
+                formulario.controls.especialidadeId.touched
+              ) {
+                <small>
+                  Selecione uma especialidade.
+                </small>
+              }
+
+            </div>
+
+            <div class="campo">
+
+              <label for="crm">
+                CRM
+              </label>
+
+              <input
+                id="crm"
+                type="text"
+                formControlName="crm"
+                placeholder="CRM-BA 12345"
+              />
+
+              @if (
+                formulario.controls.crm.invalid &&
+                formulario.controls.crm.touched
+              ) {
+                <small>
+                  Informe o CRM.
+                </small>
+              }
+
+            </div>
+
+          </div>
+
+          <div class="campo">
+
+            <label for="foto">
+              Foto
+              <span>(opcional)</span>
+            </label>
+
+            <input
+              id="foto"
+              type="url"
+              formControlName="foto"
+              placeholder="https://exemplo.com/foto.jpg"
+            />
+
+          </div>
+
+          <div class="acoes">
+
+            <button
+              class="botao-cancelar"
+              type="button"
+              (click)="cancelar()"
+            >
+              Cancelar
+            </button>
+
+            <button
+              class="botao-principal"
+              type="submit"
+              [disabled]="salvando()"
+            >
+              {{ salvando()
+                ? 'Salvando...'
+                : profissionalEditando()
+                  ? 'Salvar alterações'
+                  : 'Cadastrar profissional' }}
+            </button>
+
+          </div>
+
+        </form>
+
+      </section>
+
+    }
+
+    <section class="lista">
+
+      @if (carregando()) {
+
+        <div class="estado">
+          Carregando profissionais...
+        </div>
+
+      } @else if (profissionais().length === 0) {
+
+        <div class="estado">
+
+          <strong>
+            Nenhum profissional cadastrado
+          </strong>
+
+          <p>
+            Cadastre o primeiro profissional da sua clínica.
+          </p>
+
+        </div>
+
+      } @else {
+
+        <div class="grid-profissionais">
+
+          @for (
+            profissional of profissionais();
+            track profissional.id
+          ) {
+
+            <article class="cartao profissional">
+
+              <div class="avatar">
+
+                @if (profissional.foto) {
+                  <img
+                    [src]="profissional.foto"
+                    [alt]="profissional.nome"
+                  />
+                } @else {
+                  {{ profissional.nome.charAt(0).toUpperCase() }}
+                }
+
+              </div>
+
+              <div class="dados">
+
+                <h2>
+                  {{ profissional.nome }}
+                </h2>
+
+                <span class="especialidade">
+                  {{
+                    nomeEspecialidade(
+                      profissional.especialidadeId
+                    )
+                  }}
+                </span>
+
+                <span class="crm">
+                  {{ profissional.crm }}
+                </span>
+
+              </div>
+
+              <div class="acoes-profissional">
+
+                <button
+                  class="botao-secundario"
+                  type="button"
+                  (click)="editar(profissional)"
+                >
+                  Editar
+                </button>
+
+                @if (
+                  !profissional.id.startsWith('med-')
+                ) {
+                  <button
+                    class="botao-excluir"
+                    type="button"
+                    (click)="excluir(profissional)"
+                  >
+                    Excluir
+                  </button>
+                }
+
+              </div>
+
+            </article>
+
+          }
+
+        </div>
+
+      }
+
+    </section>
+
+  </main>
+
+</div>

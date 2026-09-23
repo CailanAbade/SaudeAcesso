@@ -3,9 +3,6 @@
   width: 100%;
 }
 
-/* =========================
-   PÁGINA
-========================= */
 
 .pagina-autenticacao {
   min-height: 100vh;
@@ -32,9 +29,6 @@
     #f8f9ff;
 }
 
-/* =========================
-   CARTÃO PRINCIPAL
-========================= */
 
 .cartao-autenticacao {
   width: 1050px;
@@ -60,10 +54,6 @@
     0 20px 50px rgba(13, 28, 47, 0.09);
 }
 
-/* =========================
-   PAINEL ESQUERDO
-========================= */
-
 .painel-boas-vindas {
   grid-column: 1 !important;
   grid-row: 1 !important;
@@ -79,57 +69,23 @@
 
   box-sizing: border-box;
 
-  background:
-    radial-gradient(
-      circle at 80% 15%,
-      rgba(124, 249, 148, 0.13),
-      transparent 25%
-    ),
-    linear-gradient(
-      155deg,
-      #00628d 0%,
-      #006194 60%,
-      #00547f 100%
-    );
+  background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.8)), url('/fundo1.png');
 
   color: #ffffff;
 }
 
 .marca {
-  display: flex;
+  display: inline-flex;
   align-items: center;
-
-  gap: 9px;
-
-  font-size: 18px;
-  font-weight: 900;
-
-  letter-spacing: -0.4px;
+  width: fit-content;
+  text-decoration: none;
 }
 
-.marca > span:last-child span {
-  font-weight: 400;
+.marca img {
+  width: 155px;
+  height: auto;
+  display: block;
 }
-
-.marca-icone {
-  width: 31px;
-  height: 31px;
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  flex-shrink: 0;
-
-  border-radius: 9px;
-
-  background: #ffffff;
-  color: #006194;
-
-  font-size: 24px;
-  font-weight: 300;
-}
-
 .boas-vindas-conteudo {
   margin: auto 0;
 }

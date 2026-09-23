@@ -15,12 +15,18 @@
         <span>Serviços</span>
       </a>
 
-      <a class="item-navegacao" href="#">
+      <a
+        class="item-navegacao"
+        routerLink="/profissionais"
+      >
         <span>♙</span>
         <span>Profissionais</span>
       </a>
 
-      <a class="item-navegacao" href="#">
+      <a
+        class="item-navegacao"
+        routerLink="/horarios"
+      >
         <span>◷</span>
         <span>Horários</span>
       </a>
@@ -32,7 +38,10 @@
     </nav>
 
     <div class="rodape-lateral">
-      <a class="item-navegacao" routerLink="/privacidade">
+      <a
+        class="item-navegacao"
+        routerLink="/privacidade"
+      >
         <span>ⓘ</span>
         <span>Privacidade</span>
       </a>
@@ -52,9 +61,7 @@
     <header class="cabecalho-painel">
       <div>
         <p class="saudacao">Painel da clínica</p>
-
         <h1>Olá, {{ nomeClinica() }}!</h1>
-
         <p class="subtitulo">
           Gerencie seus serviços e informações no SaúdeAcesso.
         </p>
@@ -64,7 +71,6 @@
         <div class="avatar">
           {{ iniciaisClinica() }}
         </div>
-
         <div class="perfil-info">
           <strong>{{ nomeClinica() }}</strong>
           <span>Clínica parceira</span>
@@ -75,7 +81,6 @@
     <section class="cartoes-resumo">
       <article class="cartao-resumo">
         <div class="icone-resumo">▣</div>
-
         <div>
           <span>Serviços cadastrados</span>
           <strong>{{ quantidadeServicos() }}</strong>
@@ -84,7 +89,6 @@
 
       <article class="cartao-resumo">
         <div class="icone-resumo">♙</div>
-
         <div>
           <span>Profissionais</span>
           <strong>{{ quantidadeMedicos() }}</strong>
@@ -93,7 +97,6 @@
 
       <article class="cartao-resumo">
         <div class="icone-resumo">★</div>
-
         <div>
           <span>Avaliação</span>
           <strong>{{ avaliacao() }}</strong>
@@ -105,10 +108,8 @@
         [class.destaque]="verificada()"
       >
         <div class="icone-resumo">✓</div>
-
         <div>
           <span>Perfil</span>
-
           <strong>
             {{ verificada() ? 'Verificado' : 'Não verificado' }}
           </strong>
@@ -120,9 +121,7 @@
       <div class="cabecalho-secao">
         <div>
           <span class="etiqueta-secao">CATÁLOGO</span>
-
           <h2>Seus serviços</h2>
-
           <p>
             Confira os serviços disponibilizados pela sua clínica.
           </p>
@@ -159,21 +158,14 @@
           <tbody>
             @if (carregando()) {
               <tr>
-                <td
-                  colspan="6"
-                  class="estado-vazio"
-                >
+                <td colspan="6" class="estado-vazio">
                   Carregando serviços...
                 </td>
               </tr>
             } @else if (servicos().length === 0) {
               <tr>
-                <td
-                  colspan="6"
-                  class="estado-vazio"
-                >
+                <td colspan="6" class="estado-vazio">
                   <strong>Nenhum serviço cadastrado</strong>
-
                   <p>
                     Cadastre um serviço para ele aparecer no catálogo.
                   </p>
@@ -184,9 +176,7 @@
                 <tr>
                   <td>
                     <div class="servico-nome">
-                      <strong>
-                        {{ servico.nome }}
-                      </strong>
+                      <strong>{{ servico.nome }}</strong>
                     </div>
                   </td>
 
@@ -232,15 +222,22 @@
                         type="button"
                         title="Ações do serviço"
                         (click)="abrirAcoes(servico)"
-                        [disabled]="processandoServico() === servico.id"
+                        [disabled]="
+                          processandoServico() === servico.id
+                        "
                       >
                         ⋯
                       </button>
 
-                      @if (servicoEditando()?.id === servico.id) {
+                      @if (
+                        servicoEditando()?.id === servico.id
+                      ) {
                         <div class="menu-acoes">
                           <a
-                            [routerLink]="['/editar-servico', servico.id]"
+                            [routerLink]="[
+                              '/editar-servico',
+                              servico.id
+                            ]"
                           >
                             Editar serviço
                           </a>
@@ -248,7 +245,9 @@
                           <button
                             type="button"
                             (click)="alternarStatus(servico)"
-                            [disabled]="processandoServico() === servico.id"
+                            [disabled]="
+                              processandoServico() === servico.id
+                            "
                           >
                             {{
                               servico.status === 'ativo'
@@ -261,7 +260,9 @@
                             class="acao-excluir"
                             type="button"
                             (click)="excluirServico(servico)"
-                            [disabled]="processandoServico() === servico.id"
+                            [disabled]="
+                              processandoServico() === servico.id
+                            "
                           >
                             Excluir serviço
                           </button>
@@ -282,7 +283,6 @@
         <div class="cabecalho-card">
           <div>
             <span class="etiqueta-secao">CLÍNICA</span>
-
             <h2>Informações do perfil</h2>
           </div>
 
@@ -297,26 +297,17 @@
         <div class="informacoes">
           <div class="informacao">
             <span>Nome</span>
-
-            <strong>
-              {{ nomeClinica() }}
-            </strong>
+            <strong>{{ nomeClinica() }}</strong>
           </div>
 
           <div class="informacao">
             <span>Endereço</span>
-
-            <strong>
-              {{ enderecoClinica() }}
-            </strong>
+            <strong>{{ enderecoClinica() }}</strong>
           </div>
 
           <div class="informacao">
             <span>Cidade</span>
-
-            <strong>
-              {{ cidadeClinica() }}
-            </strong>
+            <strong>{{ cidadeClinica() }}</strong>
           </div>
         </div>
       </article>
@@ -324,10 +315,7 @@
       <article class="cartao-informacao">
         <div class="cabecalho-card">
           <div>
-            <span class="etiqueta-secao">
-              VISIBILIDADE
-            </span>
-
+            <span class="etiqueta-secao">VISIBILIDADE</span>
             <h2>Seu perfil público</h2>
           </div>
         </div>

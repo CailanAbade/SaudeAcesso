@@ -1,0 +1,346 @@
+<div class="pagina">
+  <header class="cabecalho">
+    <a routerLink="/painel-clinica" class="marca">
+      <img src="logo.png" alt="SaúdeAcesso" />
+    </a>
+
+    <div class="acoes-cabecalho">
+      <a
+        routerLink="/painel-clinica"
+        class="botao-voltar"
+      >
+        ← Voltar ao painel
+      </a>
+
+      <button
+        type="button"
+        class="botao-sair"
+        (click)="sair()"
+      >
+        Sair
+      </button>
+    </div>
+  </header>
+
+  <main class="conteudo">
+    <div class="cabecalho-pagina">
+      <div>
+        <span class="etiqueta">HORÁRIOS</span>
+
+        <h1>Horários de atendimento</h1>
+
+        <p>
+          Configure os dias e horários em que sua clínica
+          atende pacientes.
+        </p>
+      </div>
+    </div>
+
+    @if (mensagemErro()) {
+      <div class="mensagem erro">
+        {{ mensagemErro() }}
+      </div>
+    }
+
+    @if (mensagemSucesso()) {
+      <div class="mensagem sucesso">
+        {{ mensagemSucesso() }}
+      </div>
+    }
+
+    @if (carregando()) {
+      <div class="estado-carregando">
+        Carregando horários...
+      </div>
+    } @else {
+      <form
+        [formGroup]="formulario"
+        (ngSubmit)="salvar()"
+      >
+        <section class="card-horarios">
+
+          <div class="linha-horario">
+            <div class="dia">
+              <strong>Segunda-feira</strong>
+              <span>Início da semana</span>
+            </div>
+
+            <div
+              class="controles"
+              formGroupName="segunda"
+            >
+              <label class="campo">
+                <span>Abertura</span>
+                <input
+                  type="time"
+                  formControlName="abertura"
+                />
+              </label>
+
+              <span class="separador">até</span>
+
+              <label class="campo">
+                <span>Fechamento</span>
+                <input
+                  type="time"
+                  formControlName="fechamento"
+                />
+              </label>
+
+              <label class="checkbox">
+                <input
+                  type="checkbox"
+                  formControlName="aberto"
+                />
+                <span>Aberto</span>
+              </label>
+            </div>
+          </div>
+
+          <div class="linha-horario">
+            <div class="dia">
+              <strong>Terça-feira</strong>
+              <span>Atendimento normal</span>
+            </div>
+
+            <div
+              class="controles"
+              formGroupName="terca"
+            >
+              <label class="campo">
+                <span>Abertura</span>
+                <input
+                  type="time"
+                  formControlName="abertura"
+                />
+              </label>
+
+              <span class="separador">até</span>
+
+              <label class="campo">
+                <span>Fechamento</span>
+                <input
+                  type="time"
+                  formControlName="fechamento"
+                />
+              </label>
+
+              <label class="checkbox">
+                <input
+                  type="checkbox"
+                  formControlName="aberto"
+                />
+                <span>Aberto</span>
+              </label>
+            </div>
+          </div>
+
+          <div class="linha-horario">
+            <div class="dia">
+              <strong>Quarta-feira</strong>
+              <span>Atendimento normal</span>
+            </div>
+
+            <div
+              class="controles"
+              formGroupName="quarta"
+            >
+              <label class="campo">
+                <span>Abertura</span>
+                <input
+                  type="time"
+                  formControlName="abertura"
+                />
+              </label>
+
+              <span class="separador">até</span>
+
+              <label class="campo">
+                <span>Fechamento</span>
+                <input
+                  type="time"
+                  formControlName="fechamento"
+                />
+              </label>
+
+              <label class="checkbox">
+                <input
+                  type="checkbox"
+                  formControlName="aberto"
+                />
+                <span>Aberto</span>
+              </label>
+            </div>
+          </div>
+
+          <div class="linha-horario">
+            <div class="dia">
+              <strong>Quinta-feira</strong>
+              <span>Atendimento normal</span>
+            </div>
+
+            <div
+              class="controles"
+              formGroupName="quinta"
+            >
+              <label class="campo">
+                <span>Abertura</span>
+                <input
+                  type="time"
+                  formControlName="abertura"
+                />
+              </label>
+
+              <span class="separador">até</span>
+
+              <label class="campo">
+                <span>Fechamento</span>
+                <input
+                  type="time"
+                  formControlName="fechamento"
+                />
+              </label>
+
+              <label class="checkbox">
+                <input
+                  type="checkbox"
+                  formControlName="aberto"
+                />
+                <span>Aberto</span>
+              </label>
+            </div>
+          </div>
+
+          <div class="linha-horario">
+            <div class="dia">
+              <strong>Sexta-feira</strong>
+              <span>Atendimento normal</span>
+            </div>
+
+            <div
+              class="controles"
+              formGroupName="sexta"
+            >
+              <label class="campo">
+                <span>Abertura</span>
+                <input
+                  type="time"
+                  formControlName="abertura"
+                />
+              </label>
+
+              <span class="separador">até</span>
+
+              <label class="campo">
+                <span>Fechamento</span>
+                <input
+                  type="time"
+                  formControlName="fechamento"
+                />
+              </label>
+
+              <label class="checkbox">
+                <input
+                  type="checkbox"
+                  formControlName="aberto"
+                />
+                <span>Aberto</span>
+              </label>
+            </div>
+          </div>
+
+          <div class="linha-horario">
+            <div class="dia">
+              <strong>Sábado</strong>
+              <span>Fim de semana</span>
+            </div>
+
+            <div
+              class="controles"
+              formGroupName="sabado"
+            >
+              <label class="campo">
+                <span>Abertura</span>
+                <input
+                  type="time"
+                  formControlName="abertura"
+                />
+              </label>
+
+              <span class="separador">até</span>
+
+              <label class="campo">
+                <span>Fechamento</span>
+                <input
+                  type="time"
+                  formControlName="fechamento"
+                />
+              </label>
+
+              <label class="checkbox">
+                <input
+                  type="checkbox"
+                  formControlName="aberto"
+                />
+                <span>Aberto</span>
+              </label>
+            </div>
+          </div>
+
+          <div class="linha-horario">
+            <div class="dia">
+              <strong>Domingo</strong>
+              <span>Fim de semana</span>
+            </div>
+
+            <div
+              class="controles"
+              formGroupName="domingo"
+            >
+              <label class="campo">
+                <span>Abertura</span>
+                <input
+                  type="time"
+                  formControlName="abertura"
+                />
+              </label>
+
+              <span class="separador">até</span>
+
+              <label class="campo">
+                <span>Fechamento</span>
+                <input
+                  type="time"
+                  formControlName="fechamento"
+                />
+              </label>
+
+              <label class="checkbox">
+                <input
+                  type="checkbox"
+                  formControlName="aberto"
+                />
+                <span>Aberto</span>
+              </label>
+            </div>
+          </div>
+
+        </section>
+
+        <div class="rodape-formulario">
+          <p>
+            Os horários serão exibidos no perfil público da clínica.
+          </p>
+
+          <button
+            type="submit"
+            class="botao-salvar"
+            [disabled]="salvando()"
+          >
+            {{ salvando() ? 'Salvando...' : 'Salvar horários' }}
+          </button>
+        </div>
+      </form>
+    }
+  </main>
+</div>

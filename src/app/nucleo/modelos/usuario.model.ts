@@ -6,6 +6,7 @@ export interface Usuario {
   email: string;
   tipo: TipoUsuario;
   cpf?: string;
+  cnpj?: string;
   clinicaId?: string;
   aceitouTermosEm: string;
 }

@@ -76,6 +76,15 @@ export const routes: Routes = [
       'SaúdeAcesso | Painel da Clínica',
   },
   {
+  path: 'profissionais',
+  canActivate: [autenticacaoGuard],
+  loadComponent: () =>
+    import('./paginas/profissionais/profissionais')
+      .then((m) => m.Profissionais),
+  title:
+    'SaúdeAcesso | Profissionais',
+},
+  {
     path: 'editar-servico/:id',
     canActivate: [autenticacaoGuard],
     loadComponent: () =>
@@ -86,5 +95,14 @@ export const routes: Routes = [
       ),
     title:
       'SaúdeAcesso | Editar serviço',
+  },
+    {
+    path: 'horarios',
+    canActivate: [autenticacaoGuard],
+    loadComponent: () =>
+      import('./paginas/horarios/horarios')
+        .then((m) => m.Horarios),
+    title:
+      'SaúdeAcesso | Horários de atendimento',
   },
 ];
