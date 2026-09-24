@@ -5,15 +5,22 @@
     </div>
 
     <nav class="navegacao">
-      <a class="item-navegacao ativo" href="#">
+      <a
+        class="item-navegacao ativo"
+        href="#topo-painel"
+      >
         <span>⌂</span>
         <span>Visão geral</span>
       </a>
 
-      <a class="item-navegacao" href="#">
+      <button
+        class="item-navegacao"
+        type="button"
+        (click)="irParaServicos()"
+      >
         <span>▣</span>
         <span>Serviços</span>
-      </a>
+      </button>
 
       <a
         class="item-navegacao"
@@ -31,7 +38,10 @@
         <span>Horários</span>
       </a>
 
-      <a class="item-navegacao" href="#">
+      <a
+        class="item-navegacao"
+        routerLink="/configuracoes"
+      >
         <span>⚙</span>
         <span>Configurações</span>
       </a>
@@ -57,11 +67,20 @@
     </div>
   </aside>
 
-  <main class="conteudo">
+  <main
+    class="conteudo"
+    id="topo-painel"
+  >
     <header class="cabecalho-painel">
       <div>
-        <p class="saudacao">Painel da clínica</p>
-        <h1>Olá, {{ nomeClinica() }}!</h1>
+        <p class="saudacao">
+          Painel da clínica
+        </p>
+
+        <h1>
+          Olá, {{ nomeClinica() }}!
+        </h1>
+
         <p class="subtitulo">
           Gerencie seus serviços e informações no SaúdeAcesso.
         </p>
@@ -71,35 +90,65 @@
         <div class="avatar">
           {{ iniciaisClinica() }}
         </div>
+
         <div class="perfil-info">
-          <strong>{{ nomeClinica() }}</strong>
-          <span>Clínica parceira</span>
+          <strong>
+            {{ nomeClinica() }}
+          </strong>
+
+          <span>
+            Clínica parceira
+          </span>
         </div>
       </div>
     </header>
 
     <section class="cartoes-resumo">
       <article class="cartao-resumo">
-        <div class="icone-resumo">▣</div>
+        <div class="icone-resumo">
+          ▣
+        </div>
+
         <div>
-          <span>Serviços cadastrados</span>
-          <strong>{{ quantidadeServicos() }}</strong>
+          <span>
+            Serviços cadastrados
+          </span>
+
+          <strong>
+            {{ quantidadeServicos() }}
+          </strong>
         </div>
       </article>
 
       <article class="cartao-resumo">
-        <div class="icone-resumo">♙</div>
+        <div class="icone-resumo">
+          ♙
+        </div>
+
         <div>
-          <span>Profissionais</span>
-          <strong>{{ quantidadeMedicos() }}</strong>
+          <span>
+            Profissionais
+          </span>
+
+          <strong>
+            {{ quantidadeMedicos() }}
+          </strong>
         </div>
       </article>
 
       <article class="cartao-resumo">
-        <div class="icone-resumo">★</div>
+        <div class="icone-resumo">
+          ★
+        </div>
+
         <div>
-          <span>Avaliação</span>
-          <strong>{{ avaliacao() }}</strong>
+          <span>
+            Avaliação
+          </span>
+
+          <strong>
+            {{ avaliacao() }}
+          </strong>
         </div>
       </article>
 
@@ -107,21 +156,40 @@
         class="cartao-resumo"
         [class.destaque]="verificada()"
       >
-        <div class="icone-resumo">✓</div>
+        <div class="icone-resumo">
+          ✓
+        </div>
+
         <div>
-          <span>Perfil</span>
+          <span>
+            Perfil
+          </span>
+
           <strong>
-            {{ verificada() ? 'Verificado' : 'Não verificado' }}
+            {{
+              verificada()
+                ? 'Verificado'
+                : 'Não verificado'
+            }}
           </strong>
         </div>
       </article>
     </section>
 
-    <section class="secao">
+    <section
+      class="secao"
+      id="servicos"
+    >
       <div class="cabecalho-secao">
         <div>
-          <span class="etiqueta-secao">CATÁLOGO</span>
-          <h2>Seus serviços</h2>
+          <span class="etiqueta-secao">
+            CATÁLOGO
+          </span>
+
+          <h2>
+            Seus serviços
+          </h2>
+
           <p>
             Confira os serviços disponibilizados pela sua clínica.
           </p>
@@ -158,35 +226,57 @@
           <tbody>
             @if (carregando()) {
               <tr>
-                <td colspan="6" class="estado-vazio">
+                <td
+                  colspan="6"
+                  class="estado-vazio"
+                >
                   Carregando serviços...
                 </td>
               </tr>
             } @else if (servicos().length === 0) {
               <tr>
-                <td colspan="6" class="estado-vazio">
-                  <strong>Nenhum serviço cadastrado</strong>
+                <td
+                  colspan="6"
+                  class="estado-vazio"
+                >
+                  <strong>
+                    Nenhum serviço cadastrado
+                  </strong>
+
                   <p>
                     Cadastre um serviço para ele aparecer no catálogo.
                   </p>
                 </td>
               </tr>
             } @else {
-              @for (servico of servicos(); track servico.id) {
+              @for (
+                servico of servicos();
+                track servico.id
+              ) {
                 <tr>
                   <td>
                     <div class="servico-nome">
-                      <strong>{{ servico.nome }}</strong>
+                      <strong>
+                        {{ servico.nome }}
+                      </strong>
                     </div>
                   </td>
 
                   <td>
-                    {{ formatarReal(servico.precoTabela) }}
+                    {{
+                      formatarReal(
+                        servico.precoTabela
+                      )
+                    }}
                   </td>
 
                   <td>
                     <strong class="preco-app">
-                      {{ formatarReal(servico.precoApp) }}
+                      {{
+                        formatarReal(
+                          servico.precoApp
+                        )
+                      }}
                     </strong>
                   </td>
 
@@ -204,8 +294,12 @@
                   <td>
                     <span
                       class="status"
-                      [class.ativo-status]="servico.status === 'ativo'"
-                      [class.inativo-status]="servico.status !== 'ativo'"
+                      [class.ativo-status]="
+                        servico.status === 'ativo'
+                      "
+                      [class.inativo-status]="
+                        servico.status !== 'ativo'
+                      "
                     >
                       {{
                         servico.status === 'ativo'
@@ -223,14 +317,16 @@
                         title="Ações do serviço"
                         (click)="abrirAcoes(servico)"
                         [disabled]="
-                          processandoServico() === servico.id
+                          processandoServico() ===
+                          servico.id
                         "
                       >
                         ⋯
                       </button>
 
                       @if (
-                        servicoEditando()?.id === servico.id
+                        servicoEditando()?.id ===
+                        servico.id
                       ) {
                         <div class="menu-acoes">
                           <a
@@ -244,13 +340,17 @@
 
                           <button
                             type="button"
-                            (click)="alternarStatus(servico)"
+                            (click)="
+                              alternarStatus(servico)
+                            "
                             [disabled]="
-                              processandoServico() === servico.id
+                              processandoServico() ===
+                              servico.id
                             "
                           >
                             {{
-                              servico.status === 'ativo'
+                              servico.status ===
+                              'ativo'
                                 ? 'Desativar serviço'
                                 : 'Ativar serviço'
                             }}
@@ -259,9 +359,12 @@
                           <button
                             class="acao-excluir"
                             type="button"
-                            (click)="excluirServico(servico)"
+                            (click)="
+                              excluirServico(servico)
+                            "
                             [disabled]="
-                              processandoServico() === servico.id
+                              processandoServico() ===
+                              servico.id
                             "
                           >
                             Excluir serviço
@@ -282,32 +385,52 @@
       <article class="cartao-informacao">
         <div class="cabecalho-card">
           <div>
-            <span class="etiqueta-secao">CLÍNICA</span>
-            <h2>Informações do perfil</h2>
+            <span class="etiqueta-secao">
+              CLÍNICA
+            </span>
+
+            <h2>
+              Informações do perfil
+            </h2>
           </div>
 
-          <button
+          <a
             class="botao-secundario"
-            type="button"
+            routerLink="/configuracoes"
           >
             Editar
-          </button>
+          </a>
         </div>
 
         <div class="informacoes">
           <div class="informacao">
-            <span>Nome</span>
-            <strong>{{ nomeClinica() }}</strong>
+            <span>
+              Nome
+            </span>
+
+            <strong>
+              {{ nomeClinica() }}
+            </strong>
           </div>
 
           <div class="informacao">
-            <span>Endereço</span>
-            <strong>{{ enderecoClinica() }}</strong>
+            <span>
+              Endereço
+            </span>
+
+            <strong>
+              {{ enderecoClinica() }}
+            </strong>
           </div>
 
           <div class="informacao">
-            <span>Cidade</span>
-            <strong>{{ cidadeClinica() }}</strong>
+            <span>
+              Cidade
+            </span>
+
+            <strong>
+              {{ cidadeClinica() }}
+            </strong>
           </div>
         </div>
       </article>
@@ -315,8 +438,13 @@
       <article class="cartao-informacao">
         <div class="cabecalho-card">
           <div>
-            <span class="etiqueta-secao">VISIBILIDADE</span>
-            <h2>Seu perfil público</h2>
+            <span class="etiqueta-secao">
+              VISIBILIDADE
+            </span>
+
+            <h2>
+              Seu perfil público
+            </h2>
           </div>
         </div>
 
@@ -326,9 +454,13 @@
 
         <a
           class="botao-secundario largura-total"
-          [routerLink]="['/clinicas', slugClinica()]"
+          [routerLink]="[
+            '/clinicas',
+            slugClinica()
+          ]"
         >
           Visualizar perfil público
+
           <span>→</span>
         </a>
       </article>

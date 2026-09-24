@@ -1,4 +1,5 @@
 import { Routes } from '@angular/router';
+
 import { autenticacaoGuard } from './nucleo/guardas/autenticacao-guard';
 
 export const routes: Routes = [
@@ -7,6 +8,7 @@ export const routes: Routes = [
     redirectTo: 'inicio',
     pathMatch: 'full',
   },
+
   {
     path: 'inicio',
     loadComponent: () =>
@@ -16,6 +18,7 @@ export const routes: Routes = [
     title:
       'SaúdeAcesso | Encontre médicos e exames com preço justo',
   },
+
   {
     path: 'resultados',
     loadComponent: () =>
@@ -25,6 +28,7 @@ export const routes: Routes = [
     title:
       'SaúdeAcesso | Resultados da busca',
   },
+
   {
     path: 'entrar',
     loadComponent: () =>
@@ -33,6 +37,7 @@ export const routes: Routes = [
       ),
     title: 'SaúdeAcesso | Entrar',
   },
+
   {
     path: 'privacidade',
     loadComponent: () =>
@@ -42,6 +47,7 @@ export const routes: Routes = [
     title:
       'SaúdeAcesso | Política de Privacidade e LGPD',
   },
+
   {
     path: 'clinicas/:slug',
     loadComponent: () =>
@@ -51,6 +57,7 @@ export const routes: Routes = [
     title:
       'SaúdeAcesso | Perfil da clínica',
   },
+
   {
     path: 'cadastrar-servico',
     canActivate: [autenticacaoGuard],
@@ -64,6 +71,19 @@ export const routes: Routes = [
       'SaúdeAcesso | Cadastrar novo serviço',
   },
   {
+  path: 'perfil',
+  canActivate: [autenticacaoGuard],
+  loadComponent: () =>
+    import(
+      './paginas/perfil/perfil'
+    ).then(
+      (m) => m.Perfil
+    ),
+  title:
+    'SaúdeAcesso | Meu perfil',
+},
+
+  {
     path: 'painel-clinica',
     canActivate: [autenticacaoGuard],
     loadComponent: () =>
@@ -75,15 +95,20 @@ export const routes: Routes = [
     title:
       'SaúdeAcesso | Painel da Clínica',
   },
+
   {
-  path: 'profissionais',
-  canActivate: [autenticacaoGuard],
-  loadComponent: () =>
-    import('./paginas/profissionais/profissionais')
-      .then((m) => m.Profissionais),
-  title:
-    'SaúdeAcesso | Profissionais',
-},
+    path: 'profissionais',
+    canActivate: [autenticacaoGuard],
+    loadComponent: () =>
+      import(
+        './paginas/profissionais/profissionais'
+      ).then(
+        (m) => m.Profissionais
+      ),
+    title:
+      'SaúdeAcesso | Profissionais',
+  },
+
   {
     path: 'editar-servico/:id',
     canActivate: [autenticacaoGuard],
@@ -96,13 +121,30 @@ export const routes: Routes = [
     title:
       'SaúdeAcesso | Editar serviço',
   },
-    {
+
+  {
     path: 'horarios',
     canActivate: [autenticacaoGuard],
     loadComponent: () =>
-      import('./paginas/horarios/horarios')
-        .then((m) => m.Horarios),
+      import(
+        './paginas/horarios/horarios'
+      ).then(
+        (m) => m.Horarios
+      ),
     title:
       'SaúdeAcesso | Horários de atendimento',
+  },
+
+  {
+    path: 'configuracoes',
+    canActivate: [autenticacaoGuard],
+    loadComponent: () =>
+      import(
+        './paginas/configuracoes/configuracoes'
+      ).then(
+        (m) => m.Configuracoes
+      ),
+    title:
+      'SaúdeAcesso | Configurações da clínica',
   },
 ];

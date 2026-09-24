@@ -1,4 +1,5 @@
 import { Injectable, inject, signal } from '@angular/core';
+
 import {
   Auth,
   createUserWithEmailAndPassword,
@@ -6,11 +7,13 @@ import {
   signOut,
   user,
 } from '@angular/fire/auth';
+
 import {
   Firestore,
   doc,
   setDoc,
   getDoc,
+  updateDoc,
 } from '@angular/fire/firestore';
 
 import {
@@ -27,6 +30,11 @@ interface DadosCadastro {
   cnpj?: string;
 }
 
+interface DadosAtualizacaoPerfil {
+  nome: string;
+  cpf?: string;
+}
+
 @Injectable({
   providedIn: 'root',
 })
@@ -34,25 +42,35 @@ export class Autenticacao {
   private auth = inject(Auth);
   private db = inject(Firestore);
 
-  usuarioAtual = signal<Usuario | null>(null);
-  carregandoSessao = signal(true);
+  usuarioAtual =
+    signal<Usuario | null>(null);
+
+  carregandoSessao =
+    signal(true);
 
   constructor() {
-    user(this.auth).subscribe(async (credencial) => {
-      if (!credencial) {
-        this.usuarioAtual.set(null);
+    user(this.auth).subscribe(
+      async (credencial) => {
+        if (!credencial) {
+          this.usuarioAtual.set(null);
+          this.carregandoSessao.set(false);
+          return;
+        }
+
+        const perfil =
+          await this.buscarPerfil(
+            credencial.uid
+          );
+
+        this.usuarioAtual.set(perfil);
         this.carregandoSessao.set(false);
-        return;
       }
-
-      const perfil = await this.buscarPerfil(credencial.uid);
-
-      this.usuarioAtual.set(perfil);
-      this.carregandoSessao.set(false);
-    });
+    );
   }
 
-  async cadastrar(dados: DadosCadastro): Promise<Usuario> {
+  async cadastrar(
+    dados: DadosCadastro
+  ): Promise<Usuario> {
     const credencial =
       await createUserWithEmailAndPassword(
         this.auth,
@@ -60,7 +78,8 @@ export class Autenticacao {
         dados.senha
       );
 
-    const uid = credencial.user.uid;
+    const uid =
+      credencial.user.uid;
 
     const clinicaId =
       dados.tipo === 'clinica'
@@ -72,21 +91,35 @@ export class Autenticacao {
       nome: dados.nome,
       email: dados.email,
       tipo: dados.tipo,
+
       ...(dados.cpf
-        ? { cpf: dados.cpf }
+        ? {
+            cpf: dados.cpf,
+          }
         : {}),
+
       ...(dados.cnpj
-        ? { cnpj: dados.cnpj }
+        ? {
+            cnpj: dados.cnpj,
+          }
         : {}),
+
       ...(clinicaId
-        ? { clinicaId }
+        ? {
+            clinicaId,
+          }
         : {}),
+
       aceitouTermosEm:
         new Date().toISOString(),
     };
 
     await setDoc(
-      doc(this.db, 'usuarios', uid),
+      doc(
+        this.db,
+        'usuarios',
+        uid
+      ),
       novoUsuario
     );
 
@@ -96,14 +129,22 @@ export class Autenticacao {
     ) {
       const novaClinica = {
         id: clinicaId,
+
         slug: this.gerarSlug(
           dados.nome,
           uid
         ),
+
         nome: dados.nome,
-        cnpj: dados.cnpj ?? '',
+
+        cnpj:
+          dados.cnpj ?? '',
+
         verificada: false,
-        regiaoId: 'regiao-01',
+
+        regiaoId:
+          'regiao-01',
+
         endereco: {
           rua: '',
           numero: '',
@@ -111,9 +152,13 @@ export class Autenticacao {
           cidade: '',
           estado: 'BA',
         },
+
         avaliacao: 0,
+
         qtdAvaliacoes: 0,
-        planoId: 'plano-basico',
+
+        planoId:
+          'plano-basico',
       };
 
       await setDoc(
@@ -126,7 +171,9 @@ export class Autenticacao {
       );
     }
 
-    this.usuarioAtual.set(novoUsuario);
+    this.usuarioAtual.set(
+      novoUsuario
+    );
 
     return novoUsuario;
   }
@@ -147,27 +194,78 @@ export class Autenticacao {
         credencial.user.uid
       );
 
-    this.usuarioAtual.set(perfil);
+    this.usuarioAtual.set(
+      perfil
+    );
 
     return perfil;
   }
 
+  async atualizarPerfil(
+    dados: DadosAtualizacaoPerfil
+  ): Promise<Usuario> {
+    const usuario =
+      this.usuarioAtual();
+
+    if (!usuario) {
+      throw new Error(
+        'Nenhum usuário está logado.'
+      );
+    }
+
+    const nome =
+      dados.nome.trim();
+
+    const cpf =
+      dados.cpf?.trim() ?? '';
+
+    await updateDoc(
+      doc(
+        this.db,
+        'usuarios',
+        usuario.uid
+      ),
+      {
+        nome,
+        cpf,
+      }
+    );
+
+    const usuarioAtualizado: Usuario = {
+      ...usuario,
+      nome,
+      cpf,
+    };
+
+    this.usuarioAtual.set(
+      usuarioAtualizado
+    );
+
+    return usuarioAtualizado;
+  }
+
   async sair(): Promise<void> {
-    await signOut(this.auth);
+    await signOut(
+      this.auth
+    );
+
     this.usuarioAtual.set(null);
   }
 
   private async buscarPerfil(
     uid: string
   ): Promise<Usuario | null> {
-    const referencia = doc(
-      this.db,
-      'usuarios',
-      uid
-    );
+    const referencia =
+      doc(
+        this.db,
+        'usuarios',
+        uid
+      );
 
     const retorno =
-      await getDoc(referencia);
+      await getDoc(
+        referencia
+      );
 
     return retorno.exists()
       ? (retorno.data() as Usuario)
@@ -181,10 +279,19 @@ export class Autenticacao {
     const nomeNormalizado =
       nome
         .normalize('NFD')
-        .replace(/[\u0300-\u036f]/g, '')
+        .replace(
+          /[\u0300-\u036f]/g,
+          ''
+        )
         .toLowerCase()
-        .replace(/[^a-z0-9]+/g, '-')
-        .replace(/^-+|-+$/g, '');
+        .replace(
+          /[^a-z0-9]+/g,
+          '-'
+        )
+        .replace(
+          /^-+|-+$/g,
+          ''
+        );
 
     return `${nomeNormalizado}-${uid.slice(0, 6)}`;
   }

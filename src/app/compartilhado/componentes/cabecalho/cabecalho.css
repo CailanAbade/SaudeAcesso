@@ -99,6 +99,240 @@
   transform: translateY(-1px);
 }
 
+/* =========================================================
+   MENU DO USUÁRIO
+   ========================================================= */
+
+.menu-usuario {
+  position: relative;
+}
+
+.botao-perfil {
+  min-height: 46px;
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+
+  padding: 4px 10px 4px 5px;
+
+  border: 1px solid transparent;
+  border-radius: 24px;
+
+  background: transparent;
+  color: #263342;
+
+  font-family: inherit;
+  cursor: pointer;
+
+  transition:
+    background 0.2s ease,
+    border-color 0.2s ease;
+}
+
+.botao-perfil:hover,
+.botao-perfil.aberto {
+  background: #f4f8f8;
+  border-color: #dce8e7;
+}
+
+.avatar-usuario {
+  width: 36px;
+  height: 36px;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  flex-shrink: 0;
+
+  border-radius: 50%;
+
+  background: #087f7b;
+  color: #ffffff;
+
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 0.2px;
+}
+
+.avatar-usuario.grande {
+  width: 44px;
+  height: 44px;
+
+  font-size: 13px;
+}
+
+.nome-usuario {
+  max-width: 130px;
+
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.seta-menu {
+  color: #687587;
+  font-size: 14px;
+
+  transition: transform 0.2s ease;
+}
+
+.seta-menu.aberta {
+  transform: rotate(180deg);
+}
+
+.dropdown-usuario {
+  position: absolute;
+  top: calc(100% + 10px);
+  right: 0;
+
+  width: 280px;
+
+  padding: 8px;
+
+  background: #ffffff;
+  border: 1px solid #e2e8ef;
+  border-radius: 14px;
+
+  box-shadow:
+    0 18px 45px rgba(31, 45, 61, 0.14),
+    0 4px 12px rgba(31, 45, 61, 0.06);
+
+  animation: aparecer-menu 0.16s ease;
+}
+
+@keyframes aparecer-menu {
+  from {
+    opacity: 0;
+    transform: translateY(-5px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.cabecalho-usuario {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+
+  padding: 10px;
+}
+
+.dados-usuario {
+  min-width: 0;
+
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.dados-usuario strong {
+  color: #263342;
+
+  font-size: 13px;
+  font-weight: 800;
+
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.dados-usuario span {
+  color: #687587;
+
+  font-size: 11px;
+
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.dados-usuario small {
+  margin-top: 2px;
+
+  color: #087f7b;
+
+  font-size: 10px;
+  font-weight: 700;
+}
+
+.separador {
+  height: 1px;
+
+  margin: 5px 4px;
+
+  background: #edf0f3;
+}
+
+.item-menu {
+  width: 100%;
+  min-height: 42px;
+
+  display: flex;
+  align-items: center;
+  gap: 11px;
+
+  padding: 0 11px;
+
+  border: 0;
+  border-radius: 9px;
+
+  background: transparent;
+  color: #465366;
+
+  font-family: inherit;
+  font-size: 13px;
+  font-weight: 600;
+
+  text-align: left;
+  text-decoration: none;
+
+  cursor: pointer;
+
+  transition:
+    background 0.15s ease,
+    color 0.15s ease;
+}
+
+.item-menu:hover {
+  background: #f3f8f8;
+  color: #087f7b;
+}
+
+.icone-menu {
+  width: 20px;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  color: #087f7b;
+  font-size: 15px;
+}
+
+.item-sair {
+  color: #c45151;
+}
+
+.item-sair .icone-menu {
+  color: #c45151;
+}
+
+.item-sair:hover {
+  background: #fff5f5;
+  color: #b33e3e;
+}
+
+/* =========================================================
+   RESPONSIVIDADE
+   ========================================================= */
+
 @media (max-width: 900px) {
   .cabecalho {
     padding: 0 28px;
@@ -110,6 +344,10 @@
 
   .navegacao a {
     font-size: 12px;
+  }
+
+  .nome-usuario {
+    max-width: 90px;
   }
 }
 
@@ -135,6 +373,14 @@
     min-height: 38px;
     padding: 0 14px;
   }
+
+  .botao-perfil {
+    padding-right: 7px;
+  }
+
+  .nome-usuario {
+    display: none;
+  }
 }
 
 @media (max-width: 450px) {
@@ -148,5 +394,13 @@
 
   .botao-entrar {
     display: none;
+  }
+
+  .dropdown-usuario {
+    position: fixed;
+    top: 70px;
+    right: 12px;
+    left: 12px;
+    width: auto;
   }
 }

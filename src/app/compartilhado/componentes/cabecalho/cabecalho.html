@@ -1,5 +1,10 @@
 <header class="cabecalho">
-  <a routerLink="/inicio" class="marca">
+
+  <a
+    routerLink="/inicio"
+    class="marca"
+    (click)="fecharMenu()"
+  >
     <img
       src="logo.png"
       alt="SaúdeAcesso"
@@ -7,36 +12,208 @@
   </a>
 
   <nav class="navegacao">
-    <a routerLink="/resultados">
+
+    <a
+      routerLink="/resultados"
+      (click)="fecharMenu()"
+    >
       Para Pacientes
     </a>
 
-    <a href="#">
-      Para Clínicas
-    </a>
+    @if (ehClinica()) {
+      <a
+        routerLink="/painel-clinica"
+        (click)="fecharMenu()"
+      >
+        Para Clínicas
+      </a>
+    } @else {
+      <a
+        href="#"
+        (click)="$event.preventDefault()"
+      >
+        Para Clínicas
+      </a>
+    }
 
-    <a href="#">
+    <a
+      href="#"
+      (click)="$event.preventDefault()"
+    >
       Como Funciona
     </a>
 
-    <a href="#">
+    <a
+      href="#"
+      (click)="$event.preventDefault()"
+    >
       Ajuda
     </a>
+
   </nav>
 
   <div class="acoes-cabecalho">
-    <a
-      routerLink="/entrar"
-      class="botao-entrar"
-    >
-      Entrar
-    </a>
 
-    <a
-      routerLink="/entrar"
-      class="botao-cadastrar"
-    >
-      Cadastrar
-    </a>
+    @if (!usuarioAtual()) {
+
+      <a
+        routerLink="/entrar"
+        class="botao-entrar"
+      >
+        Entrar
+      </a>
+
+      <a
+        routerLink="/entrar"
+        [queryParams]="{ modo: 'cadastrar' }"
+        class="botao-cadastrar"
+      >
+        Cadastrar
+      </a>
+
+    } @else {
+
+      <div class="menu-usuario">
+
+        <button
+          type="button"
+          class="botao-perfil"
+          [class.aberto]="menuAberto()"
+          [attr.aria-expanded]="menuAberto()"
+          aria-haspopup="menu"
+          (click)="alternarMenu()"
+        >
+
+          <span class="avatar-usuario">
+            {{ iniciaisUsuario() }}
+          </span>
+
+          <span class="nome-usuario">
+            {{ nomeUsuario() }}
+          </span>
+
+          <span
+            class="seta-menu"
+            [class.aberta]="menuAberto()"
+          >
+            ▾
+          </span>
+
+        </button>
+
+        @if (menuAberto()) {
+
+          <div
+            class="dropdown-usuario"
+            role="menu"
+          >
+
+            <div class="cabecalho-usuario">
+
+              <span class="avatar-usuario grande">
+                {{ iniciaisUsuario() }}
+              </span>
+
+              <div class="dados-usuario">
+
+                <strong>
+                  {{ nomeUsuario() }}
+                </strong>
+
+                <span>
+                  {{ emailUsuario() }}
+                </span>
+
+                <small>
+                  {{
+                    ehPaciente()
+                      ? 'Paciente'
+                      : 'Clínica parceira'
+                  }}
+                </small>
+
+              </div>
+
+            </div>
+
+            <div class="separador"></div>
+
+            <a
+              routerLink="/inicio"
+              class="item-menu"
+              role="menuitem"
+              (click)="fecharMenu()"
+            >
+              <span>Início</span>
+            </a>
+
+            @if (ehPaciente()) {
+
+              <a
+                routerLink="/perfil"
+                class="item-menu"
+                role="menuitem"
+                (click)="fecharMenu()"
+              >
+                <span>Meu perfil</span>
+              </a>
+
+            }
+
+            @if (ehClinica()) {
+
+              <a
+                routerLink="/painel-clinica"
+                class="item-menu"
+                role="menuitem"
+                (click)="fecharMenu()"
+              >
+                <span class="icone-menu">⌂</span>
+                <span>Painel da clínica</span>
+              </a>
+
+              <a
+                routerLink="/configuracoes"
+                class="item-menu"
+                role="menuitem"
+                (click)="fecharMenu()"
+              >
+                <span class="icone-menu">⚙</span>
+                <span>Configurações</span>
+              </a>
+
+            }
+
+            <a
+              routerLink="/privacidade"
+              class="item-menu"
+              role="menuitem"
+              (click)="fecharMenu()"
+            >
+              <span class="icone-menu">ⓘ</span>
+              <span>Privacidade</span>
+            </a>
+
+            <div class="separador"></div>
+
+            <button
+              type="button"
+              class="item-menu item-sair"
+              role="menuitem"
+              (click)="sair()"
+            >
+              <span class="icone-menu">↪</span>
+              <span>Sair</span>
+            </button>
+
+          </div>
+
+        }
+
+      </div>
+
+    }
+
   </div>
+
 </header>

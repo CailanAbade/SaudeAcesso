@@ -1,0 +1,316 @@
+<div class="pagina-configuracoes">
+  <aside class="barra-lateral">
+    <div class="marca">
+      <img
+        src="logo.png"
+        alt="SaúdeAcesso"
+      />
+    </div>
+
+    <nav class="navegacao">
+      <a
+        class="item-navegacao"
+        routerLink="/painel-clinica"
+      >
+        <span>⌂</span>
+        <span>Visão geral</span>
+      </a>
+
+      <a
+        class="item-navegacao"
+        routerLink="/painel-clinica"
+        fragment="servicos"
+      >
+        <span>▣</span>
+        <span>Serviços</span>
+      </a>
+
+      <a
+        class="item-navegacao"
+        routerLink="/profissionais"
+      >
+        <span>♙</span>
+        <span>Profissionais</span>
+      </a>
+
+      <a
+        class="item-navegacao"
+        routerLink="/horarios"
+      >
+        <span>◷</span>
+        <span>Horários</span>
+      </a>
+
+      <a
+        class="item-navegacao ativo"
+        routerLink="/configuracoes"
+      >
+        <span>⚙</span>
+        <span>Configurações</span>
+      </a>
+    </nav>
+
+    <div class="rodape-lateral">
+      <a
+        class="item-navegacao"
+        routerLink="/privacidade"
+      >
+        <span>ⓘ</span>
+        <span>Privacidade</span>
+      </a>
+
+      <button
+        class="botao-sair"
+        type="button"
+        (click)="sair()"
+      >
+        <span>↪</span>
+        <span>Sair</span>
+      </button>
+    </div>
+  </aside>
+
+  <main class="conteudo">
+    <header class="cabecalho">
+      <div>
+        <p class="saudacao">
+          Configurações
+        </p>
+
+        <h1>
+          Dados da clínica
+        </h1>
+
+        <p class="subtitulo">
+          Atualize as informações que aparecem no perfil da sua clínica.
+        </p>
+      </div>
+
+      <a
+        class="botao-voltar"
+        routerLink="/painel-clinica"
+      >
+        ← Voltar ao painel
+      </a>
+    </header>
+
+    @if (carregando()) {
+      <section class="card">
+        <div class="estado">
+          Carregando dados da clínica...
+        </div>
+      </section>
+    } @else {
+      <form
+        class="card"
+        [formGroup]="formulario"
+        (ngSubmit)="salvar()"
+      >
+        <div class="cabecalho-card">
+          <div>
+            <span class="etiqueta">
+              INFORMAÇÕES
+            </span>
+
+            <h2>
+              Dados básicos
+            </h2>
+
+            <p>
+              Essas informações ajudam os pacientes a identificar sua clínica.
+            </p>
+          </div>
+        </div>
+
+        @if (mensagemSucesso()) {
+          <div class="mensagem sucesso">
+            {{ mensagemSucesso() }}
+          </div>
+        }
+
+        @if (mensagemErro()) {
+          <div class="mensagem erro">
+            {{ mensagemErro() }}
+          </div>
+        }
+
+        <div class="campos">
+          <div class="campo campo-largo">
+            <label for="nome">
+              Nome da clínica
+            </label>
+
+            <input
+              id="nome"
+              type="text"
+              formControlName="nome"
+              placeholder="Nome da clínica"
+            />
+
+            @if (campoInvalido('nome')) {
+              <small>
+                Informe o nome da clínica.
+              </small>
+            }
+          </div>
+
+          <div class="campo campo-largo">
+            <label for="cnpj">
+              CNPJ
+            </label>
+
+            <input
+              id="cnpj"
+              type="text"
+              formControlName="cnpj"
+              placeholder="00.000.000/0000-00"
+            />
+
+            @if (campoInvalido('cnpj')) {
+              <small>
+                Informe o CNPJ.
+              </small>
+            }
+          </div>
+        </div>
+
+        <div class="divisor"></div>
+
+        <div class="cabecalho-card">
+          <div>
+            <span class="etiqueta">
+              ENDEREÇO
+            </span>
+
+            <h2>
+              Localização
+            </h2>
+
+            <p>
+              Informe o endereço onde os pacientes encontram sua clínica.
+            </p>
+          </div>
+        </div>
+
+        <div class="campos">
+          <div class="campo endereco-rua">
+            <label for="rua">
+              Rua
+            </label>
+
+            <input
+              id="rua"
+              type="text"
+              formControlName="rua"
+              placeholder="Nome da rua"
+            />
+
+            @if (campoInvalido('rua')) {
+              <small>
+                Informe a rua.
+              </small>
+            }
+          </div>
+
+          <div class="campo endereco-numero">
+            <label for="numero">
+              Número
+            </label>
+
+            <input
+              id="numero"
+              type="text"
+              formControlName="numero"
+              placeholder="123"
+            />
+
+            @if (campoInvalido('numero')) {
+              <small>
+                Informe o número.
+              </small>
+            }
+          </div>
+
+          <div class="campo">
+            <label for="bairro">
+              Bairro
+            </label>
+
+            <input
+              id="bairro"
+              type="text"
+              formControlName="bairro"
+              placeholder="Bairro"
+            />
+
+            @if (campoInvalido('bairro')) {
+              <small>
+                Informe o bairro.
+              </small>
+            }
+          </div>
+
+          <div class="campo">
+            <label for="cidade">
+              Cidade
+            </label>
+
+            <input
+              id="cidade"
+              type="text"
+              formControlName="cidade"
+              placeholder="Cidade"
+            />
+
+            @if (campoInvalido('cidade')) {
+              <small>
+                Informe a cidade.
+              </small>
+            }
+          </div>
+
+          <div class="campo">
+            <label for="estado">
+              Estado
+            </label>
+
+            <input
+              id="estado"
+              type="text"
+              maxlength="2"
+              formControlName="estado"
+              placeholder="BA"
+            />
+
+            @if (campoInvalido('estado')) {
+              <small>
+                Informe a UF.
+              </small>
+            }
+          </div>
+        </div>
+
+        <div class="acoes">
+          <a
+            class="botao-cancelar"
+            routerLink="/painel-clinica"
+          >
+            Cancelar
+          </a>
+
+          <button
+            class="botao-salvar"
+            type="submit"
+            [disabled]="salvando()"
+          >
+            @if (salvando()) {
+              Salvando...
+            } @else {
+              Salvar alterações
+            }
+          </button>
+        </div>
+      </form>
+    }
+  </main>
+</div>

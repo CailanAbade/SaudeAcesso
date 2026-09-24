@@ -1,0 +1,159 @@
+<app-cabecalho></app-cabecalho>
+<main class="pagina-perfil">
+
+  <section class="conteudo-perfil">
+
+    <button
+      type="button"
+      class="botao-voltar"
+      routerLink="/inicio"
+    >
+      ← Voltar
+    </button>
+
+    <div class="cabecalho-perfil">
+
+      <span class="eyebrow">
+        MINHA CONTA
+      </span>
+
+      <h1>
+        Meu perfil
+      </h1>
+
+      <p>
+        Atualize seus dados pessoais.
+      </p>
+
+    </div>
+
+
+    <section class="cartao-perfil">
+
+      <div class="cabecalho-cartao">
+
+        <div class="avatar">
+          {{ usuarioAtual()?.nome?.charAt(0)?.toUpperCase() }}
+        </div>
+
+        <div>
+
+          <strong>
+            {{ usuarioAtual()?.nome }}
+          </strong>
+
+          <span>
+            Paciente
+          </span>
+
+        </div>
+
+      </div>
+
+
+      <div class="formulario">
+
+        <div class="campo">
+
+          <label for="nome">
+            Nome completo
+          </label>
+
+          <input
+            id="nome"
+            type="text"
+            [ngModel]="nome()"
+            (ngModelChange)="alterarNome($event)"
+            placeholder="Seu nome completo"
+          />
+
+        </div>
+
+
+        <div class="campo">
+
+          <label for="email">
+            E-mail
+          </label>
+
+          <input
+            id="email"
+            type="email"
+            [value]="usuarioAtual()?.email ?? ''"
+            disabled
+          />
+
+          <small>
+            O e-mail usado para entrar na conta não pode ser alterado aqui.
+          </small>
+
+        </div>
+
+
+        <div class="campo">
+
+          <label for="cpf">
+            CPF
+          </label>
+
+          <input
+            id="cpf"
+            type="text"
+            [ngModel]="cpf()"
+            (ngModelChange)="alterarCpf($event)"
+            placeholder="000.000.000-00"
+          />
+
+        </div>
+
+
+        @if (mensagemSucesso()) {
+
+          <div class="mensagem sucesso">
+            {{ mensagemSucesso() }}
+          </div>
+
+        }
+
+
+        @if (mensagemErro()) {
+
+          <div class="mensagem erro">
+            {{ mensagemErro() }}
+          </div>
+
+        }
+
+
+        <div class="acoes">
+
+          <button
+            type="button"
+            class="botao-cancelar"
+            routerLink="/inicio"
+          >
+            Cancelar
+          </button>
+
+          <button
+            type="button"
+            class="botao-salvar"
+            [disabled]="salvando()"
+            (click)="salvar()"
+          >
+            @if (salvando()) {
+              Salvando...
+            } @else {
+              Salvar alterações
+            }
+          </button>
+
+        </div>
+
+      </div>
+
+    </section>
+
+  </section>
+
+</main>

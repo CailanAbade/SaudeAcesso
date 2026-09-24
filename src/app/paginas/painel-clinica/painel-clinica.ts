@@ -171,6 +171,22 @@ export class PainelClinica {
     });
   }
 
+  irParaServicos(): void {
+    const elemento =
+      document.getElementById(
+        'servicos'
+      );
+
+    if (!elemento) {
+      return;
+    }
+
+    elemento.scrollIntoView({
+      behavior: 'smooth',
+      block: 'start',
+    });
+  }
+
   nomeClinica(): string {
     return (
       this.clinica()?.nome ??
