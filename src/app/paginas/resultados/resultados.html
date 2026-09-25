@@ -5,20 +5,30 @@
   <section class="cabecalho-resultados">
 
     <div>
-      <span class="eyebrow">SaúdeAcesso</span>
+      <span class="eyebrow">
+        SAÚDE MAIS ACESSÍVEL
+      </span>
 
-      <h1>Encontre atendimento com preço justo</h1>
+      <h1>
+        Encontre atendimento que cabe no seu bolso
+      </h1>
 
       @if (termoBusca()) {
+
         <p>
           Resultados para:
           <strong>“{{ termoBusca() }}”</strong>
         </p>
+
       } @else {
+
         <p>
-          Encontre consultas e serviços de saúde perto de você.
+          Compare consultas, exames e serviços de saúde
+          e encontre opções com preços mais acessíveis.
         </p>
+
       }
+
     </div>
 
   </section>
@@ -39,6 +49,7 @@
       />
 
       @if (termoBusca()) {
+
         <button
           type="button"
           class="limpar-busca"
@@ -47,6 +58,7 @@
         >
           ×
         </button>
+
       }
 
     </div>
@@ -54,7 +66,9 @@
 
     <div class="seletor-ordenacao">
 
-      <span>Ordenar:</span>
+      <span>
+        Ordenar:
+      </span>
 
       <button
         type="button"
@@ -81,13 +95,25 @@
 
     <strong>
       {{ servicosFiltrados().length }}
-      {{ servicosFiltrados().length === 1 ? 'resultado encontrado' : 'resultados encontrados' }}
+      {{
+        servicosFiltrados().length === 1
+          ? 'resultado encontrado'
+          : 'resultados encontrados'
+      }}
     </strong>
 
     @if (ordenacao() === 'menor') {
-      <span>Do menor para o maior preço</span>
+
+      <span>
+        Do menor para o maior preço
+      </span>
+
     } @else {
-      <span>Do maior para o menor preço</span>
+
+      <span>
+        Do maior para o menor preço
+      </span>
+
     }
 
   </section>
@@ -103,9 +129,12 @@
           ⌕
         </div>
 
-        <h2>Nenhum resultado encontrado</h2>
+        <h2>
+          Nenhum resultado encontrado
+        </h2>
 
         @if (termoBusca()) {
+
           <p>
             Não encontramos serviços para
             <strong>“{{ termoBusca() }}”</strong>.
@@ -118,20 +147,29 @@
           >
             Limpar busca
           </button>
+
         } @else {
+
           <p>
             Ainda não existem serviços cadastrados para exibir.
           </p>
+
         }
 
       </div>
 
     } @else {
 
-      @for (servico of servicosFiltrados(); track servico.id) {
+      @for (
+        servico of servicosFiltrados();
+        track servico.id
+      ) {
 
         <a
-          [routerLink]="['/clinicas', servico.clinica.slug]"
+          [routerLink]="[
+            '/clinicas',
+            servico.clinica.slug
+          ]"
           class="cartao-servico"
         >
 
@@ -149,21 +187,27 @@
               </h2>
 
               @if (servico.status === 'ativo') {
+
                 <span class="status-disponivel">
                   Disponível
                 </span>
+
               }
 
             </div>
 
             <p class="nome-clinica">
+
               {{ servico.clinica.nome }}
 
               @if (servico.clinica.verificada) {
+
                 <span class="verificada">
                   ✓
                 </span>
+
               }
+
             </p>
 
             <p class="endereco">
@@ -177,25 +221,38 @@
 
           <div class="info-preco">
 
-            <span class="preco-tabela">
-              {{ preco.formatarReal(servico.precoTabela) }}
+            <span class="rotulo-preco">
+              Preço no SaúdeAcesso
             </span>
 
             <strong class="preco-app">
               {{ preco.formatarReal(servico.precoApp) }}
             </strong>
 
-            <span class="etiqueta-desconto">
-              -{{
-                preco.calcularDesconto(
-                  servico.precoTabela,
-                  servico.precoApp
-                )
-              }}%
-            </span>
+            <div class="comparacao-preco">
 
-            <span class="texto-partir">
-              preço pelo SaúdeAcesso
+              <span class="preco-tabela">
+                {{ preco.formatarReal(servico.precoTabela) }}
+              </span>
+
+              <span class="etiqueta-desconto">
+                -{{
+                  preco.calcularDesconto(
+                    servico.precoTabela,
+                    servico.precoApp
+                  )
+                }}%
+              </span>
+
+            </div>
+
+            <span class="economia">
+              Economize
+              {{
+                preco.formatarReal(
+                  servico.precoTabela - servico.precoApp
+                )
+              }}
             </span>
 
           </div>

@@ -4,6 +4,17 @@
 
   <section class="hero">
 
+    <div class="hero-carrossel" aria-hidden="true">
+
+      <div class="slide slide-1"></div>
+      <div class="slide slide-2"></div>
+      <div class="slide slide-3"></div>
+
+      <div class="hero-overlay"></div>
+
+    </div>
+
+
     <div class="hero-conteudo">
 
       <span class="etiqueta">
@@ -11,12 +22,13 @@
       </span>
 
       <h1>
-        Encontre médicos e exames
-        <span>mais baratos no seu bairro</span>
+        Encontre consultas e exames
+        <span>que cabem no seu bolso</span>
       </h1>
 
       <p>
-        Atendimento médico digno, perto da sua casa e que cabe no seu bolso.
+        Compare preços de consultas, exames e serviços de saúde
+        e encontre opções mais acessíveis perto de você.
       </p>
 
       <div class="caixa-busca">
@@ -54,6 +66,7 @@
                   class="sugestao-busca"
                   (mousedown)="selecionarSugestao(sugestao)"
                 >
+
                   <span class="icone-sugestao">
                     ⌕
                   </span>
@@ -61,6 +74,7 @@
                   <span>
                     {{ sugestao }}
                   </span>
+
                 </button>
 
               }
@@ -80,6 +94,7 @@
         </button>
 
       </div>
+
 
       <div class="atalhos-busca">
 
@@ -124,13 +139,15 @@
       </div>
 
       <div>
+
         <strong>
-          Preços transparentes
+          Preços mais acessíveis
         </strong>
 
         <span>
-          Compare antes de agendar
+          Compare antes de escolher
         </span>
+
       </div>
 
     </div>
@@ -143,6 +160,7 @@
       </div>
 
       <div>
+
         <strong>
           Perto de você
         </strong>
@@ -150,6 +168,7 @@
         <span>
           Encontre atendimento no seu bairro
         </span>
+
       </div>
 
     </div>
@@ -162,13 +181,15 @@
       </div>
 
       <div>
+
         <strong>
-          Clínicas verificadas
+          Informações transparentes
         </strong>
 
         <span>
-          Informações claras e atualizadas
+          Consulte preços e detalhes das clínicas
         </span>
+
       </div>
 
     </div>
@@ -183,15 +204,15 @@
       <div>
 
         <span class="eyebrow">
-          SaúdeAcesso
+          SAÚDE MAIS ACESSÍVEL
         </span>
 
         <h2>
-          Clínicas disponíveis
+          Encontre clínicas e compare opções
         </h2>
 
         <p>
-          Encontre opções de atendimento com preços acessíveis.
+          Consulte serviços, preços e informações antes de escolher onde ser atendido.
         </p>
 
       </div>
@@ -239,20 +260,25 @@
 
             <div class="imagem-clinica">
 
-              @if (clinica.imagemCapa) {
+              <div class="imagem-placeholder">
 
-                <img
-                  [src]="clinica.imagemCapa"
-                  [alt]="'Imagem da ' + clinica.nome"
-                />
+                @if (clinica.imagemCapa) {
 
-              } @else {
+                  <img
+                    [src]="clinica.imagemCapa"
+                    [alt]="'Imagem da ' + clinica.nome"
+                  />
 
-                <div class="imagem-placeholder">
-                  <span>+</span>
-                </div>
+                } @else {
 
-              }
+                  <span>
+                    +
+                  </span>
+
+                }
+
+              </div>
+
 
               @if (clinica.verificada) {
 
@@ -346,8 +372,9 @@
       </h2>
 
       <p>
-        Encontre o atendimento que precisa, compare os preços e entre em
-        contato diretamente com a clínica.
+        Encontre o atendimento que precisa, compare os preços
+        e escolha uma opção que esteja de acordo com sua necessidade
+        e seu orçamento.
       </p>
 
 
@@ -404,11 +431,11 @@
           <div>
 
             <strong>
-              Agende
+              Escolha
             </strong>
 
             <span>
-              Entre em contato com a clínica para marcar.
+              Encontre uma opção que caiba no seu orçamento.
             </span>
 
           </div>

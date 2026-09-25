@@ -8,30 +8,103 @@
   color: #0d1c2f;
 }
 
+
+/* =========================================================
+   HERO + CARROSSEL
+   ========================================================= */
+
 .hero {
   position: relative;
+  min-height: 560px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   overflow: visible;
-  padding: 70px 20px 75px;
+  padding: 75px 20px 90px;
+  isolation: isolate;
+}
 
+.hero-carrossel {
+  position: absolute;
+  inset: 0;
+  z-index: -2;
+  overflow: hidden;
+  background: #0d1c2f;
+}
+
+.slide {
+  position: absolute;
+  inset: 0;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  opacity: 0;
+  animation: trocar-slide 18s infinite;
+}
+
+.slide-1 {
+  background-image: url('/assets/anuncios/anuncio-1.jpg');
+  animation-delay: 0s;
+}
+
+.slide-2 {
+  background-image: url('/assets/anuncios/anuncio-2.jpg');
+  animation-delay: 6s;
+}
+
+.slide-3 {
+  background-image: url('/assets/anuncios/anuncio-3.jpg');
+  animation-delay: 12s;
+}
+
+.hero-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
   background:
-    radial-gradient(
-      circle at 15% 30%,
-      rgba(0, 123, 185, 0.12),
-      transparent 32%
-    ),
-    radial-gradient(
-      circle at 85% 20%,
-      rgba(124, 249, 148, 0.14),
-      transparent 28%
+    linear-gradient(
+      90deg,
+      rgba(5, 20, 34, 0.76) 0%,
+      rgba(5, 20, 34, 0.58) 42%,
+      rgba(5, 20, 34, 0.42) 100%
     ),
     linear-gradient(
       180deg,
-      #eff7ff 0%,
-      #f8f9ff 100%
+      rgba(5, 20, 34, 0.18),
+      rgba(5, 20, 34, 0.38)
     );
 }
 
+@keyframes trocar-slide {
+  0% {
+    opacity: 0;
+  }
+
+  5% {
+    opacity: 1;
+  }
+
+  28% {
+    opacity: 1;
+  }
+
+  33% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 0;
+  }
+}
+
+
+/* =========================================================
+   CONTEÚDO DO HERO
+   ========================================================= */
+
 .hero-conteudo {
+  position: relative;
+  z-index: 5;
   width: min(900px, 100%);
   margin: 0 auto;
   text-align: center;
@@ -40,15 +113,11 @@
 .etiqueta {
   display: inline-flex;
   align-items: center;
-
   margin-bottom: 18px;
   padding: 7px 13px;
-
   border-radius: 999px;
-
-  background: #e5f7e9;
+  background: rgba(229, 247, 233, 0.95);
   color: #006e2d;
-
   font-size: 10px;
   font-weight: 900;
   letter-spacing: 0.5px;
@@ -56,60 +125,54 @@
 
 .hero h1 {
   max-width: 800px;
-
   margin: 0 auto;
-
-  color: #0d1c2f;
-
+  color: #ffffff;
   font-family: 'Plus Jakarta Sans', sans-serif;
   font-size: clamp(32px, 5vw, 52px);
   line-height: 1.12;
   letter-spacing: -1.5px;
+  text-shadow: 0 2px 12px rgba(0, 0, 0, 0.18);
 }
 
 .hero h1 span {
-  color: #006194;
+  display: inline;
+  color: #7cf994;
 }
 
 .hero p {
   max-width: 600px;
-
   margin: 18px auto 30px;
-
-  color: #5f6c78;
-
+  color: rgba(255, 255, 255, 0.9);
   font-size: 16px;
   line-height: 1.6;
+  text-shadow: 0 1px 8px rgba(0, 0, 0, 0.18);
 }
+
+
+/* =========================================================
+   BUSCA
+   ========================================================= */
 
 .caixa-busca {
   position: relative;
   z-index: 10;
-
   width: min(720px, 100%);
-
   margin: 0 auto;
-
   display: flex;
   align-items: center;
-
   gap: 10px;
   padding: 8px;
-
   background: #ffffff;
   border: 1px solid #d5e3fd;
   border-radius: 14px;
-
   box-shadow:
-    0 12px 35px rgba(13, 28, 47, 0.09);
-
+    0 15px 40px rgba(0, 0, 0, 0.18);
   overflow: visible;
 }
 
 .campo-busca {
   position: relative;
   z-index: 20;
-
   flex: 1;
   min-width: 0;
 }
@@ -117,18 +180,13 @@
 .campo-busca input {
   width: 100%;
   height: 52px;
-
   box-sizing: border-box;
-
   padding: 0 15px 0 45px;
-
   border: 0;
   outline: none;
   border-radius: 9px;
-
   color: #0d1c2f;
   background: #ffffff;
-
   font-family: inherit;
   font-size: 14px;
 }
@@ -139,39 +197,26 @@
 
 .icone-busca {
   position: absolute;
-
   left: 16px;
   top: 50%;
-
   transform: translateY(-50%);
-
   color: #006194;
-
   font-size: 23px;
-
   pointer-events: none;
-
   z-index: 2;
 }
 
 .sugestoes-busca {
   position: absolute;
-
   top: calc(100% + 6px);
   left: 0;
   right: 0;
-
   z-index: 999;
-
   box-sizing: border-box;
-
   padding: 5px;
-
   background: #ffffff;
-
   border: 1px solid #d5e3fd;
   border-radius: 11px;
-
   box-shadow:
     0 10px 25px rgba(13, 28, 47, 0.10),
     0 2px 7px rgba(13, 28, 47, 0.04);
@@ -180,29 +225,19 @@
 .sugestao-busca {
   width: 100%;
   min-height: 42px;
-
   display: flex;
   align-items: center;
-
   gap: 10px;
-
   padding: 0 10px;
-
   border: 0;
   border-radius: 7px;
-
   background: transparent;
-
   color: #344154;
-
   font-family: inherit;
   font-size: 13px;
   font-weight: 600;
-
   text-align: left;
-
   cursor: pointer;
-
   transition:
     background 0.15s ease,
     color 0.15s ease;
@@ -216,49 +251,34 @@
 .icone-sugestao {
   width: 24px;
   height: 24px;
-
   display: inline-flex;
   align-items: center;
   justify-content: center;
-
   flex-shrink: 0;
-
   border-radius: 6px;
-
   background: #eff7ff;
   color: #006194;
-
   font-size: 15px;
 }
 
 .caixa-busca > button {
   position: relative;
   z-index: 1;
-
   height: 52px;
-
   display: flex;
   align-items: center;
   justify-content: center;
-
   gap: 7px;
-
   flex-shrink: 0;
-
   padding: 0 23px;
-
   border: 0;
   border-radius: 9px;
-
   background: #006194;
   color: #ffffff;
-
   font-family: inherit;
   font-size: 13px;
   font-weight: 800;
-
   cursor: pointer;
-
   transition:
     background 0.2s,
     transform 0.2s;
@@ -275,56 +295,50 @@
 
 .atalhos-busca {
   margin-top: 14px;
-
   display: flex;
   align-items: center;
   justify-content: center;
-
   gap: 7px;
-
   flex-wrap: wrap;
-
-  color: #7a838c;
-
+  color: rgba(255, 255, 255, 0.8);
   font-size: 11px;
 }
 
 .atalhos-busca button {
   padding: 5px 9px;
-
-  border: 1px solid #d5e3fd;
+  border: 1px solid rgba(255, 255, 255, 0.45);
   border-radius: 999px;
-
-  background: #ffffff;
-  color: #3f4850;
-
+  background: rgba(255, 255, 255, 0.12);
+  color: #ffffff;
   font-family: inherit;
   font-size: 11px;
-
   cursor: pointer;
+  backdrop-filter: blur(5px);
+  transition:
+    background 0.2s,
+    border-color 0.2s;
 }
 
 .atalhos-busca button:hover {
-  border-color: #006194;
-  color: #006194;
+  border-color: #ffffff;
+  background: rgba(255, 255, 255, 0.2);
 }
+
+
+/* =========================================================
+   BENEFÍCIOS
+   ========================================================= */
 
 .beneficios {
   width: min(1050px, calc(100% - 40px));
-
   margin: -25px auto 0;
-
   position: relative;
   z-index: 2;
-
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-
   background: #ffffff;
-
   border: 1px solid #d5e3fd;
   border-radius: 14px;
-
   box-shadow:
     0 8px 28px rgba(13, 28, 47, 0.07);
 }
@@ -332,9 +346,7 @@
 .beneficio {
   display: flex;
   align-items: center;
-
   gap: 13px;
-
   padding: 21px 24px;
 }
 
@@ -345,18 +357,13 @@
 .icone-beneficio {
   width: 40px;
   height: 40px;
-
   flex-shrink: 0;
-
   display: flex;
   align-items: center;
   justify-content: center;
-
   border-radius: 10px;
-
   background: #eff7ff;
   color: #006194;
-
   font-size: 13px;
   font-weight: 900;
 }
@@ -376,11 +383,14 @@
   font-size: 10px;
 }
 
+
+/* =========================================================
+   LISTA DE CLÍNICAS
+   ========================================================= */
+
 .lista-clinicas {
   width: min(1180px, calc(100% - 40px));
-
   margin: 0 auto;
-
   padding: 65px 0 75px;
 }
 
@@ -388,19 +398,14 @@
   display: flex;
   align-items: flex-end;
   justify-content: space-between;
-
   gap: 20px;
-
   margin-bottom: 25px;
 }
 
 .eyebrow {
   display: block;
-
   margin-bottom: 7px;
-
   color: #006194;
-
   font-size: 10px;
   font-weight: 900;
   letter-spacing: 0.8px;
@@ -408,28 +413,21 @@
 
 .cabecalho-secao h2 {
   margin: 0;
-
   font-family: 'Plus Jakarta Sans', sans-serif;
   font-size: 25px;
-
   letter-spacing: -0.5px;
 }
 
 .cabecalho-secao p {
   margin: 7px 0 0;
-
   color: #7a838c;
-
   font-size: 13px;
 }
 
 .link-ver-todos {
   flex-shrink: 0;
-
   color: #006194;
-
   text-decoration: none;
-
   font-size: 12px;
   font-weight: 800;
 }
@@ -441,26 +439,19 @@
 .grade-clinicas {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-
   gap: 18px;
 }
 
 .cartao-clinica {
   overflow: hidden;
-
   display: block;
-
   background: #ffffff;
-
   border: 1px solid #d5e3fd;
   border-radius: 14px;
-
   color: inherit;
   text-decoration: none;
-
   box-shadow:
     0 4px 15px rgba(13, 28, 47, 0.035);
-
   transition:
     transform 0.2s ease,
     border-color 0.2s ease,
@@ -469,38 +460,36 @@
 
 .cartao-clinica:hover {
   transform: translateY(-3px);
-
   border-color: #9dbbd4;
-
   box-shadow:
     0 10px 28px rgba(13, 28, 47, 0.09);
 }
 
 .imagem-clinica {
   position: relative;
-
   height: 145px;
-
   background: #eff4ff;
 }
 
-.imagem-clinica img {
-  width: 100%;
-  height: 100%;
+/*
+  O placeholder ocupa toda a área da imagem.
 
-  display: block;
+  Quando a clínica possui imagemCapa:
+  - o <img> aparece;
+  - o <span> não é renderizado pelo Angular.
 
-  object-fit: cover;
-}
+  Quando não possui imagemCapa:
+  - o <img> não é renderizado;
+  - o <span> aparece como fallback.
+*/
 
 .imagem-placeholder {
   width: 100%;
   height: 100%;
-
   display: flex;
   align-items: center;
   justify-content: center;
-
+  overflow: hidden;
   background:
     linear-gradient(
       135deg,
@@ -509,42 +498,38 @@
     );
 }
 
+.imagem-placeholder img {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+}
+
 .imagem-placeholder span {
   width: 55px;
   height: 55px;
-
   display: flex;
   align-items: center;
   justify-content: center;
-
   border-radius: 15px;
-
   background: #ffffff;
   color: #006194;
-
   font-size: 32px;
   font-weight: 300;
-
   box-shadow:
     0 5px 15px rgba(13, 28, 47, 0.07);
 }
 
 .selo-verificada {
   position: absolute;
-
   left: 12px;
   bottom: 12px;
-
   padding: 5px 8px;
-
   border-radius: 6px;
-
   background: #ffffff;
   color: #006e2d;
-
   font-size: 9px;
   font-weight: 900;
-
   box-shadow:
     0 3px 10px rgba(13, 28, 47, 0.1);
 }
@@ -556,15 +541,12 @@
 .titulo-clinica {
   display: flex;
   align-items: center;
-
   gap: 5px;
 }
 
 .titulo-clinica h3 {
   margin: 0;
-
   color: #0d1c2f;
-
   font-size: 15px;
   line-height: 1.3;
 }
@@ -572,36 +554,27 @@
 .icone-verificada {
   width: 16px;
   height: 16px;
-
   display: inline-flex;
   align-items: center;
   justify-content: center;
-
   flex-shrink: 0;
-
   border-radius: 50%;
-
   background: #e5f7e9;
   color: #006e2d;
-
   font-size: 9px;
   font-weight: 900;
 }
 
 .localizacao {
   margin: 7px 0;
-
   color: #7a838c;
-
   font-size: 11px;
 }
 
 .avaliacao {
   display: flex;
   align-items: center;
-
   gap: 4px;
-
   font-size: 11px;
 }
 
@@ -622,21 +595,16 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-
   margin-top: 16px;
   padding-top: 13px;
-
   border-top: 1px solid #edf1f6;
-
   color: #006194;
-
   font-size: 11px;
   font-weight: 800;
 }
 
 .seta {
   font-size: 17px;
-
   transition: transform 0.2s;
 }
 
@@ -646,12 +614,9 @@
 
 .estado-carregando {
   padding: 50px 20px;
-
   border: 1px solid #d5e3fd;
   border-radius: 14px;
-
   background: #ffffff;
-
   text-align: center;
 }
 
@@ -662,38 +627,35 @@
 
 .estado-carregando p {
   margin: 0;
-
   color: #7a838c;
-
   font-size: 13px;
 }
 
+
+/* =========================================================
+   COMO FUNCIONA
+   ========================================================= */
+
 .como-funciona {
   padding: 70px 20px;
-
   background: #eff4ff;
 }
 
 .como-funciona-conteudo {
   width: min(1050px, 100%);
-
   margin: 0 auto;
 }
 
 .como-funciona h2 {
   margin: 0;
-
   font-family: 'Plus Jakarta Sans', sans-serif;
   font-size: 27px;
 }
 
 .como-funciona > .como-funciona-conteudo > p {
   max-width: 620px;
-
   margin: 9px 0 30px;
-
   color: #66717c;
-
   font-size: 13px;
   line-height: 1.6;
 }
@@ -701,20 +663,15 @@
 .passos {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-
   gap: 18px;
 }
 
 .passo {
   display: flex;
   align-items: flex-start;
-
   gap: 13px;
-
   padding: 20px;
-
   background: #ffffff;
-
   border: 1px solid #d5e3fd;
   border-radius: 12px;
 }
@@ -722,18 +679,13 @@
 .numero {
   width: 32px;
   height: 32px;
-
   flex-shrink: 0;
-
   display: flex;
   align-items: center;
   justify-content: center;
-
   border-radius: 50%;
-
   background: #006194;
   color: #ffffff;
-
   font-size: 12px;
   font-weight: 900;
 }
@@ -745,18 +697,26 @@
 
 .passo strong {
   margin-bottom: 5px;
-
   font-size: 12px;
 }
 
 .passo div span {
   color: #7a838c;
-
   font-size: 11px;
   line-height: 1.5;
 }
 
+
+/* =========================================================
+   RESPONSIVO
+   ========================================================= */
+
 @media (max-width: 900px) {
+
+  .hero {
+    min-height: 540px;
+  }
+
   .beneficios {
     grid-template-columns: 1fr;
   }
@@ -773,11 +733,25 @@
   .passos {
     grid-template-columns: 1fr;
   }
+
 }
 
+
 @media (max-width: 650px) {
+
   .hero {
-    padding: 50px 15px 65px;
+    min-height: 620px;
+    padding: 50px 15px 75px;
+  }
+
+  .hero-overlay {
+    background:
+      linear-gradient(
+        180deg,
+        rgba(5, 20, 34, 0.68) 0%,
+        rgba(5, 20, 34, 0.62) 50%,
+        rgba(5, 20, 34, 0.74) 100%
+      );
   }
 
   .hero h1 {
@@ -807,7 +781,6 @@
 
   .lista-clinicas {
     width: calc(100% - 28px);
-
     padding-top: 50px;
   }
 
@@ -823,9 +796,16 @@
   .como-funciona {
     padding: 55px 14px;
   }
+
 }
 
+
 @media (max-width: 450px) {
+
+  .hero {
+    min-height: 650px;
+  }
+
   .hero h1 {
     font-size: 27px;
   }
@@ -841,29 +821,40 @@
 
   .sugestoes-busca {
     top: calc(100% + 5px);
-
     padding: 4px;
-
     border-radius: 9px;
-
     box-shadow:
       0 8px 20px rgba(13, 28, 47, 0.10);
   }
 
   .sugestao-busca {
     min-height: 40px;
-
     gap: 8px;
-
     padding: 0 9px;
-
     font-size: 12px;
   }
 
   .icone-sugestao {
     width: 22px;
     height: 22px;
-
     font-size: 14px;
   }
+
+}
+
+
+/* =========================================================
+   ACESSIBILIDADE
+   ========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+
+  .slide {
+    animation: none;
+  }
+
+  .slide-1 {
+    opacity: 1;
+  }
+
 }

@@ -1,0 +1,96 @@
+.pagina {
+  background: #f8fafc;
+  color: #172033;
+}
+
+.hero {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 90px 24px 70px;
+}
+
+.etiqueta {
+  display: inline-block;
+  margin-bottom: 14px;
+  color: #087f8c;
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.hero h1 {
+  margin: 0;
+  font-size: clamp(2.3rem, 5vw, 3.8rem);
+  line-height: 1.08;
+  letter-spacing: -0.04em;
+}
+
+.hero p {
+  max-width: 700px;
+  margin: 22px 0 0;
+  color: #667085;
+  font-size: 1.1rem;
+  line-height: 1.7;
+}
+
+.fluxo {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 0 24px 80px;
+}
+
+.etapa {
+  display: flex;
+  gap: 24px;
+  padding: 28px 0;
+  border-top: 1px solid #e2e8f0;
+}
+
+.etapa > span {
+  flex: 0 0 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 44px;
+  border-radius: 12px;
+  background: #e7f7f5;
+  color: #087f8c;
+  font-weight: 800;
+}
+
+.etapa h2 {
+  margin: 0;
+  font-size: 1.4rem;
+}
+
+.etapa p {
+  margin: 8px 0 0;
+  color: #667085;
+  line-height: 1.6;
+}
+
+.cta {
+  max-width: 900px;
+  margin: 0 auto 80px;
+  padding: 40px;
+  border-radius: 18px;
+  background: #eaf7f5;
+}
+
+.cta h2 {
+  margin: 0 0 24px;
+  font-size: 2rem;
+}
+
+.botao {
+  display: inline-flex;
+  align-items: center;
+  min-height: 48px;
+  padding: 0 22px;
+  border-radius: 10px;
+  background: #087f8c;
+  color: #fff;
+  font-weight: 700;
+  text-decoration: none;
+}

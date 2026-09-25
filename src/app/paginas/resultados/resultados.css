@@ -37,9 +37,11 @@
 }
 
 .cabecalho-resultados p {
+  max-width: 650px;
   margin: 9px 0 0;
   color: #66717c;
   font-size: 14px;
+  line-height: 1.6;
 }
 
 .cabecalho-resultados p strong {
@@ -90,7 +92,9 @@
   font-size: 14px;
 
   outline: none;
-  transition: border-color 0.2s, box-shadow 0.2s;
+  transition:
+    border-color 0.2s,
+    box-shadow 0.2s;
 }
 
 .campo-busca input::placeholder {
@@ -344,26 +348,40 @@
 ========================= */
 
 .info-preco {
-  min-width: 155px;
+  min-width: 175px;
 
   display: flex;
   flex-direction: column;
   align-items: flex-end;
-  gap: 3px;
+  gap: 4px;
 
   text-align: right;
+}
+
+.rotulo-preco {
+  color: #66717c;
+  font-size: 9px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
+}
+
+.preco-app {
+  color: #006e2d;
+  font-size: 23px;
+  line-height: 1;
+}
+
+.comparacao-preco {
+  display: flex;
+  align-items: center;
+  gap: 6px;
 }
 
 .preco-tabela {
   color: #8a939c;
   font-size: 11px;
   text-decoration: line-through;
-}
-
-.preco-app {
-  color: #006e2d;
-  font-size: 20px;
-  line-height: 1;
 }
 
 .etiqueta-desconto {
@@ -378,9 +396,10 @@
   font-weight: 900;
 }
 
-.texto-partir {
-  color: #89939e;
-  font-size: 9px;
+.economia {
+  color: #006e2d;
+  font-size: 10px;
+  font-weight: 800;
 }
 
 .seta-card {
@@ -494,7 +513,7 @@
   }
 
   .info-preco {
-    min-width: 120px;
+    min-width: 145px;
   }
 
 }
@@ -532,10 +551,19 @@
     justify-content: flex-start;
 
     text-align: left;
+    flex-wrap: wrap;
   }
 
-  .texto-partir {
-    display: none;
+  .rotulo-preco {
+    width: 100%;
+  }
+
+  .preco-app {
+    font-size: 21px;
+  }
+
+  .economia {
+    width: 100%;
   }
 
   .seta-card {

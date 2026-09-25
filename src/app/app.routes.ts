@@ -59,6 +59,36 @@ export const routes: Routes = [
   },
 
   {
+    path: 'para-clinicas',
+    loadComponent: () =>
+      import('./paginas/para-clinicas/para-clinicas').then(
+        (m) => m.ParaClinicas
+      ),
+    title:
+      'SaúdeAcesso | Para Clínicas',
+  },
+
+  {
+    path: 'como-funciona',
+    loadComponent: () =>
+      import('./paginas/como-funciona/como-funciona').then(
+        (m) => m.ComoFunciona
+      ),
+    title:
+      'SaúdeAcesso | Como Funciona',
+  },
+
+  {
+    path: 'ajuda',
+    loadComponent: () =>
+      import('./paginas/ajuda/ajuda').then(
+        (m) => m.Ajuda
+      ),
+    title:
+      'SaúdeAcesso | Ajuda',
+  },
+
+  {
     path: 'cadastrar-servico',
     canActivate: [autenticacaoGuard],
     loadComponent: () =>
@@ -70,18 +100,6 @@ export const routes: Routes = [
     title:
       'SaúdeAcesso | Cadastrar novo serviço',
   },
-  {
-  path: 'perfil',
-  canActivate: [autenticacaoGuard],
-  loadComponent: () =>
-    import(
-      './paginas/perfil/perfil'
-    ).then(
-      (m) => m.Perfil
-    ),
-  title:
-    'SaúdeAcesso | Meu perfil',
-},
 
   {
     path: 'painel-clinica',
@@ -146,5 +164,15 @@ export const routes: Routes = [
       ),
     title:
       'SaúdeAcesso | Configurações da clínica',
+  },
+
+  {
+    path: 'perfil',
+    canActivate: [autenticacaoGuard],
+    loadComponent: () =>
+      import('./paginas/perfil/perfil').then(
+        (m) => m.Perfil
+      ),
+    title: 'SaúdeAcesso | Meu perfil',
   },
 ];

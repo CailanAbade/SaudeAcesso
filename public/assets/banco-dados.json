@@ -15,7 +15,7 @@
       },
       "avaliacao": 4.7,
       "qtdAvaliacoes": 312,
-      "imagemCapa": "",
+      "imagemCapa": "/assets/clinicas/clinica-vida-nova.jpg",
       "planoId": "plano-trial"
     },
     {
@@ -33,7 +33,7 @@
       },
       "avaliacao": 4.5,
       "qtdAvaliacoes": 189,
-      "imagemCapa": "",
+      "imagemCapa": "/assets/clinicas/policlinica-bem-estar.jpg",
       "planoId": "plano-premium"
     },
     {
@@ -51,7 +51,7 @@
       },
       "avaliacao": 4.2,
       "qtdAvaliacoes": 76,
-      "imagemCapa": "",
+      "imagemCapa": "/assets/clinicas/centro-medico-esperanca.jpg",
       "planoId": "plano-trial"
     }
   ],

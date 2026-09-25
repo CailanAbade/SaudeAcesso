@@ -1,0 +1,233 @@
+.pagina-clinicas {
+  background: #f8fafc;
+  color: #172033;
+}
+
+.hero-clinicas {
+  padding: 88px 24px;
+  background: linear-gradient(
+    135deg,
+    #eef8ff 0%,
+    #f5fbf8 100%
+  );
+}
+
+.conteudo-hero {
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.etiqueta {
+  display: inline-block;
+  margin-bottom: 14px;
+  color: #087f8c;
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.hero-clinicas h1 {
+  max-width: 780px;
+  margin: 0;
+  font-size: clamp(2.2rem, 5vw, 4rem);
+  line-height: 1.08;
+  letter-spacing: -0.04em;
+}
+
+.hero-clinicas h1 span {
+  display: block;
+  color: #087f8c;
+}
+
+.hero-clinicas p {
+  max-width: 680px;
+  margin: 24px 0 0;
+  color: #526074;
+  font-size: 1.1rem;
+  line-height: 1.7;
+}
+
+.acoes-hero {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  margin-top: 32px;
+}
+
+.botao-principal,
+.botao-secundario {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 48px;
+  padding: 0 22px;
+  border-radius: 10px;
+  font-weight: 700;
+  text-decoration: none;
+  transition: 0.2s ease;
+}
+
+.botao-principal {
+  background: #087f8c;
+  color: #fff;
+}
+
+.botao-principal:hover {
+  background: #066b76;
+}
+
+.botao-secundario {
+  border: 1px solid #cbd5e1;
+  background: #fff;
+  color: #263247;
+}
+
+.botao-secundario:hover {
+  background: #f1f5f9;
+}
+
+.secao-beneficios,
+.secao-modelos {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 80px 24px;
+}
+
+.cabecalho-secao {
+  max-width: 700px;
+  margin-bottom: 40px;
+}
+
+.cabecalho-secao h2 {
+  margin: 0;
+  font-size: clamp(1.8rem, 4vw, 2.8rem);
+  line-height: 1.15;
+  letter-spacing: -0.03em;
+}
+
+.cabecalho-secao p {
+  margin: 16px 0 0;
+  color: #667085;
+  line-height: 1.7;
+}
+
+.grade-beneficios {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+
+.cartao-beneficio,
+.cartao-modelo {
+  background: #fff;
+  border: 1px solid #e3e8ef;
+  border-radius: 16px;
+  padding: 28px;
+}
+
+.icone,
+.numero {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 38px;
+  height: 38px;
+  margin-bottom: 18px;
+  border-radius: 10px;
+  background: #e7f7f5;
+  color: #087f8c;
+  font-size: 0.8rem;
+  font-weight: 800;
+}
+
+.cartao-beneficio h3,
+.cartao-modelo h3 {
+  margin: 0;
+  font-size: 1.25rem;
+}
+
+.cartao-beneficio p,
+.cartao-modelo p {
+  margin: 12px 0 0;
+  color: #667085;
+  line-height: 1.65;
+}
+
+.secao-modelos {
+  padding-top: 20px;
+}
+
+.grade-modelos {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+}
+
+.cartao-modelo ul {
+  margin: 20px 0;
+  padding-left: 20px;
+  color: #475467;
+  line-height: 1.8;
+}
+
+.cartao-modelo small {
+  display: block;
+  color: #7a8495;
+  line-height: 1.5;
+}
+
+.secao-cta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 30px;
+  max-width: 1100px;
+  margin: 0 auto 80px;
+  padding: 40px;
+  border-radius: 18px;
+  background: #eaf7f5;
+}
+
+.secao-cta h2 {
+  margin: 0;
+  font-size: 2rem;
+}
+
+.secao-cta p {
+  margin: 10px 0 0;
+  color: #526074;
+}
+
+@media (max-width: 800px) {
+  .grade-beneficios,
+  .grade-modelos {
+    grid-template-columns: 1fr;
+  }
+
+  .secao-cta {
+    flex-direction: column;
+    align-items: flex-start;
+    margin: 0 24px 60px;
+  }
+}
+
+@media (max-width: 560px) {
+  .hero-clinicas {
+    padding: 64px 20px;
+  }
+
+  .secao-beneficios,
+  .secao-modelos {
+    padding: 60px 20px;
+  }
+
+  .acoes-hero {
+    flex-direction: column;
+  }
+
+  .botao-principal,
+  .botao-secundario {
+    width: 100%;
+  }
+}
